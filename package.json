@@ -1,0 +1,17 @@
+{
+  "name": "ZHKJXCX",
+  "version": "1.0.0",
+  "description": "",
+  "main": ".eslintrc.js",
+  "dependencies": {
+    "miniprogram-sm-crypto": "^0.3.7",
+    "tdesign-miniprogram": "^0.4.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

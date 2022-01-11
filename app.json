@@ -1,0 +1,41 @@
+{
+  "pages":[
+    "pages/noLogin/noLogin",
+    "pages/index/index",
+    "pages/manage/manage"
+  ],
+  "usingComponents": {
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-navbar": "tdesign-miniprogram/navbar/navbar",
+    "t-tab-bar": "tdesign-miniprogram/tab-bar/tab-bar",
+    "t-tab-bar-item": "tdesign-miniprogram/tab-bar/tab-bar-item",
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-avatar": "tdesign-miniprogram/avatar/avatar",
+    "t-avatar-group": "tdesign-miniprogram/avatar/avatar-group"
+  },
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarTitleText":"织为云外协用工",
+    "navigationBarBackgroundColor":"#ffffff",
+    "navigationBarTextStyle":"black",
+    "backgroundColor":"#f3f3f3"
+  },
+  "tabBar": {
+		"custom": true,
+		"color": "#7A7E83",
+		"selectedColor": "#3cc51f",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/manage/manage",
+				"text": "管理"
+			}
+    ]
+	},
+  "sitemapLocation": "sitemap.json"
+}

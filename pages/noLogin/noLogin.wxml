@@ -1,0 +1,12 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="userinfo">
+    <view class='color9E tc'>
+      <view>织为云是先进的纺织业数字化平台，已助力100+工厂、500+作坊全面上云。</view>
+      <view class="pt20">外协用工小程序作为纺织小商品制造最后一公里，旨在帮助企业补足半成品生产环节，让生产可视可控可量化。</view>
+    </view>
+  </view>
+  <view class="usermotto">
+    <t-button theme="primary" size="large" variant="plain" bindtap="getUserProfile">我要加入</t-button>
+  </view>
+</view>

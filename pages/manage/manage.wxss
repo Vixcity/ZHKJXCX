@@ -1,0 +1,16 @@
+.manage-list {
+  height: 90px;
+  background: white;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.userInfo{
+  align-items: center;
+}
+
+.sonContainer{
+  width: 64px;
+  height: 64px;
+  border-radius: 5px;
+}
