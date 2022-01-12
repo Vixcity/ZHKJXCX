@@ -1,8 +1,8 @@
+.container{
+  padding-bottom: 48px!important;
+}
 .manage-list {
   height: 90px;
-  background: white;
-  box-sizing: border-box;
-  align-items: center;
 }
 
 .userInfo{
@@ -10,7 +10,7 @@
 }
 
 .sonContainer{
-  width: 64px;
-  height: 64px;
+  width: 100rpx;
+  height: 100rpx;
   border-radius: 5px;
 }

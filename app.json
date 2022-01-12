@@ -2,7 +2,12 @@
   "pages":[
     "pages/noLogin/noLogin",
     "pages/index/index",
-    "pages/manage/manage"
+    "pages/manage/manage",
+    "pages/signUp/signUp",
+    "pages/orderControl/orderControl",
+    "pages/statistics/statistics",
+    "pages/userManagement/userManagement",
+    "pages/workerManage/workerManage"
   ],
   "usingComponents": {
     "t-button": "tdesign-miniprogram/button/button",
@@ -11,12 +16,17 @@
     "t-tab-bar-item": "tdesign-miniprogram/tab-bar/tab-bar-item",
     "t-icon": "tdesign-miniprogram/icon/icon",
     "t-avatar": "tdesign-miniprogram/avatar/avatar",
-    "t-avatar-group": "tdesign-miniprogram/avatar/avatar-group"
+    "t-avatar-group": "tdesign-miniprogram/avatar/avatar-group",
+    "t-input": "tdesign-miniprogram/input/input",
+    "t-picker": "tdesign-miniprogram/picker/picker",
+    "t-picker-column": "tdesign-miniprogram/picker/picker-column",
+    "t-message": "tdesign-miniprogram/message/message",
+    "t-image": "tdesign-miniprogram/image/image"
   },
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarTitleText":"织为云外协用工",
-    "navigationBarBackgroundColor":"#ffffff",
+    "navigationBarBackgroundColor":"#6CD5FF",
     "navigationBarTextStyle":"black",
     "backgroundColor":"#f3f3f3"
   },

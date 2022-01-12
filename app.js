@@ -15,6 +15,6 @@ App({
   },
   globalData: {
     userInfo: null,
-    api:'https://knit-m-beta.zwyknit.com/api/'
+    api:'https://knit-m-beta.zwyknit.com/api'
   }
 })

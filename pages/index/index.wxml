@@ -1,4 +1,22 @@
 <!--index.wxml-->
 <view class="container">
-  空数据页
+  <view class="ml20 mr20 mt20 bgColorWhite w90 flex jcsb flexWarp borderBox pl20 pr20 pt20 pb20 colorBlack">
+    <view>
+      <view class="fz60 flex">
+        title
+        <t-icon name=rollback" size="xl" bind:click="someFunction"> </t-icon>
+      </view>
+      <view class="fz30">
+        客户：凯瑞针织
+      </view>
+      <view class="flex">
+        <t-image class="size-l radius-m" src="https://we-retail-static-1300977798.cos.ap-guangzhou.myqcloud.com/retail-ui/components-exp/image/image-2.jpg" mode="aspectFill"></t-image>
+        <view class="ml10 fz30">
+          <view>生产进度：13000/30000</view>
+          <view>交付时间：2021-12-30</view>
+        </view>
+      </view>
+    </view>
+    <view>222</view>
+  </view>
 </view>

@@ -1,0 +1,4 @@
+/**index.wxss**/
+.signUpBanner {
+	height: 70px;
+}

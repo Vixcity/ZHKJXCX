@@ -9,11 +9,25 @@ const formatTime = date => {
   return `${[year, month, day].map(formatNumber).join('/')} ${[hour, minute, second].map(formatNumber).join(':')}`
 }
 
+const wxReq = data => {
+  const openid = wx.getStorageSync("userInfo").openid.openid
+  wx.request({
+    url: getApp().globalData.api + data.url,
+    data: data.data,
+    method: data.method,
+    success: data.success,
+    header:{
+      openid:openid
+    }
+  })
+}
+
 const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : `0${n}`
 }
 
 module.exports = {
-  formatTime
+  formatTime,
+  wxReq
 }

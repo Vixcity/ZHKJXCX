@@ -1,0 +1,37 @@
+<!--index.wxml-->
+<view class="container">
+	<view class="container noPad">
+		<view class="flex pr20 pl20 pb20 pt20 fdc bgColorWhite w100 aic bgColorD8 fz30 signUpBanner">
+			<view class="tc h40 flex jcc aic h50">LOGO</view>
+			<view class="tc h40 flex jcc aic h50">纺织业上云的不二选择！</view>
+		</view>
+		<view class="ml20 mr20 mt20 bgColorWhite w90 flex jcsb fdc borderBox pl20 pr20 pt20 pb20 color9E fz30 tc" style="position: relative;">
+			<t-input name="微信昵称：" placeholder="请输入文字" value="{{userInfo.wechat_data.nickName}}" disabled/>
+			<t-input name="姓名：" id="realName" placeholder="输入真实姓名" value="{{userInfo.wechat_data.realName}}" bindchange="changeName" />
+			<t-input name="手机号：" id="phoneNumber" placeholder="点击获取手机号" value="{{userInfo.wechat_data.phoneNumber}}" bindchange="changePhone"/>
+			<t-input name="工序：" bindtap="chooseProcedure" placeholder="点击选择" value="{{selectedWorkProcedureValue}}" disabled/>
+			<t-picker
+				visible="{{showPick}}"
+				title="请选择工序"
+				bindconfirm="onPicker1Confirm"
+				bindcancel="onPicker1Cancel"
+			>
+				<t-picker-column options="{{workProcedure}}" value="{{selectedWorkProcedureValue}}"></t-picker-column>
+			</t-picker>
+		</view>
+		<view class="tc fz20 mt10 flex">
+			<block wx:if="{{!isRead}}">
+				<t-icon class="color9E" name="check-circle-filled" size="small" bind:click="iRead"> </t-icon>
+				<text class="color9E">我已阅读并同意《织为云外协用工平台用户注册与服务协议》</text>
+			</block>
+			<block wx:else>
+				<t-icon class="colro8D9F" name="check-circle-filled" size="small" bind:click="iRead"> </t-icon>
+				<text class="colro8D9F">我已阅读并同意《织为云外协用工平台用户注册与服务协议》</text>
+			</block>
+		</view>
+		<view class="mt20">
+			<t-button theme="primary" size="large" variant="plain" bindtap="postSignUp">提交注册</t-button>
+		</view>
+	</view>
+	<t-message id="t-message" />
+</view>

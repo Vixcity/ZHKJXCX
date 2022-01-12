@@ -29,7 +29,7 @@ Page({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
-        wx.setStorageSync('userInfo', res.userInfo)
+        wx.setStorageSync('wechat_data', res.userInfo)
 				this.toManage()
       }
     })

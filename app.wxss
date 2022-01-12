@@ -7,10 +7,7 @@ page{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
   box-sizing: border-box;
-  padding-bottom: 48px!important;
 } 
 
 
@@ -23,6 +20,15 @@ page{
 /* color */
 .color9E{
   color:#9E9E9E
+}
+.colro8D9F{
+  color: #008DF9;
+}
+.colorWhite{
+  color:white
+}
+.colorBlack{
+  color: black;
 }
 
 
@@ -57,6 +63,15 @@ page{
   display: flex;
   flex-direction: row;
 }
+.flexWarp{
+  flex-wrap: wrap;
+}
+.flexNoWarp{
+  flex-wrap: nowrap;
+}
+.fdc{
+  flex-direction: column;
+}
 .jcsb{
   justify-content:space-between;
 }
@@ -68,6 +83,12 @@ page{
 }
 .jce{
   justify-content: end;
+}
+.jcc{
+  justify-content: center;
+}
+.aic{
+  align-items: center;
 }
 
 /* float */
@@ -226,21 +247,84 @@ page{
 
 
 
+/* height */
+.h10{
+  height: 10%;
+}
+.h20{
+  height: 20%;
+}
+.h30{
+  height: 30%;
+}
+.h40{
+  height: 40%;
+}
+.h50{
+  height: 50%;
+}
+.h60{
+  height: 60%;
+}
+.h70{
+  height: 70%;
+}
+.h80{
+  height: 80%;
+}
+.h90{
+  height: 90%;
+}
+
+
+
+
+
+
+
+
 /* font */
+.fz90{
+  font-size: 90rpx;
+}
+.fz80{
+  font-size: 80rpx;
+}
+.fz70{
+  font-size: 70rpx;
+}
+.fz60{
+  font-size: 60rpx;
+}
+.fz50{
+  font-size: 50rpx;
+}
+.fz40{
+  font-size: 40rpx;
+}
+.fz30{
+  font-size: 30rpx;
+}
+.fz28{
+  font-size: 28rpx;
+}
+.fz25{
+  font-size: 25rpx;
+}
 .fz20{
-  font-size: 20px;
+  font-size: 20rpx;
 }
 .fz18{
-  font-size: 18px;
+  font-size: 18rpx;
 }
 .fz16{
-  font-size: 16px;
+  font-size: 16rpx;
 }
 .fz14{
-  font-size: 14px;
+  font-size: 14rpx;
 }
 .fz12{
-  font-size: 12px;
+  font-size: 12rpx;
 }
 
 
@@ -255,6 +339,9 @@ page{
 }
 .borderColorD8{
   border-color:#D8D8D8;
+}
+.borderRadius{
+  border-radius: 5rpx;
 }
 
 
@@ -279,4 +366,66 @@ page{
 /* box-sizing */
 .borderBox{
   box-sizing: border-box;
+}
+
+
+
+
+
+
+
+/* t-image 组件样式 */
+t-image {
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.t-image__mask {
+  background-color: #f2f2f2;
+}
+
+.radius-l .t-image {
+  border-radius: 16rpx;
+}
+
+.radius-m .t-image {
+  border-radius: 8rpx;
+}
+
+.radius-s .t-image {
+  border-radius: 4rpx;
+}
+
+.radius-round .t-image {
+  border-radius: 999px;
+}
+
+.size-xl .t-image {
+  width: 240rpx;
+  height: 240rpx;
+}
+
+.size-l .t-image {
+  width: 144rpx;
+  height: 144rpx;
+}
+
+.size-m .t-image {
+  width: 112rpx;
+  height: 112rpx;
+}
+
+.size-s .t-image {
+  width: 96rpx;
+  height: 96rpx;
+}
+
+.size-xs .t-image {
+  width: 64rpx;
+  height: 64rpx;
+}
+
+.size-xss .t-image {
+  width: 48rpx;
+  height: 48rpx;
 }
