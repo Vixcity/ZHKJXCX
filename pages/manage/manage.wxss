@@ -1,15 +1,22 @@
-.container{
-  padding-bottom: 48px!important;
+.container {
+  padding-bottom: 48px !important;
+  height: 100vh;
 }
+
+.bg {
+  background: url(https://file.zwyknit.com/20220113151412.jpg) no-repeat;
+  background-size: 100% 100%;
+}
+
 .manage-list {
   height: 90px;
 }
 
-.userInfo{
+.userInfo {
   align-items: center;
 }
 
-.sonContainer{
+.sonContainer {
   width: 100rpx;
   height: 100rpx;
   border-radius: 5px;

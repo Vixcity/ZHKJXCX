@@ -1,4 +1,49 @@
-/**index.wxss**/
+.container{
+	background-color: #27A2FD;
+}
+.signUp{
+	background-color: white;
+	overflow: hidden;
+	border-top-left-radius: 120rpx;
+	border-top-right-radius: 120rpx;
+}
 .signUpBanner {
 	height: 70px;
 }
+
+input{
+	border: 1px solid #E2E2E2;
+	border-radius: 500000px;
+	text-align: left;
+	padding: 10rpx;
+	padding-left: 30rpx;
+	color: black;
+	width: 68%;
+}
+
+.getPhoneNumber{
+	border: unset;
+	box-shadow: unset;
+	background-color: white;
+	font-size: 30rpx;
+	right: 5%;
+	line-height: unset;
+	padding: 0;
+	text-align: center;
+	color: #24AEFC;
+	z-index: 999;
+}
+.getPhoneNumber::after{
+	border: unset;
+}
+/* .getPhoneNumber{
+	border: 1px solid #E2E2E2;
+	background-color: white;
+	font-size: 30rpx;
+	border-radius: 500000px;
+	width: 72%;
+	margin-left: 29rpx;
+	text-align: left;
+	padding-left: 30rpx;
+	color: black;
+} */

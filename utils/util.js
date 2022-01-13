@@ -22,6 +22,15 @@ const wxReq = data => {
   })
 }
 
+// 验证手机号
+function verifyTel (tel){
+  let reg = /^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$/;
+  if(reg.test(tel)){
+    return true;
+  }
+  return false;
+}
+
 const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : `0${n}`
@@ -29,5 +38,6 @@ const formatNumber = n => {
 
 module.exports = {
   formatTime,
-  wxReq
+  wxReq,
+  verifyTel
 }

@@ -2,9 +2,9 @@
 import Message from 'tdesign-miniprogram/message/index';
 Component({
   data: {
-    wechat_data: {},
     userInfo: {},
     ourUser: null,
+    showPopup: false,
     pageList: [{
       title: '订单管理',
       path: '../orderControl/orderControl'
@@ -27,11 +27,13 @@ Component({
           selected: 1
         })
       }
-      if (JSON.stringify(this.data.wechat_data) === '{}') {
+      if (JSON.stringify(this.data.userInfo) === '{}') {
+        let userInfo = wx.getStorageSync('userInfo')
         this.setData({
-          wechat_data: wx.getStorageSync('wechat_data')
+          userInfo: userInfo
         })
       }
+      // console.log(userInfo)
       if (this.data.ourUser === null) {
         let _this = this
         wx.login({
@@ -45,17 +47,16 @@ Component({
               },
               method: 'POST',
               success(res) {
-                if(res.data.code===200){
-                  let wechat_data = wx.getStorageSync('wechat_data')
+                if (res.data.code === 200) {
                   let userInfo = _this.data.userInfo
                   userInfo.openid = res.data.data.openid
-                  userInfo.wechat_data = wechat_data
                   if (res.data.data.userinfo !== null) {
                     userInfo.userinfo = res.data.data.userinfo
                   }
                   _this.setData({
                     ourUser: res.data.data
                   })
+                  console.log(_this.data.ourUser)
                   wx.setStorageSync('userInfo', userInfo)
                 } else {
                   Message.error({
@@ -68,33 +69,28 @@ Component({
             })
           }
         })
-        wx.login({
-          success(res){
-            const code = res.code
-            wx.request({
-              url: getApp().globalData.api + '/wechat/phone',
-              data: {
-                code
-              },
-              method: 'POST',
-              success(res) {
-                console.log(res)
-              }
-            })
-          }
-        })
       }
+    },
+    hide: function () {
+      this.setData({
+        showPopup: false
+      })
     }
   },
   methods: {
-    toSignUp(){
+    toSignUp() {
       wx.navigateTo({
         url: '../signUp/signUp'
       })
     },
-    toWitchPage(e){
+    toWitchPage(e) {
       wx.navigateTo({
         url: e.currentTarget.dataset.path
+      })
+    },
+    openPopup() {
+      this.setData({
+        showPopup: true
       })
     }
   }

@@ -21,13 +21,14 @@
     "t-picker": "tdesign-miniprogram/picker/picker",
     "t-picker-column": "tdesign-miniprogram/picker/picker-column",
     "t-message": "tdesign-miniprogram/message/message",
-    "t-image": "tdesign-miniprogram/image/image"
+    "t-image": "tdesign-miniprogram/image/image",
+    "t-popup": "tdesign-miniprogram/popup/popup"
   },
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarTitleText":"织为云外协用工",
-    "navigationBarBackgroundColor":"#6CD5FF",
-    "navigationBarTextStyle":"black",
+    "navigationBarBackgroundColor":"#3BB1FF",
+    "navigationBarTextStyle":"white",
     "backgroundColor":"#f3f3f3"
   },
   "tabBar": {

@@ -1,36 +1,44 @@
 <!--logs.wxml-->
 <view class="container noPad">
-  <view class="flex pr20 pl20 jcsb aic bgColorWhite borderBox w100 manage-list">
-    <view class="flex userInfo w60" bindtap="bindViewTap">
-      <t-avatar shape="circle" image="{{wechat_data.avatarUrl}}" />
-      <view class="fz40 ml20">
-        <block wx:if="{{ourUser === null || ourUser.userinfo === null}}">
-          <view bindtap="toSignUp">{{wechat_data.nickName}}</view>
-          <view bindtap="toSignUp" class="fz28 mt5">未完善资料，请立即填写</view>
-        </block>
-        <block wx:else>
-          <view>{{wechat_data.nickName}}</view>
-          <view class="fz28 mt5">{{ourUser.userinfo.user_name}}</view>
-        </block>
-      </view>
-    </view>
-    <view class="w30">
-      <view class="fr">
-        <view class="tr">假装icon</view>
-        <block wx:if="{{ourUser !== null && ourUser.userinfo !== null}}">
-          <view class="flex fz30 mt5">
-            <view class="ml10 bgColorD8 borderBox pl5 pr5">车标</view>
-            <view class="ml10 bgColorD8 borderBox pl5 pr5">套口</view>
+  <view class="h100 bg">
+    <view class="pb50">
+      <view class="flex pr20 pl20 jcsb aic borderBox colorWhite w100 manage-list">
+        <view class="flex userInfo w60" bindtap="bindViewTap">
+          <t-avatar shape="circle" image="{{userInfo.wechat_data.avatarUrl}}" />
+          <view class="fz40 ml20">
+            <block wx:if="{{ourUser === null || ourUser.userinfo === null}}">
+              <view bindtap="toSignUp">{{userInfo.wechat_data.nickName}}</view>
+              <view bindtap="toSignUp" class="fz28 mt5">未完善资料，请立即填写</view>
+            </block>
+            <block wx:else>
+              <view>{{ourUser.userinfo.name[0]+'先生('+ourUser.userinfo.wechat_data.nickName+')'}}</view>
+              <view class="fz28 mt5">{{ourUser.userinfo.user_name}}</view>
+            </block>
           </view>
-        </block>
+        </view>
+        <view class="w30">
+          <view class="fr">
+            <view class="tr" bindtap="openPopup">假装icon</view>
+            <block wx:if="{{ourUser !== null && ourUser.userinfo !== null}}">
+              <view class="flex fz30 mt5 h40 colorBlack">
+                <view class="autoLogos pl5 pr5">车标</view>
+                <view class="autoLogos ml10 pl5 pr5" style="background-color:#FFEB52">套口</view>
+              </view>
+            </block>
+          </view>
+        </view>
       </view>
     </view>
-  </view>
-  <view class="ml20 mr20 mt20 bgColorWhite w90 flex jcsb flexWarp borderBox pl20 pr20 pt20 pb20 color9E fz30 tc">
-    <view wx:for-items="{{pageList}}" wx:for-item="item"  wx:key="{{item.title}}" data-path="{{item.path}}" bindtap="toWitchPage">
-      <view class="bgColorD8 sonContainer"></view>
-      <view class="mt5">{{item.title}}</view>
+    <view class="ml20 mr20 mt20 bgColorWhite w90 flex jcsb flexWarp borderBox pl20 pr20 pt20 pb20 color9E fz30 tc borderRadius16 shadow" style="transform: translateY(-60%);">
+      <view wx:for-items="{{pageList}}" wx:for-item="item"  wx:key="{{item.title}}" data-path="{{item.path}}" bindtap="toWitchPage">
+        <view class="bgColorD8 sonContainer"></view>
+        <view class="mt5">{{item.title}}</view>
+      </view>
     </view>
+    <t-message id="t-message" />
+    <t-popup
+      visible="{{showPopup}}" placement="center" >
+      <view  slot="content" >中部弹出</view>
+    </t-popup>
   </view>
-  <t-message id="t-message" />
 </view>

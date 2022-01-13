@@ -1,5 +1,6 @@
 import Message from 'tdesign-miniprogram/message/index';
 import {
+  verifyTel,
   wxReq
 } from '../../utils/util';
 // index.js
@@ -44,10 +45,38 @@ Component({
   },
   methods: {
     changeName(e) {
-      this.data.userInfo.name = e.detail.value
+      this.data.userInfo.realName = e.detail.value
+      this.data.userInfo.wechat_data.realName = e.detail.value
     },
     changePhone(e){
-      this.data.userInfo.phoneNumber = e.detail.value
+      this.changePhoneNumber(e.detail.value)
+    },
+    changePhoneNumber(phoneNumber){
+      this.data.userInfo.wechat_data.phoneNumber=phoneNumber
+      this.data.userInfo.phoneNumber=phoneNumber
+      this.setData({userInfo:this.data.userInfo})
+    },
+    getPhoneNumber(e){
+      if(e.detail.errMsg==="getPhoneNumber:ok"){
+        wxReq({
+          url: '/wechat/phone',
+          data: {
+            code:e.detail.code,
+          },
+          method:"POST",
+          success:(res) => {
+            let phoneNumber = JSON.parse(res.data.data).phone_info.purePhoneNumber
+            this.changePhoneNumber(phoneNumber)
+          }
+        })
+      } else {
+        Message.error({
+          offset: [20, 32],
+          duration: 2000,
+          content: '获取手机号失败',
+        });
+      }
+      // this.data.userInfo.phoneNumber = e.detail.value
     },
     postSignUp() {
       if (!this.data.isRead) {
@@ -66,7 +95,7 @@ Component({
         });
         return
       }
-      if (this.data.userInfo.name === undefined) {
+      if (this.data.userInfo.realName === undefined) {
         Message.error({
           offset: [20, 32],
           duration: 2000,
@@ -81,15 +110,24 @@ Component({
           content: '请填写手机号',
         });
         return
+      } else {
+        if(!verifyTel(this.data.userInfo.phoneNumber)){
+          Message.error({
+            offset: [20, 32],
+            duration: 2000,
+            content: '手机号格式不正确，请重新填写或者获取',
+          });
+          this.changePhoneNumber("")
+          return
+        }
       }
       let userInfo = this.data.userInfo
-      
       wxReq({
         url: '/user/register',
         data: {
-          // user_name:userInfo.phoneNumber,
+          user_name:userInfo.phoneNumber,
           user_name:'18958643187',  
-          name:userInfo.name,
+          name:userInfo.realName,
           process:userInfo.process,
           wechat_data:userInfo.wechat_data,
           openid:userInfo.openid.openid
@@ -124,7 +162,6 @@ Component({
       })
     },
     onPicker1Confirm(e) {
-      console.log('picker1 confirm:', e.detail);
       this.data.userInfo.process = e.detail.value[0].value
       this.setData({
         selectedWorkProcedureValue: e.detail.value[0].value,
@@ -132,7 +169,6 @@ Component({
       });
     },
     onPicker1Cancel() {
-      console.log('picker1 cancel:');
       this.setData({
         showPick: false,
       });
