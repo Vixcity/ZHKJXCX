@@ -32,7 +32,7 @@
 			<t-icon class="{{isRead?'color8D9F':'color9E'}}" name="check-circle-filled" size="small" bind:click="iRead"> </t-icon>
 			<text class="{{isRead?'color8D9F':'color9E'}}">我已阅读并同意《织为云外协用工平台用户注册与服务协议》</text>
 		</view>
-		<view class="mt20 subbmit">
+		<view class="mt20 submit">
 			<t-button theme="primary" size="large" variant="plain" bindtap="postSignUp">提交注册</t-button>
 		</view>
 	</view>

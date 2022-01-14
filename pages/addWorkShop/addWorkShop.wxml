@@ -1,0 +1,31 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="bg flex fdc jcsa aic">
+    <view class="w100 whoWorkShop borderBox pl40 pt30 flex fdc">
+      <view class="fz40 blod">{{workShopInfo.name[0]}}先生的作坊</view>
+      <view class="flex aic mt5 color91 fz28">
+        <t-icon name="user" size="xl" bind:click="someFunction"> </t-icon> 
+        <text class="ml10">套口、针织</text>
+      </view>
+    </view>
+    <view class="flex fdc aic">
+      <view class="tc mt30 fz40 blod" wx:if="{{!isAdded}}">
+        <view>您尚未加入该作坊</view>
+        <view>可点击下方按钮直接加入</view>
+      </view>
+      <view class="tc mt30 fz35 blod" wx:else>
+        <view>您目前已加入{{beloneInfo.name[0]}}师傅的作坊</view>
+        <view>如离职加入新作坊，可点击下方按钮操作</view>
+      </view>
+      <view class="submit mt40">
+        <view class="fz28 w80 mb20 color91" wx:if="{{isAdded}}">
+          <view>*此操作立即生效，不可撤销，请谨慎操作</view>
+          <view>*加入新作坊后，将无法再操作原有作坊的生产录入，也无法查看相应的生产数据。</view>
+        </view>
+        <t-button theme="primary" size="large" variant="plain" bindtap="addWorkShop">{{isAdded?'更改作坊':'加入作坊'}}</t-button>
+      </view>
+    </view>
+  </view>
+  <t-dialog title="申请成功" content="您已申请成功，请耐心等待审核通过" confirm-btn="返回首页" visible="{{showDialog}}" bind:confirm="toManege"/>
+  <t-message id="t-message" />
+</view>

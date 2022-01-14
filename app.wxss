@@ -21,6 +21,9 @@ page{
 .color9E{
   color:#9E9E9E
 }
+.color91{
+  color:#919191
+}
 .color8D9F{
   color: #008DF9;
 }
@@ -120,6 +123,33 @@ page{
 }
 
 /* margin-top */
+.mt100{
+  margin-top: 100px;
+}
+.mt90{
+  margin-top: 90px;
+}
+.mt80{
+  margin-top: 80px;
+}
+.mt70{
+  margin-top: 70px;
+}
+.mt60{
+  margin-top: 60px;
+}
+.mt50{
+  margin-top: 50px;
+}
+.mt40{
+  margin-top: 40px;
+}
+.mt30{
+  margin-top: 30px;
+}
+.mt37{
+  margin-top: 37px;
+}
 .mt20{
   margin-top: 20px;
 }
@@ -133,6 +163,21 @@ page{
 /* margin-left */
 .ml20{
   margin-left: 20px;
+}
+.ml19{
+  margin-left: 19px;
+}
+.ml18{
+  margin-left: 18px;
+}
+.ml17{
+  margin-left: 17px;
+}
+.ml15{
+  margin-left: 15px;
+}
+.ml13{
+  margin-left: 13px;
 }
 .ml10{
   margin-left: 10px;
@@ -164,6 +209,9 @@ page{
 }
 
 /* padding-top */
+.pt30{
+  padding-top: 30px;
+}
 .pt20{
   padding-top: 20px;
 }
@@ -175,6 +223,12 @@ page{
 }
 
 /* padding-left */
+.pl40{
+  padding-left: 40px;
+}
+.pl30{
+  padding-left: 30px;
+}
 .pl20{
   padding-left: 20px;
 }
@@ -319,6 +373,9 @@ page{
 }
 .fz40{
   font-size: 40rpx;
+}
+.fz35{
+  font-size: 35rpx;
 }
 .fz30{
   font-size: 30rpx;
@@ -494,7 +551,7 @@ t-image {
 
 
 /* t-button */
-.subbmit .t-button {
+.submit .t-button {
   background-image: linear-gradient( #52C0FF, #008AD8);
   color: #ffffff!important;
   border: none;
@@ -531,4 +588,17 @@ t-image {
   font-size: 30rpx;
   background-color:#FF6C40;
   border-radius: 500000px;
+}
+
+
+
+
+
+
+
+
+
+/* overflow */
+.overfh{
+  overflow: hidden;
 }

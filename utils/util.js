@@ -17,7 +17,7 @@ const wxReq = data => {
     method: data.method,
     success: data.success,
     header:{
-      openid:openid
+      Authorization:'Bearer '+openid
     }
   })
 }

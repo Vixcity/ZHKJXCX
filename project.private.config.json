@@ -1,0 +1,25 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "扫码",
+          "pathName": "pages/addWorkShop/addWorkShop",
+          "query": "uuid=948724fa72a011ec992f0242ac150004",
+          "scene": 1047,
+          "launchMode": "default"
+        }
+      ]
+    }
+  }
+}

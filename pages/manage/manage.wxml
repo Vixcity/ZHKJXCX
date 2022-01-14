@@ -18,9 +18,11 @@
         </view>
         <view class="w30">
           <view class="fr">
-            <view class="tr" bindtap="openPopup">假装icon</view>
+            <view class="tr" bindtap="openPopup">
+              <image src="https://file.zwyknit.com/erweima.png" style="width: 80rpx;height: 80rpx;"></image>
+            </view>
             <block wx:if="{{ourUser !== null && ourUser.userinfo !== null}}">
-              <view class="flex fz30 mt5 h40 colorBlack">
+              <view class="flex fz30 h40 colorBlack">
                 <view class="autoLogos pl5 pr5">车标</view>
                 <view class="autoLogos ml10 pl5 pr5" style="background-color:#FFEB52">套口</view>
               </view>
@@ -29,16 +31,29 @@
         </view>
       </view>
     </view>
-    <view class="ml20 mr20 mt20 bgColorWhite w90 flex jcsb flexWarp borderBox pl20 pr20 pt20 pb20 color9E fz30 tc borderRadius16 shadow" style="transform: translateY(-60%);">
-      <view wx:for-items="{{pageList}}" wx:for-item="item"  wx:key="{{item.title}}" data-path="{{item.path}}" bindtap="toWitchPage">
+    <view class="ml20 mr20 mt20 bgColorWhite w90 flex flexWarp borderBox pl20 pr20 pt20 pb20 color9E fz30 tc borderRadius16 shadow" style="transform: translateY(-60%);">
+      <view class="{{item.index===1?'':'ml18'}}" wx:for-items="{{pageList}}" wx:for-item="item" wx:key="{{item.title}}" data-path="{{item.path}}" bindtap="toWitchPage">
         <view class="bgColorD8 sonContainer"></view>
         <view class="mt5">{{item.title}}</view>
       </view>
     </view>
     <t-message id="t-message" />
     <t-popup
-      visible="{{showPopup}}" placement="center" >
-      <view  slot="content" >中部弹出</view>
+      visible="{{showPopup}}" placement="center">
+      <view slot="content" class="bgColorWhite overfh w80 por" style="transform: translateY(-5%);" >
+        <view class="poa" style="right: 20rpx;top:20rpx;">
+          <t-icon name="close" size="xl"  bind:click="closePopup"></t-icon>
+        </view>
+        <view class="mt40 pb20 pl20 pr20 tc">
+          <image style="width: 500rpx;height: 500rpx;" src="{{showImage}}"	show-menu-by-longpress="{{true}}"></image>
+          <view class="mt30">
+            长按保存至手机
+          </view>
+          <view>
+            或使用微信扫一扫
+          </view>
+        </view>
+      </view>
     </t-popup>
   </view>
 </view>

@@ -7,7 +7,9 @@
     "pages/orderControl/orderControl",
     "pages/statistics/statistics",
     "pages/userManagement/userManagement",
-    "pages/workerManage/workerManage"
+    "pages/workerManage/workerManage",
+    "pages/addWorkShop/addWorkShop",
+    "pages/historyWorkShop/historyWorkShop"
   ],
   "usingComponents": {
     "t-button": "tdesign-miniprogram/button/button",
@@ -22,7 +24,8 @@
     "t-picker-column": "tdesign-miniprogram/picker/picker-column",
     "t-message": "tdesign-miniprogram/message/message",
     "t-image": "tdesign-miniprogram/image/image",
-    "t-popup": "tdesign-miniprogram/popup/popup"
+    "t-popup": "tdesign-miniprogram/popup/popup",
+    "t-dialog": "tdesign-miniprogram/dialog/dialog"
   },
   "window":{
     "backgroundTextStyle":"light",
