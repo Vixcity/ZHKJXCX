@@ -6,7 +6,7 @@ import {
 // index.js
 Component({
   data: {
-    userInfo: {},
+    userInfo: null,
     value: "",
     isRead: false,
     showPick: false,
@@ -36,7 +36,7 @@ Component({
   pageLifetimes: {
     show: function () {
       wx.hideHomeButton()
-      if (JSON.stringify(this.data.userInfo) === '{}') {
+      if (this.data.userInfo === null) {
         this.setData({
           userInfo: wx.getStorageSync('userInfo')
         })

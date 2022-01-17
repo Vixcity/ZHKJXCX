@@ -1,27 +1,6 @@
 <!--index.wxml-->
 <view class="container">
   <view class="bg">
-    <view wx:for="{{4}}" class="ml20 mr20 mt20 bgColorWhite w90 jcsb flexWarp borderRadius16 shadow borderBox pl10 pr10 pt10 pb10 colorBlack">
-      <view class="flex jcsb aic">
-        <view class="fz40 flex blod aic">
-          圈圈纱围脖
-          <t-icon name=rollback" size="xl" bind:click="someFunction"> </t-icon>
-        </view>
-        <view class="flex h90">
-          <view class="autoLogos pl10 pr10">车标</view>
-          <view class="autoLogos ml10 pl10 pr10" style="background-color:#FFEB52">套口</view>
-        </view>
-      </view>
-      <view class="fz30 mt20 mb20">
-        客户：凯瑞针织
-      </view>
-      <view class="flex aic">
-        <t-image class="size-l radius-m" src="https://we-retail-static-1300977798.cos.ap-guangzhou.myqcloud.com/retail-ui/components-exp/image/image-2.jpg" mode="aspectFill"></t-image>
-        <view class="ml10 fz30 flex jcsa fdc" style="height: 144rpx;">
-          <view>生产进度：13000 / 30000</view>
-          <view>交付时间：2021-12-30</view>
-        </view>
-      </view>
-    </view>
+    <order-card wx:for="{{4}}" detailInfo="{{detailInfo}}"></order-card>
   </view>
 </view>

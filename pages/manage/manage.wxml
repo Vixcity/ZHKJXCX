@@ -3,49 +3,53 @@
   <view class="h100 bg">
     <view class="pb50">
       <view class="flex pr20 pl20 jcsb aic borderBox colorWhite w100 manage-list">
-        <view class="flex userInfo w60" bindtap="bindViewTap">
-          <t-avatar shape="circle" image="{{userInfo.wechat_data.avatarUrl}}" />
+        <view class="flex userInfo vw60" bindtap="bindViewTap">
+          <t-avatar shape="circle" image="{{userInfo.wechat_data.avatarUrl || userInfo.userinfo.wechat_data.avatarUrl}}" />
           <view class="fz40 ml20">
-            <block wx:if="{{ourUser === null || ourUser.userinfo === null}}">
+            <block wx:if="{{userInfo === null || userInfo.userinfo === null}}">
               <view bindtap="toSignUp">{{userInfo.wechat_data.nickName}}</view>
               <view bindtap="toSignUp" class="fz28 mt5">未完善资料，请立即填写</view>
             </block>
             <block wx:else>
-              <view>{{ourUser.userinfo.name[0]+'先生('+ourUser.userinfo.wechat_data.nickName+')'}}</view>
-              <view class="fz28 mt5">{{ourUser.userinfo.user_name}}</view>
+              <view>{{userInfo.userinfo.name[0]+'先生('+userInfo.userinfo.wechat_data.nickName+')'}}</view>
+              <view class="fz28 mt5">{{userInfo.userinfo.user_name}}</view>
             </block>
           </view>
         </view>
-        <view class="w30">
+        <view class="vw30">
           <view class="fr">
             <view class="tr" bindtap="openPopup">
               <image src="https://file.zwyknit.com/erweima.png" style="width: 80rpx;height: 80rpx;"></image>
             </view>
-            <block wx:if="{{ourUser !== null && ourUser.userinfo !== null}}">
+            <block wx:if="{{ourUser !== null && userInfo.userinfo !== null}}">
               <view class="flex fz30 h40 colorBlack">
-                <view class="autoLogos pl5 pr5">车标</view>
-                <view class="autoLogos ml10 pl5 pr5" style="background-color:#FFEB52">套口</view>
+                <view class="autoLogos pl5 pr5" style="background-color: white; color: #229CFB;">车标 | 套口</view>
               </view>
             </block>
           </view>
         </view>
       </view>
     </view>
-    <view class="ml20 mr20 mt20 bgColorWhite w90 flex flexWarp borderBox pl20 pr20 pt20 pb20 color9E fz30 tc borderRadius16 shadow" style="transform: translateY(-60%);">
-      <view class="{{item.index===1?'':'ml18'}}" wx:for-items="{{pageList}}" wx:for-item="item" wx:key="{{item.title}}" data-path="{{item.path}}" bindtap="toWitchPage">
-        <view class="bgColorD8 sonContainer"></view>
+    
+    <!-- 菜单 -->
+    <view class="ml20 mr20 mt20 bgColorWhite vw90 flex flexWarp borderBox pl20 pr20 pt20 pb20 color9E fz30 tc borderRadius16 shadow" style="transform: translateY(-60%);">
+      <view class="{{item.index===1?'':'ml18'}}" wx:for-items="{{pageList}}" wx:for-item="item" wx:key="title" data-path="{{item.path}}" bindtap="toWitchPage">
+        <image class="sonContainer" src="{{item.icon}}" mode="aspectFill"/>
         <view class="mt5">{{item.title}}</view>
       </view>
     </view>
+    
+    <!-- 消息组件 -->
     <t-message id="t-message" />
-    <t-popup
-      visible="{{showPopup}}" placement="center">
-      <view slot="content" class="bgColorWhite overfh w80 por" style="transform: translateY(-5%);" >
+    
+    <!-- 弹出框 -->
+    <t-popup visible="{{showPopup}}" placement="center">
+      <view slot="content" class="bgColorWhite overfh vw80 por" style="transform: translateY(-5%);">
         <view class="poa" style="right: 20rpx;top:20rpx;">
-          <t-icon name="close" size="xl"  bind:click="closePopup"></t-icon>
+          <t-icon name="close" size="xl" bind:click="closePopup"></t-icon>
         </view>
         <view class="mt40 pb20 pl20 pr20 tc">
-          <image style="width: 500rpx;height: 500rpx;" src="{{showImage}}"	show-menu-by-longpress="{{true}}"></image>
+          <image style="width: 500rpx;height: 500rpx;" src="{{showImage}}" show-menu-by-longpress="{{true}}"></image>
           <view class="mt30">
             长按保存至手机
           </view>

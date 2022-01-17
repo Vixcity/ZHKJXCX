@@ -1,23 +1,15 @@
 /**index.wxss**/
-.container{
-  padding-bottom: 48px!important;
-}
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #aaa;
+.container {
+  overflow-x: hidden;
 }
 
-.userinfo-avatar {
-  overflow: hidden;
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+.bg {
+  background: url(https://file.zwyknit.com/20220113152510.jpg);
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position-y: 30%;
 }
 
-.usermotto {
-  margin-top: 200px;
+.lastMb20 :last-child{
+  margin-bottom: 20rpx;
 }
-

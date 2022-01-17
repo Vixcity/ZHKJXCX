@@ -1,0 +1,19 @@
+/* components/orderCard.wxss */
+@import "../../app.wxss";
+
+image {
+	border-radius: 0;
+	overflow: hidden;
+	width: 144rpx;
+	height: 144rpx;
+	border-radius: 8rpx;
+}
+
+.check {
+	color: #229CFB
+}
+
+.cornerStyle{
+	right: -2%;
+	bottom: -2%;
+}

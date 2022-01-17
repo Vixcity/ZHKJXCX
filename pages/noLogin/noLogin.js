@@ -13,7 +13,7 @@ Page({
     })
 	},
 	canToManage(){
-		if(wx.getStorageSync('userInfo')!==''){
+		if(wx.getStorageSync('userInfo') !== "" && wx.getStorageSync('userInfo').userinfo!==null){
 			this.toManage()
 		}
 	},
@@ -29,8 +29,9 @@ Page({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
-        let userInfo = {wechat_data:res.userInfo}
-        wx.setStorageSync('userInfo',userInfo)
+        let userinfo = wx.getStorageSync('userInfo')
+        userinfo.wechat_data = res.userInfo
+        wx.setStorageSync('userInfo',userinfo)
 				this.toManage()
       }
     })

@@ -1,17 +1,19 @@
-.container{
+.container {
 	background-color: #27A2FD;
 }
-.signUp{
+
+.signUp {
 	background-color: white;
 	overflow: hidden;
 	border-top-left-radius: 120rpx;
 	border-top-right-radius: 120rpx;
 }
+
 .signUpBanner {
 	height: 70px;
 }
 
-input{
+input {
 	border: 1px solid #E2E2E2;
 	border-radius: 500000px;
 	text-align: left;
@@ -21,7 +23,7 @@ input{
 	width: 68%;
 }
 
-.getPhoneNumber{
+.getPhoneNumber {
 	border: unset;
 	box-shadow: unset;
 	background-color: white;
@@ -33,9 +35,11 @@ input{
 	color: #24AEFC;
 	z-index: 999;
 }
-.getPhoneNumber::after{
+
+.getPhoneNumber::after {
 	border: unset;
 }
+
 /* .getPhoneNumber{
 	border: 1px solid #E2E2E2;
 	background-color: white;
@@ -47,3 +51,8 @@ input{
 	padding-left: 30rpx;
 	color: black;
 } */
+
+.size-l .t-image {
+	width: 188rpx;
+	height: 144rpx;
+}

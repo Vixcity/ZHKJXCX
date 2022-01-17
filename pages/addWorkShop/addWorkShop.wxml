@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="container">
   <view class="bg flex fdc jcsa aic">
-    <view class="w100 whoWorkShop borderBox pl40 pt30 flex fdc">
+    <view class="vw100 whoWorkShop borderBox pl40 pt30 flex fdc">
       <view class="fz40 blod">{{workShopInfo.name[0]}}先生的作坊</view>
       <view class="flex aic mt5 color91 fz28">
         <t-icon name="user" size="xl" bind:click="someFunction"> </t-icon> 
@@ -18,7 +18,7 @@
         <view>如离职加入新作坊，可点击下方按钮操作</view>
       </view>
       <view class="submit mt40">
-        <view class="fz28 w80 mb20 color91" wx:if="{{isAdded}}">
+        <view class="fz28 vw80 mb20 color91" wx:if="{{isAdded}}">
           <view>*此操作立即生效，不可撤销，请谨慎操作</view>
           <view>*加入新作坊后，将无法再操作原有作坊的生产录入，也无法查看相应的生产数据。</view>
         </view>
