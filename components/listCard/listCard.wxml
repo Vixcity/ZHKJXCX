@@ -1,0 +1,22 @@
+<!--components/listCard.wxml-->
+<view class="bgColorWhite pl10 pr10 pt20 pb20 fz25 mt20 borderRadius16 shadow borderBox vw90 ma">
+	<view class="flex jcsb color91">
+		<view wx:for="{{cardInfoData.cardTitle}}" wx:for-item="item" wx:for-index="index" style="width:{{item.width}}%;" wx:key="item">
+			{{item.title}}
+		</view>
+	</view>
+	<view wx:for="{{cardInfoData.cardData}}" wx:for-item="item" wx:for-index="index" wx:key="item" bindtap="clickLine" data-item="{{item}}" data-index="{{index}}" class="flex jcsb color4D pb10 mt10 borderItem">
+		<view wx:for="{{item.length}}" wx:for-item="itemSon" wx:key="itemSon" style="width: {{cardInfoData.cardTitle[itemSon].width}}%;">
+			<block wx:if="{{cardInfoData.hasBr}}">
+				<view>
+					<view wx:for="{{item[itemSon]}}" wx:for-item="itemGrandSon" wx:key="itemGrandSon">{{itemGrandSon}}</view>
+				</view>
+			</block>
+			<block wx:else>
+				<view>
+					<view>{{item[itemSon]}}</view>
+				</view>
+			</block>
+		</view>
+	</view>
+</view>

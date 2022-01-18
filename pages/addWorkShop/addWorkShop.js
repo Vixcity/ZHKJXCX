@@ -1,24 +1,32 @@
 import Message from 'tdesign-miniprogram/message/index';
-import Dialog from 'tdesign-miniprogram/dialog/index';
-import { wxReq } from '../../utils/util';
+import { wxReq,getTimeDiff } from '../../utils/util';
 Component({
   data: {
     workShopInfo: {},
     isAdded:wx.getStorageSync('userInfo').userinfo?.parent!==null || false,
     query_uuid:'',
     showDialog:false,
-    beloneInfo:{}
+    beloneInfo:{},
+    isBeOverdue:false,
   },
   pageLifetimes: {
     show: function() {
       let _this = this
       let query_uuid = wx.getLaunchOptionsSync().query.uuid
-
+      let time = wx.getLaunchOptionsSync().query.time
+      let timeDiff = getTimeDiff(Date.now(),time,'hours')
       // 判断是否为直接扫码进入
       if(wx.getStorageSync('userInfo')===""){
         wx.reLaunch({
           url: '../noLogin/noLogin',
         })
+      }
+
+      if(timeDiff>48){
+        this.setData({
+          isBeOverdue:true
+        })
+        return
       }
 
       this.data.query_uuid = query_uuid

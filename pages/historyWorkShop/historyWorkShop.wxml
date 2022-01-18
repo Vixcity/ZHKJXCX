@@ -1,4 +1,5 @@
 <!--pages/statistics/statistics.wxml-->
-<view class="container">
-  历任作坊空数据页
+<view class="bg borderBox pt10 submit overfh">
+	<list-card cardInfoData="{{cardInfoData}}"></list-card>
 </view>
+

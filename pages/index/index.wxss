@@ -1,13 +1,7 @@
 /**index.wxss**/
 .container {
-  padding-bottom: 48px !important;
+  padding-bottom: 68px !important;
   height: 100%;
-}
-
-.bg {
-  background: url(https://file.zwyknit.com/20220113152510.jpg);
-  background-size: 100% auto;
-  background-repeat: no-repeat;
 }
 
 .userinfo {

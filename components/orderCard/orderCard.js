@@ -32,6 +32,9 @@ Component({
 			this.setData({
 				isCheck: !this.data.isCheck
 			})
+		},
+		clickEvent(event){
+			this.triggerEvent("clickEvent", event.currentTarget.dataset)
 		}
 	}
 })

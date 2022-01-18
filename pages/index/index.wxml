@@ -1,6 +1,15 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="bg">
-    <order-card wx:for="{{4}}" detailInfo="{{detailInfo}}"></order-card>
+  <view class="bg h100 w100">
+    <!-- 卡片列表 -->
+    <order-card bindtap="toOutPutEntry" wx:for="{{orderList}}" wx:for-item="item" wx:for-index="index" data-index="{{index}}" detailInfo="{{item}}"></order-card>
+
+    <!-- 懒加载 -->
+    <view class="tc color91 mt20 mb20" hidden='{{!isShowLoadmore}}'>
+      <view>正在加载</view>
+    </view>
+    <view class="tc color91 mt20 mb20" hidden='{{!isShowNoDatasTips}}'>
+      <view>暂无更多数据</view>
+     </view>
   </view>
 </view>

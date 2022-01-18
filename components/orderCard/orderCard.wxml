@@ -13,7 +13,7 @@
 		客户：{{detailInfo.customer}}
 	</view>
 	<view class="flex aic">
-		<t-image class="size-l radius-m" src="https://we-retail-static-1300977798.cos.ap-guangzhou.myqcloud.com/retail-ui/components-exp/image/image-2.jpg" mode="aspectFill"></t-image>
+		<t-image class="size-l radius-m" src="{{detailInfo.imgSrc}}" mode="aspectFill"></t-image>
 		<view class="ml10 fz30 flex jcsa fdc" style="height: 144rpx;">
 			<view>生产进度：{{detailInfo.nowNumber}} / {{detailInfo.allNumber}}</view>
 			<view>交付时间：{{detailInfo.time}}</view>

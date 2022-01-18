@@ -1,1 +1,4 @@
 /* pages/workerManage/workerManage.wxss */
+.bg {
+	background-position: 5%;
+}

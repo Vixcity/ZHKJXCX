@@ -1,51 +1,27 @@
 <!--pages/statistics/statistics.wxml-->
 <view class="container">
   <view class="pof flex vw100 top0">
-    <view wx:for="{{topTabData}}" wx:for-item="item" data-whichType="{{item.whichType}}" bindtap="chooseWhichOne" class="flex jcc item aic">
+    <view wx:for="{{topTabData}}" wx:for-item="item" wx:key="item" data-whichType="{{item.whichType}}" bindtap="chooseWhichOne" class="flex jcc item aic">
       <view>{{item.value}}</view>
       <t-icon name="caret-down-small" size="xl"></t-icon>
     </view>
   </view>
-  <view class="mt40">
+  <view wx:if="{{isLeader}}" class="mt40">
     <view class="colorB9 pt10 fz30 tc">
       共3条记录，共2250元
     </view>
-    <view class="bgColorWhite pl10 pr10 pt20 pb20 fz25 mt20 borderRadius16 shadow borderBox vw90">
-      <view class="flex jcsb color91">
-        <view class="w30">生产时间/人员</view>
-        <view class="w25">客户/产品</view>
-        <view class="w20">尺码颜色/数量</view>
-        <view class="w25">工序单价/总价</view>
-      </view>
-      <view wx:for="{{4}}" wx:for-item="item" class="flex jcsb color4D pb10 mt10 borderItem">
-        <view class="w30">
-          <view>2021-12-30 12:30</view>
-          <view>王先生</view>
-        </view>
-        <view class="w25">
-          <view>凯瑞针织</view>
-          <view>圈圈纱围脖</view>
-        </view>
-        <view class="w20">
-          <view>S/红色</view>
-          <view>3000</view>
-        </view>
-        <view class="w25">
-          <view>0.3元</view>
-          <view>900.00元</view>
-        </view>
-      </view>
-    </view>
-
-    <!-- 时间选择器 -->
-    <t-picker visible="{{showDataPick}}" bindconfirm="pickDataConfirm" bindcancel="pickDataCancel">
-      <t-picker-column options="{{years}}" value="{{selectedYearsWithDate}}"></t-picker-column>
-      <t-picker-column options="{{months}}" value="{{selectedMonth}}"></t-picker-column>
-    </t-picker>
-
-    <!-- 人类选择器 -->
-    <t-picker visible="{{showPeoplePick}}" bindconfirm="pickPeopleConfirm" bindcancel="pickPeopleCancel">
-      <t-picker-column options="{{people}}" value="{{selectedPeopleValue}}"></t-picker-column>
-    </t-picker>
+    <list-card cardInfoData="{{cardInfoData}}"></list-card>
   </view>
+  <view wx:else class="mt40">空数据页</view>
+  
+  <!-- 时间选择器 -->
+  <t-picker visible="{{showDataPick}}" bindconfirm="pickDataConfirm" bindcancel="pickDataCancel">
+    <t-picker-column options="{{years}}" value="{{selectedYearsWithDate}}"></t-picker-column>
+    <t-picker-column options="{{months}}" value="{{selectedMonth}}"></t-picker-column>
+  </t-picker>
+
+  <!-- 人类选择器 -->
+  <t-picker visible="{{showPeoplePick}}" bindconfirm="pickPeopleConfirm" bindcancel="pickPeopleCancel">
+    <t-picker-column options="{{people}}" value="{{selectedPeopleValue}}"></t-picker-column>
+  </t-picker>
 </view>

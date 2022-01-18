@@ -36,8 +36,20 @@ const formatNumber = n => {
   return n[1] ? n : `0${n}`
 }
 
+// 获取时间差
+const getTimeDiff = (time1,time2,type='hours') => {
+  let timeDiff = time1>time2?time1-time2:time2-time1
+  let hours = Math.floor(timeDiff / (3600 * 1000));
+  let days = Math.floor(timeDiff / (24 * 3600 * 1000));
+  let minutes = Math.floor(timeDiff / (60 * 1000));
+  if(type==="hours") return hours
+  if(type==="days") return days
+  if(type==="minutes") return minutes
+}
+
 module.exports = {
   formatTime,
   wxReq,
-  verifyTel
+  verifyTel,
+  getTimeDiff
 }

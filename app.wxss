@@ -507,6 +507,11 @@ page{
 
 
 /* background */
+.bg {
+  background: url(https://file.zwyknit.com/20220113152510.jpg);
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+}
 .bgColorD8{
   background-color: #D8D8D8;
 }

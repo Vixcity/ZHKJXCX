@@ -1,0 +1,13 @@
+<!--pages/outputEntry/outputEntry.wxml-->
+<view class="bg borderBox pt10 submit overfh">
+	<order-card detailInfo="{{cardOrder}}"></order-card>
+	<view class="ml20 mr20 mt20 bgColorWhite vw90 jcsb flexWarp borderRadius16 shadow borderBox pl10 pr10 pt10 pb10 colorBlack por overfh">
+		这里是tab页面
+	</view>
+	<view wx:for="{{2}}" class="ml20 mr20 mt20 bgColorWhite vw90 jcsb flexWarp borderRadius16 shadow borderBox pl10 pr10 pt10 pb10 colorBlack por overfh">
+		这里是尺码颜色页面
+	</view>
+	<view class="vw100 mt20 mb20">
+		<t-button theme="primary" size="large" variant="plain" bindtap="addWorkShop">提交</t-button>
+	</view>
+</view>

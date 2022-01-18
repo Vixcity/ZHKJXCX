@@ -1,43 +1,46 @@
 {
-  "pages":[
-    "pages/noLogin/noLogin",
-    "pages/index/index",
-    "pages/manage/manage",
-    "pages/signUp/signUp",
-    "pages/orderControl/orderControl",
-    "pages/statistics/statistics",
-    "pages/userManagement/userManagement",
-    "pages/workerManage/workerManage",
-    "pages/addWorkShop/addWorkShop",
-    "pages/historyWorkShop/historyWorkShop"
-  ],
-  "usingComponents": {
-    "t-button": "tdesign-miniprogram/button/button",
-    "t-navbar": "tdesign-miniprogram/navbar/navbar",
-    "t-tab-bar": "tdesign-miniprogram/tab-bar/tab-bar",
-    "t-tab-bar-item": "tdesign-miniprogram/tab-bar/tab-bar-item",
-    "t-icon": "tdesign-miniprogram/icon/icon",
-    "t-avatar": "tdesign-miniprogram/avatar/avatar",
-    "t-avatar-group": "tdesign-miniprogram/avatar/avatar-group",
-    "t-input": "tdesign-miniprogram/input/input",
-    "t-picker": "tdesign-miniprogram/picker/picker",
-    "t-picker-column": "tdesign-miniprogram/picker/picker-column",
-    "t-message": "tdesign-miniprogram/message/message",
-    "t-image": "tdesign-miniprogram/image/image",
-    "t-popup": "tdesign-miniprogram/popup/popup",
-    "t-dialog": "tdesign-miniprogram/dialog/dialog",
-    "t-tabs": "tdesign-miniprogram/tabs/tabs",
-    "t-tab-panel": "tdesign-miniprogram/tabs/tab-panel",
-    "order-card":"./components/orderCard/orderCard"
-  },
-  "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarTitleText":"织为云外协用工",
-    "navigationBarBackgroundColor":"#3BB1FF",
-    "navigationBarTextStyle":"white",
-    "backgroundColor":"#f3f3f3"
-  },
-  "tabBar": {
+	"pages": [
+		"pages/noLogin/noLogin",
+		"pages/index/index",
+		"pages/manage/manage",
+		"pages/signUp/signUp",
+		"pages/orderControl/orderControl",
+		"pages/statistics/statistics",
+		"pages/userManagement/userManagement",
+		"pages/workerManage/workerManage",
+		"pages/addWorkShop/addWorkShop",
+		"pages/historyWorkShop/historyWorkShop",
+		"pages/orderDetail/orderDetail",
+		"pages/outputEntry/outputEntry"
+	],
+	"usingComponents": {
+		"t-button": "tdesign-miniprogram/button/button",
+		"t-navbar": "tdesign-miniprogram/navbar/navbar",
+		"t-tab-bar": "tdesign-miniprogram/tab-bar/tab-bar",
+		"t-tab-bar-item": "tdesign-miniprogram/tab-bar/tab-bar-item",
+		"t-icon": "tdesign-miniprogram/icon/icon",
+		"t-avatar": "tdesign-miniprogram/avatar/avatar",
+		"t-avatar-group": "tdesign-miniprogram/avatar/avatar-group",
+		"t-input": "tdesign-miniprogram/input/input",
+		"t-picker": "tdesign-miniprogram/picker/picker",
+		"t-picker-column": "tdesign-miniprogram/picker/picker-column",
+		"t-message": "tdesign-miniprogram/message/message",
+		"t-image": "tdesign-miniprogram/image/image",
+		"t-popup": "tdesign-miniprogram/popup/popup",
+		"t-dialog": "tdesign-miniprogram/dialog/dialog",
+		"t-tabs": "tdesign-miniprogram/tabs/tabs",
+		"t-tab-panel": "tdesign-miniprogram/tabs/tab-panel",
+		"order-card": "./components/orderCard/orderCard",
+		"list-card": "./components/listCard/listCard"
+	},
+	"window": {
+		"backgroundTextStyle": "light",
+		"navigationBarTitleText": "织为云外协用工",
+		"navigationBarBackgroundColor": "#3BB1FF",
+		"navigationBarTextStyle": "white",
+		"backgroundColor": "#f3f3f3"
+	},
+	"tabBar": {
 		"custom": true,
 		"color": "#7A7E83",
 		"selectedColor": "#3cc51f",
@@ -52,7 +55,7 @@
 				"pagePath": "pages/manage/manage",
 				"text": "管理"
 			}
-    ]
+		]
 	},
-  "sitemapLocation": "sitemap.json"
+	"sitemapLocation": "sitemap.json"
 }

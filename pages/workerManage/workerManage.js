@@ -5,7 +5,36 @@ Page({
 	 * 页面的初始数据
 	 */
 	data: {
+		cardInfoData: {
+			cardData: [
+				[
+					'王先生', '员工', '在岗', '2021-12-29~至今'
+				],
+				[
+					'王先生', '员工', '在岗', '2021-12-29~至今'
+				],
+				[
+					'王先生', '员工', '离职', '2021-12-29~2022-02-22'
+				]
+			],
+			cardTitle: [{
+				title: '姓名',
+				width: 19
+			}, {
+				title: '角色',
+				width: 15
+			}, {
+				title: '在岗状态',
+				width: 20
+			}, {
+				title: '在岗时间',
+				width: 46
+			}]
+		}
+	},
 
+	click(option){
+		// console.log(option.detail)
 	},
 
 	/**

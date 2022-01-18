@@ -1,5 +1,34 @@
 <!--pages/userManagement/userManagement.wxml-->
-<view class="container">
-  空数据页
-</view>
+<t-tabs value="{{0}}" bind:change="onTabsChange">
+    <t-tab-panel label="合作中" value="0">
+      <block wx:if="{{!isLeader}}">
+        <view class="vh90 flex aic jcc">
+          空数据页
+        </view>
+      </block>
+      <block wx:else>
+        <list-card cardInfoData="{{cardInfoData}}"></list-card>
+      </block>
+    </t-tab-panel>
+    <t-tab-panel label="待绑定" value="1">
+      <block wx:if="{{!isLeader}}">
+        <view class="vh90 flex aic jcc">
+          空数据页
+        </view>
+      </block>
+      <block wx:else>
+        <list-card cardInfoData="{{cardInfoData}}"></list-card>
+      </block>
+    </t-tab-panel>
+    <t-tab-panel label="已终止" value="2">
+      <block wx:if="{{!isLeader}}">
+        <view class="vh90 flex aic jcc">
+          空数据页
+        </view>
+      </block>
+      <block wx:else>
+        <list-card cardInfoData="{{cardInfoData}}"></list-card>
+      </block>
+    </t-tab-panel>
+  </t-tabs>
 

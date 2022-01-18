@@ -1,4 +1,6 @@
 <!--pages/workerManage/workerManage.wxml-->
 <view class="container">
-  空数据页
+  <view class="bg vw100 vh100">
+    <list-card cardInfoData="{{cardInfoData}}" bind:clickLine="click"></list-card>
+  </view>
 </view>

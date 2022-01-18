@@ -2,14 +2,3 @@
 .container {
   overflow-x: hidden;
 }
-
-.bg {
-  background: url(https://file.zwyknit.com/20220113152510.jpg);
-  background-size: 100% auto;
-  background-repeat: no-repeat;
-  background-position-y: 30%;
-}
-
-.lastMb20 :last-child{
-  margin-bottom: 20rpx;
-}

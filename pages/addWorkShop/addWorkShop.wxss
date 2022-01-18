@@ -1,9 +1,7 @@
 /**index.wxss**/
 .bg{
-  background: url(https://file.zwyknit.com/20220114101424.jpg) no-repeat;
   background-size: 100% 100%;
   height: 100vh;
-  width: 100%;
 }
 .whoWorkShop{
   background: url(https://file.zwyknit.com/20220114132504.png) no-repeat;
