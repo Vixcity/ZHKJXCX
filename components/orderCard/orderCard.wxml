@@ -14,14 +14,15 @@
 	</view>
 	<view class="flex aic">
 		<t-image class="size-l radius-m" src="{{detailInfo.imgSrc}}" mode="aspectFill"></t-image>
-		<view class="ml10 fz30 flex jcsa fdc" style="height: 144rpx;">
+		<view class="por ml10 fz30 flex jcsa fdc w100" style="height: 144rpx;">
 			<view>生产进度：{{detailInfo.nowNumber}} / {{detailInfo.allNumber}}</view>
 			<view>交付时间：{{detailInfo.time}}</view>
+			<view wx:if="{{showPrice}}" class="poa fz30 color27A2" style="right:0;bottom:20%">￥{{detailInfo.price}}</view>
 		</view>
 		<t-icon name="check-circle-filled" size="xl" bind:click="changeCheck" class="{{detailInfo.isBind?'check':'color9E'}} poa" style="right: 20rpx;bottom: 20rpx;" wx:if="{{showIcon}}"></t-icon>
-		<view wx:if="{{showPrice}}" class="poa fz30 color27A2" style="right:2%;bottom:16%">￥{{detailInfo.price}}</view>
 		<view wx:if="{{detailInfo.status === 1}}" class="poa bgColor8D9F colorWhite borderRadius16 pl10 pb8 pr15 pt5 cornerStyle">待定价</view>
 		<view wx:if="{{detailInfo.status === 2}}" class="poa bgColor8D9F colorWhite borderRadius16 pl10 pb8 pr15 pt5 cornerStyle">生产中</view>
 		<view wx:if="{{detailInfo.status === 3}}" class="poa bgColor8D9F colorWhite borderRadius16 pl10 pb8 pr15 pt5 cornerStyle">已完成</view>
 	</view>
+	<slot name="after"></slot>
 </view>

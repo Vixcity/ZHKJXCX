@@ -6,7 +6,7 @@
 
     <!-- 懒加载 -->
     <view class="tc color91 mt20 mb20" hidden='{{!isShowLoadmore}}'>
-      <view>正在加载</view>
+      <t-loading theme="spinner" size="40rpx" loading text="加载中..." hidden='{{!isShowLoadmore}}'></t-loading>
     </view>
     <view class="tc color91 mt20 mb20" hidden='{{!isShowNoDatasTips}}'>
       <view>暂无更多数据</view>

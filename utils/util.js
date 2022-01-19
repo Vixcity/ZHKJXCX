@@ -17,7 +17,7 @@ const wxReq = data => {
     method: data.method,
     success: data.success,
     header:{
-      Authorization:'Bearer '+openid
+      Authorization:'Bearer ' + openid
     }
   })
 }
@@ -47,9 +47,51 @@ const getTimeDiff = (time1,time2,type='hours') => {
   if(type==="minutes") return minutes
 }
 
+// 获取前N个月
+const createDateDate = (n,isNow=false,fenge) => {
+  let datelist = []
+  let date = new Date()
+  let Y = date.getFullYear()
+  let M = date.getMonth()
+
+  // 判断这个月算不算在内
+  if (isNow) M++
+
+  // 循环递减
+  for (let i = 0; i < n; i++) {
+    let dateoption = ''
+
+    // 判断是否为1月
+    if (M - 1 !== -1) {
+    } else {
+      M = 12
+      Y = Y - 1
+    }
+
+    // 小于10，格式就变成0x，例如:01
+    let m = M
+    m = m < 10 ? '0' + m : m
+    
+    // 如果有分隔符，那么就通过分隔符号来分隔
+    if(fenge){
+      dateoption = Y + '' + fenge + m
+    } else {
+      dateoption = Y + '年' + m + '月'
+    }
+
+    // 递减
+    M--
+
+    // 保存数据
+    datelist.push(dateoption)
+  }
+  return datelist
+}
+
 module.exports = {
   formatTime,
   wxReq,
   verifyTel,
-  getTimeDiff
+  getTimeDiff,
+  createDateDate
 }

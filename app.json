@@ -31,7 +31,8 @@
 		"t-tabs": "tdesign-miniprogram/tabs/tabs",
 		"t-tab-panel": "tdesign-miniprogram/tabs/tab-panel",
 		"order-card": "./components/orderCard/orderCard",
-		"list-card": "./components/listCard/listCard"
+		"list-card": "./components/listCard/listCard",
+		"t-loading": "tdesign-miniprogram/loading/loading"
 	},
 	"window": {
 		"backgroundTextStyle": "light",

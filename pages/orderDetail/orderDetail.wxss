@@ -1,1 +1,8 @@
 /* pages/orderDetail.wxss */
+.bg {
+	background-position: 5%;
+}
+
+.submit .t-button{
+	width: 100%;
+}

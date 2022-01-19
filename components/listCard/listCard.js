@@ -11,14 +11,22 @@ Component({
 				type:Boolean,
 				value: false,
 			}
-		},		
+		},
+		isSlot:{
+			type:Boolean,
+			value:false
+		},
+		showShort:{
+			type:Boolean,
+			value:false
+		}
 	},
 
 	/**
 	 * 组件的初始数据
 	 */
 	data: {
-
+		isShort:false
 	},
 
 	/**
@@ -26,7 +34,11 @@ Component({
 	 */
 	pageLifetimes: {
 		show: function() {
-
+			if(this.data.showShort){
+				this.setData({
+					isShort:true
+				})
+			}
 		}
 	},
 
@@ -36,6 +48,11 @@ Component({
 	methods: {
 		clickLine(event){
 			this.triggerEvent("clickLine", event.currentTarget.dataset)
+		},
+		changeShortOrLong(){
+			this.setData({
+				isShort:!this.data.isShort
+			})
 		}
 	}
 })

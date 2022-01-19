@@ -1,2 +1,33 @@
 <!--pages/orderDetail.wxml-->
-<text>pages/orderDetail.wxml</text>
+<view class="container">
+  <view class="bg vw100 vh100">
+    <order-card detailInfo="{{detailInfo}}" showPrice="{{true}}">
+			<list-card slot="after" showShort="{{true}}" isSlot="{{true}}" cardInfoData="{{cardInfoData}}"></list-card>
+		</order-card>
+		<view class="bgColorWhite pl10 pr10 pt20 pb20 fz25 mt20 borderRadius16 shadow borderBox vw90 ma">
+			<t-tabs value="{{0}}" bind:change="onTabsChange">
+				<t-tab-panel label="生产定价" value="0">
+					<view class="mt20">
+						<view>
+							<view class="flex w100 aic">
+								<view class="w30"><text class="colorRed">*</text>单件工价</view>
+								<view class="w70 flex aic"><input type="text" placeholder="单件工价" class="w40" />元/件</view>
+							</view>
+							<view class="line"></view>
+							<view class="flex w100 aic">
+								<view class="w30"><text class="colorRed">*</text>整单工价</view>
+								<view class="w70 flex aic"><input type="text" placeholder="整单工价" class="w40" />元</view>
+							</view>
+						</view>
+					</view>
+					<view class="vw70 mt20 submit ma">
+						<t-button theme="primary" size="large" variant="plain" bindtap="addWorkShop">提交</t-button>
+					</view>
+				</t-tab-panel>
+				<t-tab-panel label="生产进度" value="1">
+					<list-card isSlot="{{true}}" cardInfoData="{{productionSchedule}}"></list-card>
+				</t-tab-panel>
+			</t-tabs>
+		</view>
+  </view>
+</view>

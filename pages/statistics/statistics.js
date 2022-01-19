@@ -1,4 +1,6 @@
 // pages/statistics/statistics.js
+import {createDateDate, wxReq} from '../../utils/util';
+
 Page({
 
 	/**
@@ -18,6 +20,7 @@ Page({
 				whichType: 2
 			}
 		],
+		year:'',
 		years: [{
 				label: '2022年',
 				value: '2022'
@@ -67,13 +70,13 @@ Page({
 		cardInfoData: {
 			cardData: [
 				[
-					['2021-01-18 12:30','王先生'],
+					['2021-01-18 12:30'],
 					['凯瑞针织','圈圈纱围脖'],
 					['S/红色',3000],
 					['0.3元','900.00元']
 				],
 				[
-					['2021-01-18 12:30','王先生'],
+					['2021-01-18 12:30'],
 					['凯瑞针织','圈圈纱围脖'],
 					['S/红色',3000],
 					['0.3元','900.00元']
@@ -101,7 +104,13 @@ Page({
 	 */
 	onLoad:function(option) {
     option.isLeader = option.isLeader==="true"?true:false
-    this.setData(option)
+		option.isStaff = option.isStaff==="true"?true:false
+		// console.log(option)
+		option.beforeDate = createDateDate(6,true)
+		this.setData(option)
+		// if(isStaff){
+		// 	
+		// }
   },
 
 	/**
@@ -115,7 +124,7 @@ Page({
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function () {
-
+		
 	},
 
 	/**
@@ -215,6 +224,26 @@ Page({
 	pickPeopleCancel() {
 		this.setData({
 			showPeoplePick: false
+		})
+	},
+
+	// 标签页切换
+	onTabsChange(e){
+		this.reqData(e.detail.label.slice(0,4),e.detail.label.slice(5,7))
+	},
+
+	reqData(year,month){
+		wxReq({
+			url:'/user/workshop/yield/list',
+			method:'GET',
+			data:{
+				uuid: wx.getStorageSync('userInfo').userinfo.uuid,
+				year:year,
+				month:month
+			},
+			success:(res) => {
+				console.log(res.data.data)
+			}
 		})
 	}
 })

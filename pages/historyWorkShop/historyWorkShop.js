@@ -1,3 +1,5 @@
+const { wxReq } = require("../../utils/util")
+
 // pages/statistics/statistics.js
 Page({
 
@@ -6,23 +8,7 @@ Page({
 	 */
 	data: {
 		cardInfoData: {
-			cardData: [
-				[
-					'张师傅', '在岗', '2021-12-29~至今'
-				],
-				[
-					'王先生', '在岗', '2021-12-29~至今'
-				],
-				[
-					'王师傅', '离职', '2021-12-29~2022-02-22'
-				],
-				[
-					'王师傅', '离职', '2021-12-29~2022-02-22'
-				],
-				[
-					'王师傅', '离职', '2021-12-29~2022-02-22'
-				]
-			],
+			cardData: [],
 			cardTitle: [{
 				title: '作坊负责人',
 				width: 30
@@ -40,7 +26,25 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-
+		wxReq({
+			url:'/user/workshop/record/list',
+			method:'GET',
+			success:(res) => {
+				// console.log(res.data.data)
+				let arr = []
+				res.data.data.forEach(item => {
+					arr.push([
+						item.workshop.name,
+						item.status===1?'在岗':'离职',
+						item.created_at.slice(0,10)+'~'+(item.quit_at?+item.quit_at.slice(1,10):'至今')
+					])
+				});
+				this.data.cardInfoData.cardData = arr
+				this.setData({
+					cardInfoData:this.data.cardInfoData
+				})
+			}
+		})
 	},
 
 	/**
@@ -54,7 +58,7 @@ Page({
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function () {
-
+		
 	},
 
 	/**

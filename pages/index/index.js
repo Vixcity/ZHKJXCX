@@ -51,13 +51,13 @@ Page({
           limit:page_size //每页加载十条 上面设置
       },
       success:function(res){
-        console.log(res.data.data.data)
+        // console.log(res.data.data.data)
         if(res.data.code == 200){  //判断当code == 200 的时候得到数据
 
         //   var datas = res.data.result.comments; // 下面有得到的数据可以参考
           if (res.data.data.data.length === 0){ //如果res.data.data.data.length === 0 表示没有可加载的数据了
             that.setData({
-              isShowLoadmore: true, //隐藏正在加载
+              isShowLoadmore: false, //隐藏正在加载
               isShowNoDatasTips: true, //显示暂无数据
               endloading: true, //上拉不在加载
             })

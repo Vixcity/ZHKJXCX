@@ -1,6 +1,44 @@
 <!--pages/workerManage/workerManage.wxml-->
 <view class="container">
   <view class="bg vw100 vh100">
-    <list-card cardInfoData="{{cardInfoData}}" bind:clickLine="click"></list-card>
+    <list-card  bind:clickLine="getName" cardInfoData="{{cardInfoData}}"></list-card>
+    <view class="mt30 color91 tc fz30">
+      新员工需扫作坊主二维码才能添加到组织
+    </view>
+    <view class="vw90 mt20 submit ma">
+      <t-button theme="primary" size="large" variant="plain" bindtap="addWorkrManage">添加员工</t-button>
+    </view>
+    <t-dialog
+      visible="{{isOpenAddWorkerWin}}"
+      t-class-confirm="{{dialogConfig.tConfirmBtn}}"
+      title="{{dialogConfig.title}}"
+      content="{{dialogConfig.content}}"
+      confirm-btn="{{dialogConfig.confirmBtn}}"
+      cancel-btn="{{dialogConfig.cancelBtn}}"
+      button-layout="{{dialogConfig.buttonLayout}}"
+      actions="{{dialogConfig.actions}}"
+      bind:confirm="confirmHandle"
+      bind:cancel="closeHandle"
+    >
+      <scroll-view
+        wx:if="{{currentKey === 'multiTextAndTitle'}}"
+        slot="content"
+        scroll-y
+        class="long-content"
+      >
+        <view class="content-cintainer">
+          告知当前状态、信息和解决方法，等内容。描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案
+        </view>
+      </scroll-view>
+      <input
+        wx:if="{{useSlot}}"
+        slot="content"
+        placeholder="员工姓名"
+        bindinput="workerName"
+        placeholder-class="placeholder"
+        style="border: 1px solid #919191;"
+        class="pl10 pt5 pb5 borderRadius16 mt10"
+      />
+    </t-dialog>
   </view>
 </view>

@@ -1,6 +1,6 @@
 <!--pages/statistics/statistics.wxml-->
 <view class="container">
-  <view class="pof flex vw100 top0">
+  <view wx:if="{{isLeader}}" class="pof flex vw100 top0">
     <view wx:for="{{topTabData}}" wx:for-item="item" wx:key="item" data-whichType="{{item.whichType}}" bindtap="chooseWhichOne" class="flex jcc item aic">
       <view>{{item.value}}</view>
       <t-icon name="caret-down-small" size="xl"></t-icon>
@@ -12,7 +12,19 @@
     </view>
     <list-card cardInfoData="{{cardInfoData}}"></list-card>
   </view>
-  <view wx:else class="mt40">空数据页</view>
+  
+  <view class="vw100" wx:if="{{isStaff}}">
+    <t-tabs value="{{0}}" bind:change="onTabsChange">
+      <t-tab-panel wx:for="{{beforeDate}}" wx:for-item="item" wx:for-index="index" label="{{item}}" value="{{index}}">
+        <view class="colorB9 pt10 fz30 tc">
+          共3条记录，共2250元
+        </view>
+        <list-card cardInfoData="{{cardInfoData}}"></list-card>
+      </t-tab-panel>
+    </t-tabs>
+  </view>
+
+  <view wx:if="{{!isLeader && !isStaff}}" class="mt40">空数据页</view>
   
   <!-- 时间选择器 -->
   <t-picker visible="{{showDataPick}}" bindconfirm="pickDataConfirm" bindcancel="pickDataCancel">

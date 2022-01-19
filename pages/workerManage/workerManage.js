@@ -1,4 +1,23 @@
 // pages/workerManage/workerManage.js
+import Dialog from 'tdesign-miniprogram/dialog/index';
+
+const dialogConfig = {
+  title: '',
+  tConfirmBtn: '',
+  content: '',
+  confirmBtn: '',
+  cancelBtn: '',
+  buttonLayout: 'horizontal',
+  actions: false,
+};
+
+const modelConfigFactory = (opt) => {
+  return {
+    ...dialogConfig,
+    ...opt,
+  };
+};
+
 Page({
 
 	/**
@@ -30,7 +49,8 @@ Page({
 				title: '在岗时间',
 				width: 46
 			}]
-		}
+		},
+		isOpenAddWorkerWin:false
 	},
 
 	click(option){
@@ -91,5 +111,73 @@ Page({
 	 */
 	onShareAppMessage: function () {
 
+	},
+
+	addWorkrManage(){
+		this.setData({
+			show: true,
+			useSlot: true,
+			currentKey: 'withInput',
+			dialogConfig: modelConfigFactory({
+				title: '添加员工',
+				content: '添加后可以为该员工添加产量',
+				confirmBtn: '保存',
+				cancelBtn: '取消',
+			}),
+			isOpenAddWorkerWin: true
+		})
+	},
+	
+	addWorkrManage(){
+		this.setData({
+			show: true,
+			useSlot: true,
+			currentKey: 'confirm',
+			dialogConfig: modelConfigFactory({
+				title: '添加员工',
+				content: '添加后可以为该员工添加产量',
+				confirmBtn: '保存',
+				cancelBtn: '取消',
+			}),
+			isOpenAddWorkerWin: true
+		})
+	},
+
+	/** 异步关闭弹层 */
+	closeHandle() {
+    this.confirmHandle();
+	},
+
+	 /** 普通弹层关闭 */
+	 confirmHandle(e) {
+		console.log(this.data.workerName)
+		console.log(this.data.useSlot)
+    this.setData({
+      show: false,
+      useSlot: false,
+    });
+    Dialog.close();
+	},
+	
+	workerName(e){
+		this.setData({
+			workerName:e.detail.value
+		})
+	},
+
+	getName(e){
+		e.detail.item,
+		this.setData({
+			show: true,
+			useSlot: false,
+			currentKey: 'confirm',
+			dialogConfig: modelConfigFactory({
+				title: '请问是否将 '+ e.detail.item[0] +' 设为离职状态？',
+				content: '离职后该员工将无法再操作相关业务',
+				confirmBtn: '离职',
+				cancelBtn: '取消',
+			}),
+			isOpenAddWorkerWin: true
+		})
 	}
 })

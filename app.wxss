@@ -31,7 +31,7 @@ page{
   color:#4D4D4D
 }
 .color8D9F{
-  color: #008DF9;
+  color: #008DF9
 }
 .color6CD5{
   color:#6CD5FF
@@ -43,7 +43,10 @@ page{
   color:white
 }
 .colorBlack{
-  color: black;
+  color: black
+}
+.colorRed{
+  color:red
 }
 
 
@@ -487,6 +490,12 @@ page{
 
 
 /* border */
+.line{
+  width: 100%;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  border-top:1px #e7e7e7 solid;
+}
 .boderSolid1{
   border: 1px solid;
 }
@@ -514,6 +523,9 @@ page{
 }
 .bgColorD8{
   background-color: #D8D8D8;
+}
+.bgColorF3{
+  background-color: #F3F3F3;
 }
 .bgColorWhite{
   background-color: white;
