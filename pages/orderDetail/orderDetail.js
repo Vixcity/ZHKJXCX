@@ -1,32 +1,17 @@
 // pages/orderDetail.js
-import Dialog from 'tdesign-miniprogram/dialog/index';
+import Message from 'tdesign-miniprogram/message/index';
+import {
+	wxReq
+} from '../../utils/util';
 Page({
 
 	/**
 	 * 页面的初始数据
 	 */
 	data: {
-		detailInfo: {
-      title: '圈圈纱围脖',
-      time: '2022-01-30',
-      nowNumber: 130,
-      allNumber: 300,
-      customer: '凯瑞针纺',
-      price: 90000,
-      imgSrc:'https://file.zwyknit.com/1641886474000.png'
-		},
+		// 展开信息
 		cardInfoData: {
-			cardData: [
-				[
-					'S/红色', '车标', '0.5元/件', 10000, '3000/7000'
-				],
-				[
-					'S/红色', '车标', '0.5元/件', 10000, '3000/7000'
-				],
-				[
-					'S/红色', '车标', '0.5元/件', 10000, '3000/7000'
-				]
-			],
+			cardData: [],
 			cardTitle: [{
 				title: '颜色尺码',
 				width: 20
@@ -44,19 +29,9 @@ Page({
 				width: 20
 			}]
 		},
+		// 生产进度
 		productionSchedule: {
-			cardData: [
-				[
-					['2021-01-18 12:30','王先生'],
-					['S/红色',3000],
-					['0.3元','900.00元']
-				],
-				[
-					['2021-01-18 12:30','王先生'],
-					['S/红色',3000],
-					['0.3元','900.00元']
-				]
-			],
+			cardData: [],
 			cardTitle: [{
 				title: '生产时间/人员',
 				width: 37
@@ -68,21 +43,53 @@ Page({
 				width: 30
 			}],
 			hasBr: true,
-		}
+		},
+		onePrice: '',
+		allPrice: '',
+		maxOneLength: 10,
+		maxAllLength: 10
 	},
 
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
+		let productDetail = wx.getStorageSync('orderDetail')
+		delete productDetail.detailInfo.status
+		this.setData(productDetail)
+		wxReq({
+			url: '/workshop/weave/product/detail',
+			method: "GET",
+			data: {
+				id: this.data.detailProduct.id
+			},
+			success: (res) => {
+				let arr = []
+				let list = []
+				let product_info = res.data.data.product_info
+				let user_workshop_yields = res.data.data.user_workshop_yields
+				let cardInfoData = this.data.cardInfoData
+				let productionSchedule = this.data.productionSchedule
+				product_info.forEach(item => {
+					arr.push([item.size.size_name + ' / ' + item.color.color_name, res.data.data.weave_plan.process_name, item.price + '元每件', item.number, item.real_number + ' / ' + (item.number - item.real_number)])
+				});
+				cardInfoData.cardData = arr
 
-	},
+				user_workshop_yields.forEach(item => {
+					list.push([
+						[item.created_at.slice(0, 16), item.user.name],
+						[item.weave_plan_product_info.size.size_name + '/' + item.weave_plan_product_info.color.color_name, item.number],
+						[item.price + '元', item.number * item.price + '元']
+					])
+				});
+				productionSchedule.cardData = list
 
-	/**
-	 * 生命周期函数--监听页面初次渲染完成
-	 */
-	onReady: function () {
-
+				this.setData({
+					cardInfoData,
+					productionSchedule
+				})
+			}
+		})
 	},
 
 	/**
@@ -99,31 +106,78 @@ Page({
 
 	},
 
-	/**
-	 * 生命周期函数--监听页面卸载
-	 */
-	onUnload: function () {
-
+	// 提交
+	commitProductPrice() {
+		let detailProduct = this.data.detailProduct
+		if (this.data.onePrice === "" || this.data.allPrice === "") {
+			Message.error({
+				offset: [20, 32],
+				duration: 2000,
+				content: '请填写对应价格',
+			});
+			return
+		}
+		wxReq({
+			url: '/process/price/save',
+			method: 'POST',
+			data: {
+				data: [{
+					pid: detailProduct.pid,
+					total_price: this.data.allPrice,
+					price: this.data.onePrice,
+					product_id: detailProduct.product_id,
+					id: detailProduct.process.length !== 0 ? detailProduct.process[0].id : ""
+				}]
+			},
+			success: (res) => {
+				if (res.data.code === 200) {
+					Message.success({
+						offset: [20, 32],
+						duration: 2000,
+						content: '提交成功',
+					});
+				}
+			}
+		})
 	},
 
-	/**
-	 * 页面相关事件处理函数--监听用户下拉动作
-	 */
-	onPullDownRefresh: function () {
+	// 更改单价
+	changePrice(e) {
+		let type = e.target.dataset.price
+		let allNumber = +this.data.detailInfo.allNumber
+		let price = e.detail.value
+		let maxlength = price.indexOf('.') + 3
 
-	},
+		if (type === 'one') {
+			if (maxlength === 2) {
+				this.setData({
+					maxOneLength: 10
+				})
+			} else {
+				this.setData({
+					maxOneLength: maxlength
+				})
+			}
+			this.setData({
+				allPrice: (+price * allNumber).toFixed(2),
+				onePrice: price
+			})
+		}
 
-	/**
-	 * 页面上拉触底事件的处理函数
-	 */
-	onReachBottom: function () {
-
-	},
-
-	/**
-	 * 用户点击右上角分享
-	 */
-	onShareAppMessage: function () {
-
+		if (type === 'all') {
+			if (maxlength === 2) {
+				this.setData({
+					maxAllLength: 10
+				})
+			} else {
+				this.setData({
+					maxAllLength: maxlength
+				})
+			}
+			this.setData({
+				onePrice: (+price / allNumber).toFixed(2),
+				allPrice: price
+			})
+		}
 	}
 })

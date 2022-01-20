@@ -25,9 +25,11 @@ Page({
         selected: 0
       })
     }
-    if(this.data.page === 1){
-      this.reviewpage()
-    }
+    this.setData({
+      page:1,
+      orderList:[]
+    })
+    this.reviewpage()
   },
 
   onReachBottom: function () {

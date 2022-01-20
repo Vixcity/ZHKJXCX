@@ -11,17 +11,17 @@
 						<view>
 							<view class="flex w100 aic">
 								<view class="w30"><text class="colorRed">*</text>单件工价</view>
-								<view class="w70 flex aic"><input type="text" placeholder="单件工价" class="w40" />元/件</view>
+								<view class="w70 flex aic"><input type="digit" maxlength='{{maxOneLength}}' value='{{onePrice}}' bindinput="changePrice" data-price="one" placeholder="单件工价" class="w40" />元/件</view>
 							</view>
 							<view class="line"></view>
 							<view class="flex w100 aic">
 								<view class="w30"><text class="colorRed">*</text>整单工价</view>
-								<view class="w70 flex aic"><input type="text" placeholder="整单工价" class="w40" />元</view>
+								<view class="w70 flex aic"><input type="digit" maxlength='{{maxAllLength}}' value='{{allPrice}}' bindinput="changePrice" data-price="all" placeholder="整单工价" class="w40" />元</view>
 							</view>
 						</view>
 					</view>
 					<view class="vw70 mt20 submit ma">
-						<t-button theme="primary" size="large" variant="plain" bindtap="addWorkShop">提交</t-button>
+						<t-button theme="primary" size="large" variant="plain" bindtap="commitProductPrice">提交</t-button>
 					</view>
 				</t-tab-panel>
 				<t-tab-panel label="生产进度" value="1">
@@ -30,4 +30,5 @@
 			</t-tabs>
 		</view>
   </view>
+	<t-message id="t-message" />
 </view>
