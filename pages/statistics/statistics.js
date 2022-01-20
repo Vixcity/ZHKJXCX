@@ -197,7 +197,7 @@ Page({
 					[item.created_at.slice(0,17),item.user.name]
 					// []
 					[item.weave_plan_product_info.size.size_name+'/'+item.weave_plan_product_info.color.color_name,item.number]
-					// []
+					[item.weave_plan.company_name]
 					console.log(item)
 				});
 			}
