@@ -41,4 +41,5 @@
       />
     </t-dialog>
   </view>
+  <t-message id="t-message" />
 </view>

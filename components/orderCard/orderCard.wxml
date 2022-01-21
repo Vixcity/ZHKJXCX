@@ -2,8 +2,9 @@
 <view class="ml20 mr20 mt20 bgColorWhite vw90 jcsb flexWarp borderRadius16 shadow borderBox pl10 pr10 pt10 pb10 colorBlack por overfh">
 	<view class="flex jcsb aic">
 		<view class="fz40 flex blod aic">
-			{{detailInfo.title}}
-			<t-icon class="ml10 color8D9F" name=swap" size="xl" bind:click="someFunction"> </t-icon>
+			<text wx:if="{{detailInfo.display === 0}}">{{detailInfo.title}}</text>
+			<text wx:if="{{detailInfo.display === 1}}">{{detailInfo.code}}</text>
+			<t-icon catchtap="changeShow" wx:if="{{showChangeIcon}}" class="ml10 color8D9F" name=swap" size="xl" bind:click="someFunction"> </t-icon>
 		</view>
 		<view class="flex h90">
 			<view class="autoLogos pl10 pr10">车标 | 套口</view>
@@ -13,11 +14,11 @@
 		客户：{{detailInfo.customer}}
 	</view>
 	<view class="flex aic">
-		<t-image class="size-l radius-m" src="{{detailInfo.imgSrc}}" mode="aspectFill"></t-image>
+		<image class="size-l radius-m" src="{{detailInfo.imgSrc}}" mode="aspectFill" />
 		<view class="por ml10 fz30 flex jcsa fdc w100" style="height: 144rpx;">
 			<view>生产进度：{{detailInfo.nowNumber}} / {{detailInfo.allNumber}}</view>
 			<view>交付时间：{{detailInfo.time}}</view>
-			<view wx:if="{{showPrice}}" class="poa fz30 color27A2" style="right:0;bottom:20%">￥{{detailInfo.price}}</view>
+			<view wx:if="{{showPrice}}" class="poa fz30 color27A2" style="right:0;bottom:24%">￥{{detailInfo.price}}</view>
 		</view>
 		<t-icon name="check-circle-filled" size="xl" bind:click="changeCheck" class="{{detailInfo.isBind?'check':'color9E'}} poa" style="right: 20rpx;bottom: 20rpx;" wx:if="{{showIcon}}"></t-icon>
 		<view wx:if="{{detailInfo.status === 1}}" class="poa bgColor8D9F colorWhite borderRadius16 pl10 pb8 pr15 pt5 cornerStyle">待定价</view>

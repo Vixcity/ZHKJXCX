@@ -10,11 +10,16 @@ Page({
     this.setData(option)
   },
   onShow() {
+    this.getOrderList('')
+  },
+
+  // 获取列表
+  getOrderList(status) {
     wxReq({
       url: '/workshop/order/list',
       data: {
-        status: '',
-        limit:1000000
+        status,
+        limit: 1000000
       },
       method: 'GET',
       success: (res) => {
@@ -29,9 +34,13 @@ Page({
             allNumber: item.number,
             customer: item.weave_plan.company.company_name,
             imgSrc: item.product.rel_image[0].image_url || '',
-            status:item.status,
-            showPrice:item.total_price?true:false,
-            price:item.total_price
+            status: item.status,
+            showPrice: item.total_price ? true : false,
+            price: item.total_price,
+            display:item.display,
+            pid:item.pid,
+            product_id:item.product_id,
+            code:item.product.product_code
           })
         });
         this.setData({
@@ -41,6 +50,7 @@ Page({
       }
     })
   },
+
   toOrderDetail(e) {
     wx.setStorageSync('orderDetail', {
       detailProduct: this.data.allInfoList[e.currentTarget.dataset.index],
@@ -52,6 +62,10 @@ Page({
     })
   },
   onTabsChange(e) {
-    console.log(e)
+    if (e.detail.value === '0') {
+      this.getOrderList('')
+      return
+    }
+    this.getOrderList(e.detail.value)
   }
 })

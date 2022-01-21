@@ -73,7 +73,11 @@ Page({
                 nowNumber:item.real_number?item.real_number:0,
                 allNumber:item.number,
                 customer:item.weave_plan.company.company_name,
-                imgSrc:item.product.rel_image[0].image_url || ''
+                imgSrc:item.product.rel_image[0].image_url || '',
+                display:item.display,
+                pid:item.pid,
+                product_id:item.product_id,
+                code:item.product.product_code
               })
             });
             that.setData({
@@ -106,5 +110,12 @@ Page({
     wx.navigateTo({
       url: '../outputEntry/outputEntry',
     })
+  },
+
+  changeShow(e){
+    let detailOrder = this.data.detailOrderList[e.currentTarget.dataset.index]
+    let cardOrder = this.data.orderList[e.currentTarget.dataset.index]
+    detailOrder.display = e.detail
+    cardOrder.display = e.detail
   }
 })

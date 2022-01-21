@@ -1,3 +1,7 @@
+const {
+	wxReq
+} = require("../../utils/util")
+
 // pages/userManagement/userManagement.js
 Page({
 
@@ -6,17 +10,7 @@ Page({
 	 */
 	data: {
 		cardInfoData: {
-			cardData: [
-				[
-					'凯瑞针织', '合作中', '无'
-				],
-				[
-					'凯瑞针织', '绑定中', '2021-12-29~至今'
-				],
-				[
-					'凯瑞针织', '已终止', '2021-12-29~2022-02-22'
-				]
-			],
+			cardData: [],
 			cardTitle: [{
 				title: '客户名',
 				width: 30
@@ -39,51 +33,48 @@ Page({
 	},
 
 	/**
-	 * 生命周期函数--监听页面初次渲染完成
-	 */
-	onReady: function () {
-
-	},
-
-	/**
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function () {
-
+		this.getUserData(2)
 	},
 
-	/**
-	 * 生命周期函数--监听页面隐藏
-	 */
-	onHide: function () {
-
+	// 获取用户数据
+	getUserData: function (status) {
+		let _this = this
+		wxReq({
+			url: '/user/company/list',
+			method: 'GET',
+			data: {
+				status
+			},
+			success: (res) => {
+				let arr = []
+				res.data.data.forEach(item => {
+					let status
+					if (item.status === 1) {
+						status = '绑定中'
+					} else if (item.status === 2) {
+						status = '合作中'
+					} else if (item.status === 3) {
+						status = '已终止'
+					}
+					arr.push([
+						item.company.company_name,
+						status,
+						item.created_at.slice(0, 10) + '~' + (item.quit_at === '0000-00-00 00:00:00' ? '至今' : item.quit_at.slice(0, 10))
+					])
+				});
+				_this.data.cardInfoData.cardData = arr
+				_this.setData({
+					cardInfoData:_this.data.cardInfoData
+				})
+			}
+		})
 	},
 
-	/**
-	 * 生命周期函数--监听页面卸载
-	 */
-	onUnload: function () {
-
-	},
-
-	/**
-	 * 页面相关事件处理函数--监听用户下拉动作
-	 */
-	onPullDownRefresh: function () {
-
-	},
-
-	/**
-	 * 页面上拉触底事件的处理函数
-	 */
-	onReachBottom: function () {
-
-	},
-
-	/**
-	 * 用户点击右上角分享
-	 */
-	onShareAppMessage: function () {
-
+	// 切换Tab页面
+	onTabsChange: function (e) {
+		this.getUserData(+e.detail.value)
 	}
 })

@@ -36,7 +36,7 @@ Page({
 					arr.push([
 						item.workshop.name,
 						item.status===1?'在岗':'离职',
-						item.created_at.slice(0,10)+'~'+(item.quit_at?+item.quit_at.slice(1,10):'至今')
+						item.created_at.slice(0,10)+'~'+(item.quit_at!=="0000-00-00 00:00:00"?item.quit_at.slice(0,10):'至今')
 					])
 				});
 				this.data.cardInfoData.cardData = arr

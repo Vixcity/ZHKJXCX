@@ -5,7 +5,7 @@ image {
 	border-radius: 0;
 	overflow: hidden;
 	width: 144rpx;
-	height: 144rpx;
+	height: 114rpx;
 	border-radius: 8rpx;
 }
 

@@ -1,5 +1,8 @@
 // pages/statistics/statistics.js
-import {createDateDate, wxReq} from '../../utils/util';
+import {
+	createDateDate,
+	wxReq
+} from '../../utils/util';
 
 Page({
 
@@ -11,7 +14,7 @@ Page({
 		showPeoplePick: false,
 		topTabData: [{
 				desc: "dateTime",
-				value: "2022年1月",
+				value: (new Date().getFullYear()) + "年" + (new Date().getMonth() + 1) + "月",
 				whichType: 1
 			},
 			{
@@ -20,68 +23,18 @@ Page({
 				whichType: 2
 			}
 		],
-		year:'',
-		years: [{
-				label: '2022年',
-				value: '2022'
-			},
-			{
-				label: '2021年',
-				value: '2021'
-			},
-			{
-				label: '2020年',
-				value: '2020'
-			},
-			{
-				label: '2019年',
-				value: '2019'
-			},
-		],
+		year: '',
+		years: Array.from(new Array(4), (_, index) => ({
+			label: `${new Date().getFullYear() - index}年`,
+			value: new Date().getFullYear() - index,
+		})),
 		months: Array.from(new Array(12), (_, index) => ({
 			label: `${index + 1}月`,
 			value: index + 1,
 		})),
-		people: [{
-				label: '老刘',
-				value: '老刘'
-			},
-			{
-				label: '老李',
-				value: '老李'
-			},
-			{
-				label: '老王',
-				value: '老王'
-			},
-			{
-				label: '老谢',
-				value: '老谢'
-			},
-			{
-				label: '老张',
-				value: '老张'
-			},
-			{
-				label: '老陈',
-				value: '老陈'
-			},
-		],
+		people: [],
 		cardInfoData: {
-			cardData: [
-				[
-					['2021-01-18 12:30'],
-					['凯瑞针织','圈圈纱围脖'],
-					['S/红色',3000],
-					['0.3元','900.00元']
-				],
-				[
-					['2021-01-18 12:30'],
-					['凯瑞针织','圈圈纱围脖'],
-					['S/红色',3000],
-					['0.3元','900.00元']
-				]
-			],
+			cardData: [],
 			cardTitle: [{
 				title: '生产时间/人员',
 				width: 28
@@ -102,16 +55,46 @@ Page({
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
-	onLoad:function(option) {
-    option.isLeader = option.isLeader==="true"?true:false
-		option.isStaff = option.isStaff==="true"?true:false
+	onLoad: function (option) {
+		option.isLeader = option.isLeader === "true" ? true : false
+		option.isStaff = option.isStaff === "true" ? true : false
 		// console.log(option)
-		option.beforeDate = createDateDate(6,true)
+		option.beforeDate = createDateDate(6, true)
 		this.setData(option)
-		// if(isStaff){
-		// 	
-		// }
-  },
+	},
+
+	onShow: function () {
+		let date = new Date()
+		if (wx.getStorageSync('userInfo').userinfo.role === 2) {
+			this.reqData(date.getFullYear(), date.getMonth() + 1, wx.getStorageSync('userInfo').userinfo.uuid)
+		} else {
+			this.reqData(date.getFullYear(), date.getMonth() + 1)
+			this.getPeople()
+		}
+	},
+
+	getPeople() {
+		let _this = this
+		wxReq({
+			url: '/user/staff/record/list',
+			method: 'GET',
+			success: (res) => {
+				let arr = [{
+					label: '所有人',
+					value: ''
+				}]
+				res.data.data.forEach(item => {
+					arr.push({
+						label: item.user.name,
+						value: item.uuid
+					})
+				});
+				_this.setData({
+					people: arr
+				})
+			}
+		})
+	},
 
 	// 标签点击事件
 	chooseWhichOne(event) {
@@ -133,21 +116,18 @@ Page({
 			pickedData += item.label
 		});
 
+		this.data.topTabData[0].value = pickedData
 		this.setData({
-			topTabData: [{
-					desc: "dateTime",
-					value: pickedData,
-					whichType: 1
-				},
-				{
-					desc: "peopleChoose",
-					value: this.data.topTabData[1].value,
-					whichType: 2
-				}
-			],
+			topTabData:this.data.topTabData,
 			showDataPick: false
 		})
-		// console.log(pickedData)
+
+		// 选中时获取数据
+		if (this.data.topTabData[1].valueChoose === "") {
+			this.reqData(pickedData.slice(0, 4), pickedData.slice(5, 6))
+		} else {
+			this.reqData(pickedData.slice(0, 4), pickedData.slice(5, 6), this.data.topTabData[1].valueChoose)
+		}
 	},
 	pickDataCancel() {
 		this.setData({
@@ -156,21 +136,22 @@ Page({
 	},
 
 	// 人类选择器
-	pickPeopleConfirm(event) {
+	pickPeopleConirm(event) {
+		this.data.topTabData[1].value = event.detail.value[0].label
+		this.data.topTabData[1].valueChoose = event.detail.value[0].value
 		this.setData({
-			topTabData: [{
-					desc: "dateTime",
-					value: this.data.topTabData[0].value,
-					whichType: 1
-				},
-				{
-					desc: "peopleChoose",
-					value: event.detail.value[0].label,
-					whichType: 2
-				}
-			],
+			topTabData: this.data.topTabData,
 			showPeoplePick: false
 		})
+
+		let pickedData = this.data.topTabData[0].value
+
+		// 选中时获取数据
+		if (event.detail.value[0].value === "") {
+			this.reqData(pickedData.slice(0, 4), pickedData.slice(5, 6))
+		} else {
+			this.reqData(pickedData.slice(0, 4), pickedData.slice(5, 6), event.detail.value[0].value)
+		}
 	},
 	pickPeopleCancel() {
 		this.setData({
@@ -179,27 +160,40 @@ Page({
 	},
 
 	// 标签页切换
-	onTabsChange(e){
-		this.reqData(e.detail.label.slice(0,4),e.detail.label.slice(5,7))
+	onTabsChange(e) {
+		this.reqData(e.detail.label.slice(0, 4), e.detail.label.slice(5, 7), wx.getStorageSync('userInfo').userinfo.uuid)
 	},
 
-	reqData(year,month){
+	// 获取数据
+	reqData(year, month, uuid) {
+		let data = {
+			year,
+			month
+		}
+		if (uuid) {
+			data.uuid = uuid
+		}
 		wxReq({
-			url:'/user/workshop/yield/list',
-			method:'GET',
-			data:{
-				uuid: wx.getStorageSync('userInfo').userinfo.uuid,
-				year:year,
-				month:month
-			},
-			success:(res) => {
+			url: '/user/workshop/yield/list',
+			method: 'GET',
+			data: data,
+			success: (res) => {
+				let arr = []
+				let allNumber = 0
 				res.data.data.list.forEach(item => {
-					[item.created_at.slice(0,17),item.user.name]
-					// []
-					[item.weave_plan_product_info.size.size_name+'/'+item.weave_plan_product_info.color.color_name,item.number]
-					[item.weave_plan.company_name]
-					console.log(item)
+					arr.push([
+						[item.created_at.slice(0, 16), item.user.name],
+						[item.weave_plan_product_info.weave_plan.company.company_name, item.weave_plan_product_info.product.name],
+						[item.weave_plan_product_info.size.size_name + '/' + item.weave_plan_product_info.color.color_name, item.number],
+						[item.price + '元', item.number * item.price + '元']
+					])
+					allNumber += item.number * item.price
 				});
+				this.data.cardInfoData.cardData = arr
+				this.setData({
+					cardInfoData: this.data.cardInfoData,
+					allNumber
+				})
 			}
 		})
 	}

@@ -10,32 +10,9 @@ Page({
 	 */
 	data: {
 		choosePeople: false,
-		people: [{
-				label: '老刘',
-				value: '老刘'
-			},
-			{
-				label: '老李',
-				value: '老李'
-			},
-			{
-				label: '老王',
-				value: '老王'
-			},
-			{
-				label: '老谢',
-				value: '老谢'
-			},
-			{
-				label: '老张',
-				value: '老张'
-			},
-			{
-				label: '老陈',
-				value: '老陈'
-			},
-		],
+		people: [],
 		selectedPeopleValue: '',
+		selectedPeopleLabel:'',
 		enteryAllNumber: "",
 		showChoose: false,
 		entryArr:[]
@@ -46,6 +23,7 @@ Page({
 	 */
 	onShow: function () {
 		this.setData(wx.getStorageSync('outPutEntry'))
+		console.log(this.data.cardOrder)
 		if (wx.getStorageSync('userInfo').userinfo.role === 3) {
 			this.setData({
 				showChoose: true,
@@ -57,6 +35,7 @@ Page({
 			})
 		}
 		this.getDetailInfo()
+		this.getPeopleName()
 	},
 
 	getDetailInfo(){
@@ -90,6 +69,30 @@ Page({
 		})
 	},
 
+	getPeopleName(){
+		let _this = this
+		wxReq({
+			url:"/user/staff/list",
+			method:"GET",
+			data:{
+				status:1,
+				is_add:2
+			},
+			success: (res) => {
+				let arr = []
+				res.data.data.forEach(item => {
+					arr.push({
+						label:item.name,
+						value: item.uuid
+					})
+				});
+				_this.setData({
+					people:arr
+				})
+			}
+		})
+	},
+
 	/**
 	 * 打开选择器
 	 */
@@ -103,8 +106,8 @@ Page({
 	 * 提交选择器内容
 	 */
 	confirmPick(e) {
-		console.log(e.detail)
 		this.setData({
+			selectedPeopleLabel: e.detail.value[0].label,
 			selectedPeopleValue: e.detail.value[0].value,
 			choosePeople: false
 		})
@@ -123,15 +126,21 @@ Page({
 	getInputNumber(e) {
 		let data = this.data.product_info[e.currentTarget.dataset.index]
 		let value = +e.detail.value > (data.number - data.real_number) ? (data.number - data.real_number) : +e.detail.value
-		data.value = value
+		
+		data.value = value===0?undefined:value
 		this.setData({
 			product_info: this.data.product_info
 		})
 	},
 	getEnteryAllNumber(e) {
 		let value = +e.detail.value > (this.data.allNumber - this.data.allRealNumber) ? (this.data.allNumber - this.data.allRealNumber) : +e.detail.value
+		
+		if( value === 0 ){
+			value = ""
+		}
+
 		this.setData({
-			process_price_all: (value * this.data.process_price).toFixed(2),
+			process_price_all: ((value || 1) * this.data.process_price).toFixed(2),
 			enteryAllNumber: value
 		})
 	},
@@ -175,48 +184,69 @@ Page({
 		// 判断是尺码颜色还是自由录入
 		if (this.data.tabValue !== 1) {
 			// 判断是否留空
-			if ((this.data.product_info.find(item => item.value === undefined)) !== undefined) {
+			if ((this.data.product_info.find(item => item.value !== undefined)) !== undefined) {
+				let data = []
+
+				this.data.product_info.forEach(item => {
+					data.push({
+						product_info_id: item.id,
+						number: item.value,
+						uuid: uuid,
+						process_price_id: this.data.detailOrder.process[0].id,
+						price:this.data.process_price
+					})
+				});
+
+				wxReq({
+					url:'/workshop/weave/product/save',
+					method:'POST',
+					data:{
+						data
+					},
+					success: (res) => {
+						if(res.data.code===200){
+							Message.success({
+								offset: [20, 32],
+								duration: 2000,
+								content: '提交成功',
+							});
+							this.getDetailInfo()
+							return
+						}
+					}
+				})	
+			}
+
+			Message.error({
+				offset: [20, 32],
+				duration: 2000,
+				content: '请至少填写一个尺码颜色对应产量',
+			});
+			return
+		}
+
+		if(this.data.enteryAllNumber==="") {
+			Message.error({
+				offset: [20, 32],
+				duration: 2000,
+				content: '请填写自由录入产量',
+			});
+			return
+		}
+
+		if(this.data.showChoose){
+			if(this.data.selectedPeopleLabel==="") {
 				Message.error({
 					offset: [20, 32],
 					duration: 2000,
-					content: '请完整填写尺码颜色对应产量',
+					content: '请选择生产人员',
 				});
 				return
 			}
-
-			let data = []
-
-			this.data.product_info.forEach(item => {
-				data.push({
-					product_info_id: item.id,
-					number: item.value,
-					uuid: uuid,
-					process_price_id: this.data.detailOrder.process[0].id,
-					price:this.data.process_price
-				})
-			});
-
-			wxReq({
-				url:'/workshop/weave/product/save',
-				method:'POST',
-				data:{
-					data
-				},
-				success: (res) => {
-					if(res.data.code===200){
-						Message.success({
-							offset: [20, 32],
-							duration: 2000,
-							content: '提交成功',
-						});
-						this.getDetailInfo()
-						return
-					}
-				}
-			})
+			this.getPostData(this.data.selectedPeopleValue)
+		} else {
+			this.getPostData()
 		}
-
-		this.getPostData()
 		wxReq({
 			url:'/workshop/weave/product/save',
 			method:'POST',
@@ -261,11 +291,11 @@ Page({
 		return min
 	},
 
-	getPostData(){
+	getPostData(getUuid){
 		let min = this.getMinDiff()
 		let minDiff = min.number - min.real_number
 		let enteryAllNumber = this.data.enteryAllNumber
-		let uuid = wx.getStorageSync('userInfo').userinfo.uuid
+		let uuid = getUuid?getUuid:wx.getStorageSync('userInfo').userinfo.uuid
 		let _this = this
 
 		if(enteryAllNumber > minDiff){
@@ -287,7 +317,6 @@ Page({
 				process_price_id:_this.data.detailOrder.process[0].id
 			})
 
-			console.log(_this.data.entryArr)
 			return _this.data.entryArr
 		}
 	}

@@ -6,6 +6,7 @@ Component({
     isAdded:wx.getStorageSync('userInfo').userinfo?.parent!==null || false,
     query_uuid:'',
     showDialog:false,
+    showUsed:false,
     beloneInfo:{},
     isBeOverdue:false,
   },
@@ -47,6 +48,11 @@ Component({
             _this.setData({
               workShopInfo:res.data.data
             })
+            if(res.data.data.uuid === query_uuid){
+              _this.setData({
+                showUsed:true
+              })
+            }
           }
         })
         this.setData({
@@ -73,8 +79,14 @@ Component({
             });
             return
           }
-          _this.setData({
-            showDialog:true
+          wxReq({
+            url:'/user/adopt/workshop',
+            method:"POST",
+            success:(res) => {
+              _this.setData({
+                showDialog:true
+              })
+            }
           })
         }
       })
@@ -83,13 +95,6 @@ Component({
       wx.reLaunch({
         url: '../manage/manage',
       })
-      // wxReq({
-      //   url:'/user/adopt/workshop',
-      //   method:"POST",
-      //   success:(res) => {
-      //     console.log(res.data.data)
-      //   }
-      // })
     }
   }
 })
