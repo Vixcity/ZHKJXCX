@@ -1,9 +1,11 @@
-const { wxReq } = require("../../utils/util")
+const {
+	wxReq
+} = require("../../utils/util")
 
 // components/orderCard.js
 Component({
 	options: {
-    multipleSlots: true // 在组件定义时的选项中启用多slot支持
+		multipleSlots: true // 在组件定义时的选项中启用多slot支持
 	},
 
 	/**
@@ -18,9 +20,9 @@ Component({
 			type: Boolean,
 			value: false
 		},
-		showChangeIcon:{
-			type:Boolean,
-			value:false
+		showChangeIcon: {
+			type: Boolean,
+			value: false
 		},
 		// 详细信息
 		detailInfo: Object
@@ -30,7 +32,7 @@ Component({
 	 * 组件的初始数据
 	 */
 	data: {
-		isShow:'title'
+		isShow: 'title'
 	},
 
 	/**
@@ -43,20 +45,20 @@ Component({
 				isCheck: !this.data.isCheck
 			})
 		},
-		clickEvent(event){
+		clickEvent(event) {
 			this.triggerEvent("clickEvent", event.currentTarget.dataset)
 		},
-		changeShow(e){
+		changeShow(e) {
 			// 0 为title
 			// 1 为code
-			if(this.data.detailInfo.display===0){
+			if (this.data.detailInfo.display === 0) {
 				this.data.detailInfo.display = 1
 			} else {
 				this.data.detailInfo.display = 0
 			}
 
 			this.setData({
-				detailInfo:this.data.detailInfo
+				detailInfo: this.data.detailInfo
 			})
 
 			let {
@@ -66,15 +68,15 @@ Component({
 			} = this.data.detailInfo
 
 			wxReq({
-				url:'/workshop/order/display',
-				method:"POST",
-				data:{
+				url: '/workshop/order/display',
+				method: "POST",
+				data: {
 					pid,
 					display,
 					product_id
 				},
 				success: (res) => {
-					
+
 				}
 			})
 

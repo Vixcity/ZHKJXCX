@@ -10,8 +10,16 @@
 			<view class="autoLogos pl10 pr10">车标 | 套口</view>
 		</view>
 	</view>
-	<view class="fz30 mt20 mb20">
-		客户：{{detailInfo.customer}}
+	<view class="fz30 mt20 mb20 flex jcsb">
+		<text>客户：{{detailInfo.customer}}</text>
+		<view wx:if="{{detailInfo.status !== 3}}">
+			<text wx:if="{{detailInfo.dateDiff > 0}}" class="color8D9F">剩余{{detailInfo.dateDiff}}天</text>
+			<text wx:if="{{detailInfo.dateDiff === 0}}" class="colorFDA9">今天截止交付，请注意完成</text>
+			<text wx:if="{{detailInfo.dateDiff < 0}}" class="colorE800">逾期{{0-detailInfo.dateDiff}}天</text>
+		</view>
+		<view wx:else>
+			<text class="color00D9">订单已完成</text>
+		</view>
 	</view>
 	<view class="flex aic">
 		<image class="size-l radius-m" src="{{detailInfo.imgSrc}}" mode="aspectFill" />

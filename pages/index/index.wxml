@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="bg h100 w100">
+  <view class="bg w100 {{orderList.length === 0?'vh100':'h100'}}">
     <!-- 卡片列表 -->
     <order-card bindtap="toOutPutEntry" bind:changeShow="changeShow" showChangeIcon="{{true}}" wx:for="{{orderList}}" wx:for-item="item" wx:key="item" wx:for-index="index" data-index="{{index}}" detailInfo="{{item}}"></order-card>
 

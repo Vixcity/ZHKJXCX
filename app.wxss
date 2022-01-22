@@ -39,6 +39,18 @@ page{
 .color27A2{
   color:#27A2FD
 }
+.color27FD{
+  color:#27fdb6
+}
+.color00D9{
+  color:#00d954
+}
+.colorFDA9{
+  color:#FDA947
+}
+.colorE800{
+  color:#E80000
+}
 .colorWhite{
   color:white
 }
@@ -47,6 +59,9 @@ page{
 }
 .colorRed{
   color:red
+}
+.colorOrange{
+  color:orange
 }
 
 

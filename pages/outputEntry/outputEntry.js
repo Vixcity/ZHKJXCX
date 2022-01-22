@@ -23,7 +23,6 @@ Page({
 	 */
 	onShow: function () {
 		this.setData(wx.getStorageSync('outPutEntry'))
-		console.log(this.data.cardOrder)
 		if (wx.getStorageSync('userInfo').userinfo.role === 3) {
 			this.setData({
 				showChoose: true,

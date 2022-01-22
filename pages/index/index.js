@@ -1,12 +1,8 @@
-import {wxReq} from '../../utils/util';
+import {dateDiff, wxReq} from '../../utils/util';
 // index.js
 Page({
   data: {
-    motto: 'Hello World',
     userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    canIUseGetUserProfile: false,
     value:0,
     isShowLoadmore:false,
     isShowNoDatasTips:false,
@@ -49,8 +45,9 @@ Page({
       url: '/workshop/weave/product/list', 
       method:'GET' ,
       data:{
-          page:page, //默认从第二页加载
-          limit:page_size //每页加载十条 上面设置
+          page:page,  // 默认从第二页加载
+          limit:page_size,  // 每页加载十条 上面设置
+          type:1  // 未完成列表
       },
       success:function(res){
         // console.log(res.data.data.data)
@@ -66,6 +63,11 @@ Page({
           } else {
             let data = res.data.data.data
             let datas = []
+            let date = new Date()
+            let year = date.getFullYear()
+            let month = date.getMonth() + 1
+            let day = date.getDate()
+            let nowDate = year + '-' + (month < 10 ? "0" + month : month) + '-' + (day < 10 ? '0' + day : day)
             data.forEach(item => {
               datas.push({
                 title:item.product.name,
@@ -77,7 +79,8 @@ Page({
                 display:item.display,
                 pid:item.pid,
                 product_id:item.product_id,
-                code:item.product.product_code
+                code:item.product.product_code,
+                dateDiff:dateDiff(nowDate,item.weave_plan.end_time)
               })
             });
             that.setData({

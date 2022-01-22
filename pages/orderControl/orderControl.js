@@ -1,5 +1,5 @@
 const {
-  wxReq
+  wxReq, dateDiff
 } = require("../../utils/util")
 
 // index.js
@@ -25,7 +25,11 @@ Page({
       success: (res) => {
         let data = res.data.data.data
         let datas = []
-        // console.log(res.data.data)
+        let date = new Date()
+        let year = date.getFullYear()
+        let month = date.getMonth() + 1
+        let day = date.getDate()
+        let nowDate = year + '-' + (month < 10 ? "0" + month : month) + '-' + (day < 10 ? '0' + day : day)
         data.forEach(item => {
           datas.push({
             title: item.product.name,
@@ -40,7 +44,8 @@ Page({
             display:item.display,
             pid:item.pid,
             product_id:item.product_id,
-            code:item.product.product_code
+            code:item.product.product_code,
+            dateDiff:dateDiff(nowDate,item.weave_plan.end_time)
           })
         });
         this.setData({
