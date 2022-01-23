@@ -11,7 +11,9 @@
 		"pages/addWorkShop/addWorkShop",
 		"pages/historyWorkShop/historyWorkShop",
 		"pages/orderDetail/orderDetail",
-		"pages/outputEntry/outputEntry"
+		"pages/outputEntry/outputEntry",
+		"pages/bindCompany/bindCompany",
+		"pages/bindOrder/bindOrder"
 	],
 	"usingComponents": {
 		"t-button": "tdesign-miniprogram/button/button",

@@ -539,6 +539,15 @@ page{
 .bgColorD8{
   background-color: #D8D8D8;
 }
+.bgColorB9{
+  background-color: #B9B9B9;
+}
+.bgColorFDA9{
+  background-color: #FDA947;
+}
+.bgColor00D9{
+  background-color: #00D954;
+}
 .bgColorF3{
   background-color: #F3F3F3;
 }
@@ -660,6 +669,11 @@ t-image {
 .size-xss .t-image {
   width: 48rpx;
   height: 48rpx;
+}
+
+.size-xsss .t-image {
+  width: 38rpx;
+  height: 38rpx;
 }
 
 

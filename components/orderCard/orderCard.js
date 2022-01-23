@@ -40,10 +40,12 @@ Component({
 	 */
 	methods: {
 		// 点击勾号
-		changeCheck() {
-			this.setData({
-				isCheck: !this.data.isCheck
-			})
+		changeCheck(event) {
+			// console.log(event)
+			this.triggerEvent("changeCheck", event.currentTarget.dataset)
+			// this.setData({
+			// 	isCheck: !this.data.isCheck
+			// })
 		},
 		clickEvent(event) {
 			this.triggerEvent("clickEvent", event.currentTarget.dataset)

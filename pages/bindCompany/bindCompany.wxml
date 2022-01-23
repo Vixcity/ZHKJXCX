@@ -1,0 +1,40 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="bg flex fdc jcsa aic">
+    <view class="bg flex fdc jcsa aic por">
+      <view class="ml20 mr20 mt20 bgColorWhite vw90 jcsb flexWarp borderRadius16 shadow borderBox pl20 pr20 pt20 pb20 colorBlack por overfh borderBox flex fdc">
+        <view class="fz40 blod">{{companyName}}（有限公司）</view>
+        <view class="flex aic mt5 color91 fz28 size-xsss">
+          <image class="t-image" src="https://file.zwyknit.com/%E5%AE%9A%E4%BD%8D-01.png"/>
+          <text class="ml10">{{address}}</text>
+        </view>
+        <view wx:if="{{bindStatus === 0}}" class="poa bgColorB9 fz35 colorWhite flex aic jcc bindStatus">未绑定</view>
+        <view wx:if="{{bindStatus === 1}}" class="poa bgColorFDA9 fz35 colorWhite flex aic jcc bindStatus">审核中</view>
+        <view wx:if="{{bindStatus === 2}}" class="poa bgColor00D9 fz35 colorWhite flex aic jcc bindStatus">已绑定</view>
+      </view>
+      <view class="flex fdc aic">
+        <view wx:if="{{bindStatus === 0}}" class="tc mt30 fz35 blod">
+          <view>您尚未与该工厂绑定合作关系</view>
+          <view>可点击下方按钮申请绑定</view>
+        </view>
+        <view wx:if="{{bindStatus === 1}}" class="tc mt30 fz35 blod">
+          <view>您已申请绑定与该工厂的合作</view>
+          <view>正在审核中…</view>
+        </view>
+        <view wx:if="{{bindStatus === 2}}" class="tc mt30 fz35 blod">
+          <view>您已成功绑定与该工厂的合作</view>
+          <view>无需重复扫码操作</view>
+        </view>
+        <view class="submit mt40">
+          <view wx:if="{{bindStatus === 0}}" class="fz28 vw80 mb20 color91 flex">
+            <t-icon name="check-circle-filled" size="xl" bind:click="changeRead"> </t-icon><view class="ml10">我已阅读并同意《纺织工厂绑定合作协议》</view>
+          </view>
+          <t-button theme="primary" size="large" variant="plain" bindtap="bindOrToManege">{{bindStatus === 0?'申请绑定':'返回首页'}}</t-button>
+        </view>
+      </view>
+    </view>
+  </view>
+  <t-dialog title="申请成功" content="您已加入作坊成功，请返回首页查看" confirm-btn="返回首页" visible="{{showDialog}}" bind:confirm="toManege"/>
+  <t-dialog title="重复申请" content="您已加入此作坊，请勿重复申请" confirm-btn="返回首页" visible="{{showUsed}}" bind:confirm="toManege"/>
+  <t-message id="t-message" />
+</view>

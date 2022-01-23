@@ -1,0 +1,24 @@
+<!--index.wxml-->
+<view class="container" style="overflow-x: hidden;">
+  <view class="bg flex fdc jcsa aic">
+    <view class="bg flex fdc jcsa aic por">
+      <view class="ml20 mr20 mt20 colorWhite cardBg vw90 jcsb flexWarp borderRadius16 shadow borderBox pl20 pr20 pt20 pb20 por overfh borderBox flex fdc">
+        <view class="fz35">
+        SCode：{{hash}}
+        </view>
+        <view class="fz35 mt20">
+          所属客户：{{companyName}}
+        </view>
+        <view class="poa bgColorB9 fz35 colorWhite flex aic jcc bindStatus">未绑定</view>
+      </view>
+      <view class="flex fdc aic">
+        <order-card wx:for="{{detailInfoList}}" wx:for-item="item" wx:key="item" wx:for-index="index" data-index="{{index}}" detailInfo="{{item}}" bind:changeCheck="changeCheck" showIcon="{{true}}"></order-card>
+        <view class="submit mt40 mb20">
+          <t-button theme="primary" size="large" variant="plain" bindtap="bindOrder">绑定</t-button>
+        </view>
+      </view>
+    </view>
+  </view>
+  <t-dialog title="申请成功" content="您已加入作坊成功，请返回首页查看" confirm-btn="返回首页" visible="{{showDialog}}" bind:confirm="toManege"/>
+  <t-message id="t-message" />
+</view>

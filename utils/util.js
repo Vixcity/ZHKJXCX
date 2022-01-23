@@ -9,6 +9,7 @@ const formatTime = date => {
   return `${[year, month, day].map(formatNumber).join('/')} ${[hour, minute, second].map(formatNumber).join(':')}`
 }
 
+// 封装请求
 const wxReq = data => {
   const openid = wx.getStorageSync("userInfo").openid.openid
   wx.request({
@@ -89,6 +90,7 @@ const createDateDate = (n,isNow=false,fenge) => {
   return datelist
 }
 
+// 获取日期差
 const dateDiff = function (nowTime, compairTime) {
   //nowTime和compairTime是yyyy-MM-dd格式
   let aDate, oDate1, oDate2, iDays;
@@ -100,11 +102,24 @@ const dateDiff = function (nowTime, compairTime) {
   return iDays;  //返回相差天数
 }
 
+// 获取Url参数
+const urlParams= function(url) {
+  let obj = {}
+  let str = url.slice(url.indexOf('?') + 1)
+  let arr = str.split('&')
+  for (let j = arr.length, i = 0; i < j; i++) {
+    let arr_temp = arr[i].split('=')
+    obj[arr_temp[0]] = arr_temp[1]
+  }
+  return obj
+}
+
 module.exports = {
   formatTime,
   wxReq,
   verifyTel,
   getTimeDiff,
   createDateDate,
-  dateDiff
+  dateDiff,
+  urlParams
 }

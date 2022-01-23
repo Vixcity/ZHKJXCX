@@ -1,0 +1,21 @@
+/**index.wxss**/
+.bg{
+  background-size: 100% 100%;
+  height: 100vh;
+}
+.whoWorkShop{
+  background: url(https://file.zwyknit.com/20220114132504.png) no-repeat;
+  background-size: 110%;
+  background-position: 55%;
+  height: 20%;
+}
+.iconInDown .t-icon{
+  width: auto;
+}
+
+.bindStatus{
+  transform: rotate(45deg);
+  right: -50%;
+  width: 120%;
+  height: 25%;
+}
