@@ -24,7 +24,7 @@
     </t-tabs>
   </view>
 
-  <view wx:if="{{!isLeader && !isStaff}}" class="mt40">空数据页</view>
+  <view wx:if="{{!isLeader && !isStaff}}" class="mt40">暂无数据，请填写产量录入</view>
   
   <!-- 时间选择器 -->
   <t-picker visible="{{showDataPick}}" bindconfirm="pickDataConfirm" bindcancel="pickDataCancel">

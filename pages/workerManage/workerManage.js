@@ -55,6 +55,8 @@ Page({
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function () {
+		option.isLeader = option.isLeader === "true" ? true : false
+		this.setData(option)
 		this.getWokerList()
 	},
 

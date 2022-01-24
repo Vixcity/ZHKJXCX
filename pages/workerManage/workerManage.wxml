@@ -1,6 +1,6 @@
 <!--pages/workerManage/workerManage.wxml-->
 <view class="container">
-  <view class="bg vw100 vh100">
+  <view wx:if="{{isLeader}}" class="bg vw100 vh100">
     <list-card  bind:clickLine="getName" cardInfoData="{{cardInfoData}}"></list-card>
     <view class="mt30 color91 tc fz30">
       新员工需扫作坊主二维码才能添加到组织
@@ -40,6 +40,9 @@
         class="pl10 pt5 pb5 borderRadius16 mt10"
       />
     </t-dialog>
+  </view>
+  <view wx:else class="tc mt40">
+    暂无员工，请成为作坊主添加员工
   </view>
   <t-message id="t-message" />
 </view>

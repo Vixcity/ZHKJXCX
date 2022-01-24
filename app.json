@@ -1,8 +1,8 @@
 {
 	"pages": [
+		"pages/manage/manage",
 		"pages/noLogin/noLogin",
 		"pages/index/index",
-		"pages/manage/manage",
 		"pages/signUp/signUp",
 		"pages/orderControl/orderControl",
 		"pages/statistics/statistics",

@@ -18,8 +18,8 @@ const wxReq = data => {
     method: data.method,
     success: data.success,
     header:{
-      Authorization:'Bearer ' + 6666 // 作坊主ID
-      // Authorization:'Bearer ' + openid // 员工ID
+      // Authorization:'Bearer ' + 6666
+      Authorization:'Bearer ' + openid // 员工ID
     }
   })
 }

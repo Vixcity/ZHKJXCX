@@ -21,6 +21,7 @@ Page({
 		this.canToManage()
   },
   getUserProfile(e) {
+    let _this = this
     // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
     wx.getUserProfile({
       desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
@@ -29,10 +30,28 @@ Page({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
-        let userinfo = wx.getStorageSync('userInfo')
-        userinfo.wechat_data = res.userInfo
-        wx.setStorageSync('userInfo',userinfo)
-				this.toManage()
+        let wxUserInfo = res.userInfo
+        wx.login({
+          success: res => {
+            // 发送 res.code 到后台换取 openId, sessionKey, unionId
+            const code = res.code
+            wx.request({
+              url: getApp().globalData.api + '/wechat/userinfo',
+              data: {
+                code
+              },
+              method: 'POST',
+              success(resdata) {
+                if (resdata.data.code === 200) {
+                    let userinfo = resdata.data.data
+                    userinfo.wechat_data = wxUserInfo
+                    wx.setStorageSync('userInfo',userinfo)
+                    _this.toManage()
+                }
+              }
+            })
+          }
+        })
       }
     })
   }

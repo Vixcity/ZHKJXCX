@@ -3,7 +3,7 @@
   <t-tab-panel label="合作中" value="2">
     <block wx:if="{{!isLeader}}">
       <view class="vh90 flex aic jcc">
-        空数据页
+        暂无客户，请扫码绑定客户
       </view>
     </block>
     <block wx:else>
@@ -13,7 +13,7 @@
   <t-tab-panel label="待绑定" value="1">
     <block wx:if="{{!isLeader}}">
       <view class="vh90 flex aic jcc">
-        空数据页
+        暂无客户，请扫码绑定客户
       </view>
     </block>
     <block wx:else>
@@ -23,7 +23,7 @@
   <t-tab-panel label="已终止" value="3">
     <block wx:if="{{!isLeader}}">
       <view class="vh90 flex aic jcc">
-        空数据页
+        暂无客户，请扫码绑定客户
       </view>
     </block>
     <block wx:else>

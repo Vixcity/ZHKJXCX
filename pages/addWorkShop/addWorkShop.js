@@ -17,9 +17,10 @@ Component({
       let time = wx.getLaunchOptionsSync().query.time
       let timeDiff = getTimeDiff(Date.now(),time,'hours')
       // 判断是否为直接扫码进入
-      if(wx.getStorageSync('userInfo')===""){
+      console.log(wx.getStorageSync('userInfo'))
+      if(wx.getStorageSync('userInfo')==="" || wx.getStorageSync('userInfo').userinfo===null){
         wx.reLaunch({
-          url: '../noLogin/noLogin',
+          url: '../manage/manage',
         })
       }
 

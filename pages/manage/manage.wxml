@@ -1,4 +1,4 @@
-<!--logs.wxml-->
+<!--manage.wxml-->
 <view class="container noPad">
   <view class="h100 bg">
     <view class="pb50">
@@ -6,7 +6,11 @@
         <view class="flex userInfo vw60" bindtap="bindViewTap">
           <t-avatar shape="circle" image="{{userInfo.wechat_data.avatarUrl || userInfo.userinfo.wechat_data.avatarUrl}}" />
           <view class="fz40 ml20">
-            <block wx:if="{{userInfo === null || userInfo.userinfo === null}}">
+            <block wx:if="{{showNoLogin}}">
+              <view bindtap="toLogin">暂未登录</view>
+              <view bindtap="toLogin" class="fz28 mt5">点击立即登录</view>
+            </block>
+            <block wx:elif="{{userInfo === null || userInfo.userinfo === null}}">
               <view bindtap="toSignUp">{{userInfo.wechat_data.nickName}}</view>
               <view bindtap="toSignUp" class="fz28 mt5">未完善资料，请立即填写</view>
             </block>
@@ -34,7 +38,7 @@
     
     <!-- 菜单 -->
     <view class="ml20 mr20 mt20 bgColorWhite vw90 flex flexWarp borderBox pl20 pr20 pt20 pb20 color9E fz30 tc borderRadius16 shadow" style="transform: translateY(-60%);">
-      <view class="{{item.index===1?'':'ml18'}}" wx:for-items="{{pageList}}" wx:for-item="item" wx:key="title" data-path="{{item.path}}" bindtap="toWitchPage">
+      <view class="{{item.index===1?'':'ml18'}}" wx:for="{{pageList}}" wx:for-item="item" wx:key="title" data-path="{{item.path}}" bindtap="toWitchPage">
         <image class="sonContainer" src="{{item.icon}}" mode="aspectFill"/>
         <view class="mt5">{{item.title}}</view>
       </view>

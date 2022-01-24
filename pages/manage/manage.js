@@ -7,7 +7,27 @@ Component({
     userInfo:null,
     showPopup: false,
     showImage:'',
-    pageList: []
+    pageList: [{
+      title: '订单管理',
+      path: '../orderControl/orderControl',
+      icon:'https://file.zwyknit.com/%E8%AE%A2%E5%8D%95%E7%AE%A1%E7%90%86-01.png',
+      index:1
+    }, {
+      title: '数据统计',
+      path: '../statistics/statistics',
+      icon:'https://file.zwyknit.com/%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1-01.png',
+      index:2
+    }, {
+      title: '客户管理',
+      path: '../userManagement/userManagement',
+      icon:'https://file.zwyknit.com/%E5%AE%A2%E6%88%B7%E7%AE%A1%E7%90%86-01.png',
+      index:3
+    }, {
+      title: '员工管理',
+      path: '../workerManage/workerManage',
+      icon:'https://file.zwyknit.com/%E5%91%98%E5%B7%A5%E7%AE%A1%E7%90%86-01.png',
+      index:4
+    }]
   },
   pageLifetimes: {
     show: function () {
@@ -21,6 +41,12 @@ Component({
       }
       if (this.data.userInfo === null ) {
         let userInfo = wx.getStorageSync('userInfo')
+        if(userInfo===""){
+          this.setData({
+            showNoLogin:true
+          })
+          return
+        }
         this.setData({
           userInfo: userInfo
         })
@@ -158,6 +184,12 @@ Component({
           index:4
         }]
       }
+    },
+
+    toLogin(){
+      wx.navigateTo({
+        url: '../noLogin/noLogin',
+      })
     }
   }
 })
