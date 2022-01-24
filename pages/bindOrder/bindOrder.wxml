@@ -19,6 +19,6 @@
       </view>
     </view>
   </view>
-  <t-dialog title="申请成功" content="您已加入作坊成功，请返回首页查看" confirm-btn="返回首页" visible="{{showDialog}}" bind:confirm="toManege"/>
+  <t-dialog title="绑定成功" content="绑定订单成功，请返回首页查看" confirm-btn="返回首页" visible="{{showDialog}}" bind:confirm="toManege"/>
   <t-message id="t-message" />
 </view>

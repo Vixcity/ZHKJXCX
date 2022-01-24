@@ -1,10 +1,13 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="bg flex fdc jcsa aic">
+  <view class="{{isBeOverdue?'timeOutBg':'bg'}} flex fdc jcsa aic">
     <view class="por vh100 vw100" wx:if="{{isBeOverdue}}">
-      <view class="poa w100 tc colorWhite" style="top:25%;">
-        <view>您扫描的作坊主二维码已过期</view>
-        <view class="mt30">请重新扫码进入</view>
+      <view class="poa w100 tc" style="top:60%;">
+        <view>二维码已过期</view>
+        <view class="mt10">请找作坊主扫描新二维码</view>
+        <view class="submit mt50">
+          <t-button theme="primary" size="large" variant="plain" bindtap="toManege">返回首页</t-button>
+        </view>
       </view>
     </view>
     <view class="bg flex fdc jcsa aic" wx:else>
