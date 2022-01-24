@@ -51,7 +51,22 @@ Component({
           userInfo: userInfo
         })
       }
-
+      this.getUserInfoData()
+    },
+    hide: function () {
+      this.setData({
+        showPopup: false
+      })
+    }
+  },
+  methods: {
+    toSignUp() {
+      wx.navigateTo({
+        url: '../signUp/signUp'
+      })
+    },
+    getUserInfoData(){
+      let _this = this
       wxReq({
         url:'/user/info',
         method:'GET',
@@ -71,19 +86,6 @@ Component({
             _this.setData(_this.getPageList(userRole))
           }
         }
-      })
-
-    },
-    hide: function () {
-      this.setData({
-        showPopup: false
-      })
-    }
-  },
-  methods: {
-    toSignUp() {
-      wx.navigateTo({
-        url: '../signUp/signUp'
       })
     },
     toWitchPage(e) {

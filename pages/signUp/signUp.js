@@ -126,7 +126,6 @@ Component({
         url: '/user/register',
         data: {
           user_name:userInfo.phoneNumber,
-          user_name:'18958643187',  
           name:userInfo.realName,
           process:userInfo.process,
           wechat_data:userInfo.wechat_data,

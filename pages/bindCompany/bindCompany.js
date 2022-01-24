@@ -8,10 +8,28 @@ Page({
     showDialog:false,
     showUsed:false,
     isBeOverdue:false,
-    bindStatus:''
+    bindStatus:'',
+    iRead:false,
+    isLogin:true,
+    isLeader:true
   },
 
   onLoad: function(options) {
+    if (wx.getStorageSync('userInfo')==="") {
+      this.setData({
+        isLogin:false
+      })
+
+      return  
+    }
+
+    if(wx.getStorageSync('userInfo').userinfo.role===2) {
+      this.setData({
+        isLeader:false
+      })
+
+      return
+    }
     // 扫描普通链接进入小程序，并获取参数
     // 链接为：https://knit-m-beta.zwyknit.com/miniprogram?company_id=xx1
     // 参数为：company_id
@@ -26,6 +44,7 @@ Page({
 
       this.init(params)      
     }
+    // console.log(1)
     // let params = {
     //   company_id:'xx1'
     // }
@@ -57,9 +76,23 @@ Page({
       }
     })
   },
+
+  changeRead(){
+    this.setData({
+      iRead:!this.data.iRead
+    })
+  },
     
   bindOrToManege(){
     if(this.data.bindStatus === 0){
+      if(!this.data.iRead){
+        Message.error({
+          offset: [20, 32],
+          duration: 2000,
+          content: '同意并阅读绑定合作协议'
+        });
+        return
+      }
       this.bindCompany()
       return
     }
@@ -77,7 +110,14 @@ Page({
       },
       success: (res) => {
         if(res.data.code === 200){
-
+          _this.init({
+            company_id:_this.data.company_id
+          })
+          Message.success({
+            offset: [20, 32],
+            duration: 2000,
+            content: '审核提交成功'
+          });
           return
         }
       }

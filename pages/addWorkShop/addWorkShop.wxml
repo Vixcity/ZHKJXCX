@@ -39,5 +39,6 @@
   </view>
   <t-dialog title="申请成功" content="您已加入作坊成功，请返回首页查看" confirm-btn="返回首页" visible="{{showDialog}}" bind:confirm="toManege"/>
   <t-dialog title="重复申请" content="您已加入此作坊，请勿重复申请" confirm-btn="返回首页" visible="{{showUsed}}" bind:confirm="toManege"/>
+  <t-dialog title="返回首页" content="您绑定的用户不是作坊主" confirm-btn="返回首页" visible="{{notLeader}}" bind:confirm="toManege"/>
   <t-message id="t-message" />
 </view>

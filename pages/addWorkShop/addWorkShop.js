@@ -9,6 +9,7 @@ Component({
     showUsed:false,
     beloneInfo:{},
     isBeOverdue:false,
+    notLeader:false
   },
   pageLifetimes: {
     show: function() {
@@ -17,7 +18,7 @@ Component({
       let time = wx.getLaunchOptionsSync().query.time
       let timeDiff = getTimeDiff(Date.now(),time,'hours')
       // 判断是否为直接扫码进入
-      console.log(wx.getStorageSync('userInfo'))
+      // console.log(wx.getStorageSync('userInfo'))
       if(wx.getStorageSync('userInfo')==="" || wx.getStorageSync('userInfo').userinfo===null){
         wx.reLaunch({
           url: '../manage/manage',
@@ -46,6 +47,12 @@ Component({
           },
           method:"GET",
           success(res){
+            if(res.data.data===null){
+              _this.setData({
+                notLeader:true
+              })
+              return
+            }
             _this.setData({
               workShopInfo:res.data.data
             })

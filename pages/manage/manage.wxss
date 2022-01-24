@@ -21,3 +21,10 @@
   height: 100rpx;
   border-radius: 5px;
 }
+
+.image{
+  overflow: hidden;
+  height: 120rpx;
+  width: 120rpx;
+  border-radius: 1000000rpx;
+}
