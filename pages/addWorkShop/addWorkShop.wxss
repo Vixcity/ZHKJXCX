@@ -16,6 +16,7 @@
 .timeOutBg{
   height: 100vh;
   background: url(https://file.zwyknit.com/%E8%BF%94%E5%9B%9E%E9%A6%96%E9%A1%B5%E7%B4%AB%E8%89%B2.png);
+  /* https://file.zwyknit.com/%E8%BF%94%E5%9B%9E%E9%A6%96%E9%A1%B5%E8%93%9D%E8%89%B2.png 首页背景蓝色 */
   background-size: 100% auto;
   background-position: 55%;
 }
