@@ -1,5 +1,6 @@
 // 获取应用实例
 const app = getApp()
+import Message from 'tdesign-miniprogram/message/index';
 
 Page({
   data: {
@@ -47,6 +48,13 @@ Page({
                     userinfo.wechat_data = wxUserInfo
                     wx.setStorageSync('userInfo',userinfo)
                     _this.toManage()
+                } else {
+                  Message.error({
+                    offset: [20, 32],
+                    duration: 2000,
+                    content: res.data.data || res.data.message,
+                  });
+                  return
                 }
               }
             })

@@ -37,7 +37,7 @@ Page({
             nowNumber: item.real_number ? item.real_number : 0,
             allNumber: item.number,
             customer: item.weave_plan.company.company_name,
-            imgSrc: item.product.rel_image[0].image_url || '',
+            imgSrc: item.product.rel_image[0]?.image_url || 'https://file.zwyknit.com/defaultOrder.jpg',
             status: item.status,
             showPrice: item.total_price ? true : false,
             price: item.total_price,

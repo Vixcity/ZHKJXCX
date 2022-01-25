@@ -1,4 +1,5 @@
 import {dateDiff, wxReq} from '../../utils/util';
+import Message from 'tdesign-miniprogram/message/index';
 // index.js
 Page({
   data: {
@@ -81,7 +82,7 @@ Page({
                 nowNumber:item.real_number?item.real_number:0,
                 allNumber:item.number,
                 customer:item.weave_plan.company.company_name,
-                imgSrc:item.product.rel_image[0].image_url || '',
+                imgSrc:item.product.rel_image[0]?.image_url || 'https://file.zwyknit.com/defaultOrder.jpg',
                 display:item.display,
                 pid:item.pid,
                 product_id:item.product_id,
@@ -105,6 +106,11 @@ Page({
             page:page+1 //更新page 请求下一页数据
           })
         }else{
+          Message.error({
+            offset: [20, 32],
+            duration: 2000,
+            content: res.data.data || res.data.message,
+          });
           that.setData({
             showDialog:true
           })

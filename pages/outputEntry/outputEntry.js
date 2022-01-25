@@ -157,6 +157,11 @@ Page({
 				product_info: wx.getStorageSync('entry_product_info'),
 				tabValue:1
 			})
+			if(!this.data.showChoose){
+				this.setData({
+					selectedPeopleLabel:''
+				})
+			}
 		}
 	},
 
@@ -187,13 +192,15 @@ Page({
 				let data = []
 
 				this.data.product_info.forEach(item => {
-					data.push({
-						product_info_id: item.id,
-						number: item.value,
-						uuid: uuid,
-						process_price_id: this.data.detailOrder.process[0].id,
-						price:this.data.process_price
-					})
+					if(item.value){
+						data.push({
+							product_info_id: item.id,
+							number: item.value,
+							uuid: uuid,
+							process_price_id: this.data.detailOrder.process[0].id,
+							price:this.data.process_price
+						})
+					}
 				});
 
 				wxReq({

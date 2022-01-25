@@ -37,7 +37,7 @@
     </view>
     
     <!-- 菜单 -->
-    <view class="ml20 mr20 mt20 bgColorWhite vw90 flex flexWarp borderBox pl20 pr20 pt20 pb20 color9E fz30 tc borderRadius16 shadow" style="transform: translateY(-60%);">
+    <view class="ml20 mr20 mt40 bgColorWhite vw90 flex flexWarp borderBox pl20 pr20 pt20 pb20 color9E fz30 tc borderRadius16 shadow" style="transform: translateY(-60%);">
       <view class="{{item.index===1?'':'ml18'}}" wx:for="{{pageList}}" wx:for-item="item" wx:key="title" data-path="{{item.path}}" bindtap="toWitchPage">
         <image class="sonContainer" src="{{item.icon}}" mode="aspectFill"/>
         <view class="mt5">{{item.title}}</view>

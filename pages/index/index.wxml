@@ -14,4 +14,5 @@
   </view>
   <t-dialog title="注册账号" content="您还未注册账号，请点击前往注册" confirm-btn="点击注册" visible="{{showDialog}}" bind:confirm="toSingUp"/>
   <t-dialog title="登录" content="您还未登录，点击前往登录" confirm-btn="点击登录" visible="{{showLogin}}" bind:confirm="toNoLogin"/>
+  <t-message id="t-message" />
 </view>
