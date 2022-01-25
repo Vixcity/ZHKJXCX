@@ -80,6 +80,9 @@ Component({
             // 路人 == 1
             let userRole = allUserinfo.userinfo.role
             _this.setData(_this.getPageList(userRole))
+            _this.setData({
+              userInfo:allUserinfo
+            })
             
           } else {
             let userRole = wx.getStorageSync('userInfo').userinfo.role
@@ -106,7 +109,11 @@ Component({
             showImage:wx.getStorageSync('作坊主小程序码'),
             showPopup:true
           })
+          return
         }
+        
+        wx.setStorageSync('wxacodeTime' ,Date.now())
+        this.getWxACode()
       }
     },
     getWxACode(){

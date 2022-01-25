@@ -23,7 +23,7 @@
         <view class="vw30">
           <view class="fr">
             <!-- 二维码 -->
-            <view wx:if="{{userInfo.userinfo.role !== 2}}" class="tr" bindtap="openPopup">
+            <view wx:if="{{!showNoLogin && userInfo.userinfo.role !== 2}}" class="tr" bindtap="openPopup">
               <image src="https://file.zwyknit.com/erweima.png" style="width: 80rpx;height: 80rpx;"></image>
             </view>
             <block wx:if="{{ourUser !== null && userInfo.userinfo !== null}}">

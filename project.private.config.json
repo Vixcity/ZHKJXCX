@@ -15,16 +15,16 @@
         {
           "name": "扫码",
           "pathName": "pages/addWorkShop/addWorkShop",
-          "query": "uuid=948724fa72a011ec992f0242ac150004&time=1643001124000",
-          "launchMode": "default",
-          "scene": 1047
+          "query": "uuid=71673e807cf311eca0a711844a06be76&time=1643077534002",
+          "scene": 1047,
+          "launchMode": "default"
         },
         {
           "name": "绑定工厂",
           "pathName": "pages/bindCompany/bindCompany",
           "query": "",
-          "scene": 1011,
-          "launchMode": "default"
+          "launchMode": "default",
+          "scene": 1011
         }
       ]
     }

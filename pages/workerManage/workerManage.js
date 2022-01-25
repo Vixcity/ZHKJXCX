@@ -51,12 +51,16 @@ Page({
 		// console.log(option.detail)
 	},
 
+	// 获取参数，判断是否为作坊主
+	onLoad:function(option) {
+		option.isLeader = option.isLeader === "true" ? true : false
+		this.setData(option)
+	},
+
 	/**
 	 * 生命周期函数--监听页面显示
 	 */
-	onShow: function () {
-		option.isLeader = option.isLeader === "true" ? true : false
-		this.setData(option)
+	onShow: function (option) {
 		this.getWokerList()
 	},
 

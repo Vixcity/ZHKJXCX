@@ -56,7 +56,7 @@ Component({
             _this.setData({
               workShopInfo:res.data.data
             })
-            if(res.data.data.uuid === query_uuid){
+            if(wx.getStorageSync('userInfo').userinfo.parent.uuid === query_uuid){
               _this.setData({
                 showUsed:true
               })
