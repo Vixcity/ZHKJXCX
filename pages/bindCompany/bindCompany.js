@@ -19,36 +19,35 @@ Page({
       this.setData({
         isLogin:false
       })
-
+      
       return  
     }
+    if(wx.getStorageSync('userInfo').userinfo.role===2) {
+      this.setData({
+        isLeader:false
+      })
 
-    // if(wx.getStorageSync('userInfo').userinfo.role===2) {
-    //   this.setData({
-    //     isLeader:false
-    //   })
-
-    //   return
-    // }
+      return
+    }
     // 扫描普通链接进入小程序，并获取参数
     // 链接为：https://knit-m-beta.zwyknit.com/miniprogram?company_id=xx1
     // 参数为：company_id
-    // if (options.q) {
-    //   let scan_url = decodeURIComponent(options.q);
-    //   let params = urlParams(scan_url)
+    if (options.q) {
+      let scan_url = decodeURIComponent(options.q);
+      let params = urlParams(scan_url)
 
-    //   let { company_id } = params
-    //   this.setData({
-    //     company_id
-    //   })
+      let { company_id } = params
+      this.setData({
+        company_id
+      })
 
-    //   this.init(params)      
-    // }
-    // console.log(1)
-    let params = {
-      company_id:'da3fd4be69f011ecb621b1870022e9e4'
+      this.init(params)      
     }
-    this.init(params)
+    // console.log(1)
+    // let params = {
+    //   company_id:'xx1'
+    // }
+    // this.init(params)
   },
 
   init(params){
@@ -120,6 +119,13 @@ Page({
           });
           return
         }
+      }
+    })
+    wxReq({
+      url:'/user/adopt/company',
+      method:'POST',
+      success: (res) => {
+        console.log(res)
       }
     })
   },

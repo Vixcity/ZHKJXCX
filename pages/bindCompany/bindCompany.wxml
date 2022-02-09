@@ -12,9 +12,9 @@
         <view wx:if="{{bindStatus === 1}}" class="poa bgColorFDA9 fz35 colorWhite flex aic jcc bindStatus">审核中</view>
         <view wx:if="{{bindStatus === 2}}" class="poa bgColor00D9 fz35 colorWhite flex aic jcc bindStatus">已绑定</view>
       </view>
+      <view wx:if="{{!isLogin}}" class="vw100 tc mt40">您还未登录，点击返回首页进行登录</view>
+      <view wx:if="{{!isLeader}}" class="vw100 tc mt40">您为员工，无权限进行绑定操作</view>
       <view wx:if="{{companyName}}">
-        <view wx:if="{{!isLogin}}" class="vw100 tc mt40">您还未登录，点击返回首页进行登录</view>
-        <view wx:if="{{!isLeader}}" class="vw100 tc mt40">您为员工，无权限进行绑定操作</view>
         <view class="flex fdc aic">
           <view wx:if="{{bindStatus === 0}}" class="tc mt30 fz35 blod">
             <view>您尚未与该工厂绑定合作关系</view>
@@ -37,7 +37,7 @@
         </view>
       </view>
       <view wx:else class="vw100">
-        <view class="tc mt30 fz35 blod">
+        <view wx:if="{{isLogin && isLeader}}" class="tc mt30 fz35 blod">
           <view>暂未查询到该工厂信息</view>
         </view>
         <view class="submit mt40">

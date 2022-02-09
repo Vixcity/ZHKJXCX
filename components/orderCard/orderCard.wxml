@@ -24,7 +24,11 @@
 	<view class="flex aic">
 		<image class="size-l radius-m" src="{{detailInfo.imgSrc}}" mode="aspectFill" />
 		<view class="por ml10 fz30 flex jcsa fdc w100" style="height: 144rpx;">
-			<view>生产进度：{{detailInfo.nowNumber}} / {{detailInfo.allNumber}}</view>
+			<view class="flex w100">
+				<view class="w70">生产进度：{{detailInfo.nowNumber}} / {{detailInfo.allNumber}}</view>
+				<view class="w30 tc" wx:if="{{showEnterPrice && isLeader && (enterPricce !== '0.00')}}">定价：{{enterPricce}}</view>
+				<view class="w30 tc colorRed" wx:if="{{showEnterPrice && isLeader && (enterPricce === '0.00')}}" bindtap="toOrderDetail">暂无定价,点击前往定价</view>
+			</view>
 			<view>交付时间：{{detailInfo.time}}</view>
 			<view wx:if="{{showPrice}}" class="poa fz30 color27A2" style="right:0;bottom:24%">￥{{detailInfo.price}}</view>
 		</view>

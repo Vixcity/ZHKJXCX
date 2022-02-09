@@ -24,15 +24,24 @@ Component({
 			type: Boolean,
 			value: false
 		},
+		showEnterPrice: {
+			type: Boolean,
+			value: false
+		},
 		// 详细信息
-		detailInfo: Object
+		detailInfo: Object,
+		enterPricce: String
 	},
 
 	/**
 	 * 组件的初始数据
 	 */
 	data: {
-		isShow: 'title'
+		isShow: 'title',
+		// 作坊主
+		// isLeader: wx.getStorageSync('userInfo').userinfo.role === 3
+		// 员工账号测试
+		isLeader: wx.getStorageSync('userInfo').userinfo?.role === 2
 	},
 
 	/**
@@ -83,6 +92,22 @@ Component({
 			})
 
 			this.triggerEvent("changeShow", display)
+		},
+
+		// 产量录入 => 产品定价
+		toOrderDetail(e) {
+			// 拿到 => 取值 => 赋值
+			let obj = wx.getStorageSync('outPutEntry')
+			obj.cardOrder.price = obj.detailOrder.total_price
+
+			wx.setStorageSync('orderDetail', {
+				detailInfo: obj.cardOrder,
+				detailProduct:obj.detailOrder,
+			})
+
+			wx.navigateTo({
+				url: '../../pages/orderDetail/orderDetail',
+			})
 		}
 	}
 })

@@ -1,6 +1,6 @@
 <!--pages/outputEntry/outputEntry.wxml-->
 <view class="bg borderBox pt10 submit overfh">
-	<order-card detailInfo="{{cardOrder}}"></order-card>
+	<order-card detailInfo="{{cardOrder}}" enterPricce="{{process_price_all}}" showEnterPrice="{{true}}"></order-card>
 	<view class="ml20 mr20 mt20 bgColorWhite vw90 jcsb flexWarp borderRadius16 shadow borderBox pl10 pr10 pt10 pb10 colorBlack por overfh">
 		<t-tabs value="{{0}}" bind:change="onTabsChange">
 			<t-tab-panel label="按尺码颜色" value="0">

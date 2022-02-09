@@ -10,6 +10,7 @@
       <block wx:else>
         <view class="pb20">
           <order-card wx:for="{{detailInfoList}}" wx:for-item="item" wx:key="item" detailInfo="{{item}}" data-index="{{index}}" bindtap="toOrderDetail" showPrice="{{item.showPrice}}"></order-card>
+          <view class="vw100"></view>
         </view>
       </block>
     </t-tab-panel>
@@ -22,6 +23,7 @@
       <block wx:else>
         <view class="pb20">
           <order-card wx:for="{{detailInfoList}}" wx:for-item="item" wx:key="item" detailInfo="{{item}}" data-index="{{index}}" bindtap="toOrderDetail" showPrice="{{item.showPrice}}"></order-card>
+          <view class="vw100"></view>
         </view>
       </block>
     </t-tab-panel>
@@ -34,6 +36,7 @@
       <block wx:else>
         <view class="pb20">
           <order-card wx:for="{{detailInfoList}}" wx:for-item="item" wx:key="item" detailInfo="{{item}}" data-index="{{index}}" bindtap="toOrderDetail" showPrice="{{item.showPrice}}"></order-card>
+          <view class="vw100"></view>
         </view>
       </block>
     </t-tab-panel>
@@ -46,6 +49,7 @@
       <block wx:else>
         <view class="pb20">
           <order-card wx:for="{{detailInfoList}}" wx:for-item="item" wx:key="item" detailInfo="{{item}}" data-index="{{index}}" bindtap="toOrderDetail" showPrice="{{item.showPrice}}"></order-card>
+          <view class="vw100"></view>
         </view>
       </block>
     </t-tab-panel>
