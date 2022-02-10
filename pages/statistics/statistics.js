@@ -118,7 +118,7 @@ Page({
 
 		this.data.topTabData[0].value = pickedData
 		this.setData({
-			topTabData:this.data.topTabData,
+			topTabData: this.data.topTabData,
 			showDataPick: false
 		})
 
@@ -182,7 +182,7 @@ Page({
 				let allNumber = 0
 				res.data.data.list.forEach(item => {
 					arr.push([
-						[item.created_at.slice(0, 16), item.user.name],
+						[item.created_at.slice(5, 16), item.user.name],
 						[item.weave_plan_product_info.weave_plan.company.company_name, item.weave_plan_product_info.product.name],
 						[item.weave_plan_product_info.size.size_name + '/' + item.weave_plan_product_info.color.color_name, item.number],
 						[item.price + '元', item.number * item.price + '元']

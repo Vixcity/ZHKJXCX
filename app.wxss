@@ -736,3 +736,6 @@ t-image {
 .overfh{
   overflow: hidden;
 }
+.overfsy{
+  overflow-y: auto;
+}

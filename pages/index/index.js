@@ -1,24 +1,27 @@
-import {dateDiff, wxReq} from '../../utils/util';
+import {
+  dateDiff,
+  wxReq
+} from '../../utils/util';
 import Message from 'tdesign-miniprogram/message/index';
 // index.js
 Page({
   data: {
     userInfo: {},
-    value:0,
-    isShowLoadmore:false,
-    isShowNoDatasTips:false,
+    value: 0,
+    isShowLoadmore: false,
+    isShowNoDatasTips: false,
     endloading: false,
-    page:1,
-    page_size:10,
-    orderList:[],
-    detailOrderList:[],
+    page: 1,
+    page_size: 10,
+    orderList: [],
+    detailOrderList: [],
   },
 
-  onShow(){
+  onShow() {
     wx.hideHomeButton()
-    if(wx.getStorageSync('userInfo')===''){
+    if (wx.getStorageSync('userInfo') === '') {
       this.setData({
-        showLogin:true
+        showLogin: true
       })
       return
     }
@@ -29,39 +32,54 @@ Page({
       })
     }
     this.setData({
-      page:1,
-      orderList:[]
+      page: 1,
+      orderList: []
     })
     this.reviewpage()
+  },
+
+  onHide: function () {
+    this.setData({
+      userInfo: {},
+      value: 0,
+      isShowLoadmore: false,
+      isShowNoDatasTips: false,
+      endloading: false,
+      page: 1,
+      page_size: 10,
+      orderList: [],
+      detailOrderList: [],
+    })
   },
 
   onReachBottom: function () {
     var that = this;
     var endloading = that.data.endloading
-    if (!endloading){
+    if (!endloading) {
       that.reviewpage()
     }
   },
 
-  // 评论分页加载
-  reviewpage:function(e){
-    let that =this;
+  // 列表分页加载
+  reviewpage: function (e) {
+    let that = this;
     let page = this.data.page;
     let page_size = this.data.page_size;
     wxReq({
-      url: '/workshop/weave/product/list', 
-      method:'GET' ,
-      data:{
-          page:page,  // 默认从第二页加载
-          limit:page_size,  // 每页加载十条 上面设置
-          type:1  // 未完成列表
+      url: '/workshop/weave/product/list',
+      method: 'GET',
+      data: {
+        page: page, // 默认从第二页加载
+        limit: page_size, // 每页加载十条 上面设置
+        type: 1, // 未完成列表
+        no_binding: 1 // 显示未绑定订单
       },
-      success:function(res){
+      success: function (res) {
         // console.log(res.data.data.data)
-        if(res.data.code == 200){  //判断当code == 200 的时候得到数据
+        if (res.data.code == 200) { //判断当code == 200 的时候得到数据
 
-        //   var datas = res.data.result.comments; // 下面有得到的数据可以参考
-          if (res.data.data.data.length === 0){ //如果res.data.data.data.length === 0 表示没有可加载的数据了
+          //   var datas = res.data.result.comments; // 下面有得到的数据可以参考
+          if (res.data.data.data.length === 0) { //如果res.data.data.data.length === 0 表示没有可加载的数据了
             that.setData({
               isShowLoadmore: false, //隐藏正在加载
               isShowNoDatasTips: true, //显示暂无数据
@@ -77,24 +95,25 @@ Page({
             let nowDate = year + '-' + (month < 10 ? "0" + month : month) + '-' + (day < 10 ? '0' + day : day)
             data.forEach(item => {
               datas.push({
-                title:item.product.name,
-                time:item.weave_plan.end_time,
-                nowNumber:item.real_number?item.real_number:0,
-                allNumber:item.number,
-                customer:item.weave_plan.company.company_name,
-                imgSrc:item.product.rel_image[0]?.image_url || 'https://file.zwyknit.com/defaultOrder.jpg',
-                display:item.display,
-                pid:item.pid,
-                product_id:item.product_id,
-                code:item.product.product_code,
-                dateDiff:dateDiff(nowDate,item.weave_plan.end_time)
+                title: item.product.name,
+                time: item.weave_plan.end_time,
+                nowNumber: item.real_number ? item.real_number : 0,
+                allNumber: item.number,
+                customer: item.weave_plan.company.company_name,
+                imgSrc: item.product.rel_image[0]?.image_url || 'https://file.zwyknit.com/defaultOrder.jpg',
+                display: item.display,
+                pid: item.pid,
+                product_id: item.product_id,
+                code: item.product.product_code,
+                dateDiff: dateDiff(nowDate, item.weave_plan.end_time),
+                processName: item.weave_plan.process_name
               })
             });
             that.setData({
-              orderList: that.data.orderList.concat(datas),  //将得到的订单添加到orderList中更新
+              orderList: that.data.orderList.concat(datas), //将得到的订单添加到orderList中更新
               detailOrderList: data
             })
-            if (data.length < that.data.page_size){ //如果剩下评论数 小于10表示数据加载完了
+            if (data.length < that.data.page_size) { //如果剩下评论数 小于10表示数据加载完了
               // console.log('已经加载完了')
               that.setData({
                 isShowLoadmore: false, //隐藏正在加载
@@ -103,16 +122,16 @@ Page({
             }
           }
           that.setData({
-            page:page+1 //更新page 请求下一页数据
+            page: page + 1 //更新page 请求下一页数据
           })
-        }else{
+        } else {
           Message.error({
             offset: [20, 32],
             duration: 2000,
             content: res.data.data || res.data.message,
           });
           that.setData({
-            showDialog:true
+            showDialog: true
           })
           console.log(res)
         }
@@ -120,23 +139,26 @@ Page({
     })
   },
 
-  toOutPutEntry(e){
+  toOutPutEntry(e) {
     let i = e.currentTarget.dataset.index
     let detailOrder = this.data.detailOrderList[i]
     let cardOrder = this.data.orderList[i]
-    wx.setStorageSync('outPutEntry', {detailOrder,cardOrder})
+    wx.setStorageSync('outPutEntry', {
+      detailOrder,
+      cardOrder
+    })
     wx.navigateTo({
       url: '../outputEntry/outputEntry',
     })
   },
 
-  changeShow(e){
+  changeShow(e) {
     let detailOrder = this.data.detailOrderList[e.currentTarget.dataset.index]
     let cardOrder = this.data.orderList[e.currentTarget.dataset.index]
     detailOrder.display = e.detail
     cardOrder.display = e.detail
   },
-  
+
   getUserProfile(e) {
     // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
     wx.getUserProfile({
@@ -148,8 +170,8 @@ Page({
         })
         let userinfo = wx.getStorageSync('userInfo')
         userinfo.wechat_data = res.userInfo
-        wx.setStorageSync('userInfo',userinfo)
-				this.toManage()
+        wx.setStorageSync('userInfo', userinfo)
+        this.toManage()
       }
     })
   },
@@ -159,14 +181,14 @@ Page({
       url: '../manage/manage'
     })
   },
-  
+
   toSingUp() {
     wx.navigateTo({
       url: '../signUp/signUp',
     })
   },
 
-  toNoLogin(){
+  toNoLogin() {
     wx.reLaunch({
       url: '../noLogin/noLogin',
     })

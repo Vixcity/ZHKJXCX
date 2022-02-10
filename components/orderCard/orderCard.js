@@ -102,12 +102,12 @@ Component({
 
 			wx.setStorageSync('orderDetail', {
 				detailInfo: obj.cardOrder,
-				detailProduct:obj.detailOrder,
+				detailProduct: obj.detailOrder,
 			})
 
 			wx.navigateTo({
 				url: '../../pages/orderDetail/orderDetail',
 			})
-		}
+		},
 	}
 })

@@ -1,5 +1,6 @@
 const {
-  wxReq, dateDiff
+  wxReq,
+  dateDiff
 } = require("../../utils/util")
 
 // index.js
@@ -41,11 +42,12 @@ Page({
             status: item.status,
             showPrice: item.total_price ? true : false,
             price: item.total_price,
-            display:item.display,
-            pid:item.pid,
-            product_id:item.product_id,
-            code:item.product.product_code,
-            dateDiff:dateDiff(nowDate,item.weave_plan.end_time)
+            display: item.display,
+            pid: item.pid,
+            product_id: item.product_id,
+            code: item.product.product_code,
+            dateDiff: dateDiff(nowDate, item.weave_plan.end_time),
+            processName: item.weave_plan.process_name
           })
         });
         this.setData({

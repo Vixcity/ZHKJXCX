@@ -7,7 +7,7 @@
 			<t-icon catchtap="changeShow" wx:if="{{showChangeIcon}}" class="ml10 color8D9F" name=swap" size="xl" bind:click="someFunction"> </t-icon>
 		</view>
 		<view class="flex h90">
-			<view class="autoLogos pl10 pr10">车标 | 套口</view>
+			<view class="autoLogos pl10 pr10">{{detailInfo.processName}}</view>
 		</view>
 	</view>
 	<view class="fz30 mt20 mb20 flex jcsb">

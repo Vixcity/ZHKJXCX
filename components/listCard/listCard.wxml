@@ -1,5 +1,5 @@
 <!--components/listCard.wxml-->
-<view class="{{isSlot?'fz25 mt20':'bgColorWhite pl10 pr10 pt20 pb20 fz25 mt20 borderRadius16 shadow borderBox vw90 ma'}}">
+<view class="{{isSlot?'fz25 mt20':'bgColorWhite pl10 pr10 pt20 pb20 fz25 mt20 borderRadius16 shadow borderBox vw90 ma'}} {{classStyle}}">
 	<view style="{{isShort?'height:0;overflow:hidden;':'height:100%'}}">
 		<view class="flex jcsb color91">
 			<view wx:for="{{cardInfoData.cardTitle}}" wx:for-item="item" wx:for-index="index" style="width:{{item.width+'%'}};" wx:key="item">

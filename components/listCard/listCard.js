@@ -19,7 +19,8 @@ Component({
 		showShort:{
 			type:Boolean,
 			value:false
-		}
+		},
+		classStyle:String
 	},
 
 	/**

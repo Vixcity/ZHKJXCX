@@ -92,7 +92,32 @@ Page({
 						'员工',
 						item.status === 1 ? '在职' : '离职',
 						item.created_at.slice(0, 10) + '~' + (item.quit_at === "0000-00-00 00:00:00" ? "至今" : item.quit_at.slice(0, 10))
-					])
+					],[
+						item.user.name,
+						'员工',
+						item.status === 1 ? '在职' : '离职',
+						item.created_at.slice(0, 10) + '~' + (item.quit_at === "0000-00-00 00:00:00" ? "至今" : item.quit_at.slice(0, 10))
+					],[
+						item.user.name,
+						'员工',
+						item.status === 1 ? '在职' : '离职',
+						item.created_at.slice(0, 10) + '~' + (item.quit_at === "0000-00-00 00:00:00" ? "至今" : item.quit_at.slice(0, 10))
+					],[
+						item.user.name,
+						'员工',
+						item.status === 1 ? '在职' : '离职',
+						item.created_at.slice(0, 10) + '~' + (item.quit_at === "0000-00-00 00:00:00" ? "至今" : item.quit_at.slice(0, 10))
+					],[
+						item.user.name,
+						'员工',
+						item.status === 1 ? '在职' : '离职',
+						item.created_at.slice(0, 10) + '~' + (item.quit_at === "0000-00-00 00:00:00" ? "至今" : item.quit_at.slice(0, 10))
+					],[
+						item.user.name,
+						'员工',
+						item.status === 1 ? '在职' : '离职',
+						item.created_at.slice(0, 10) + '~' + (item.quit_at === "0000-00-00 00:00:00" ? "至今" : item.quit_at.slice(0, 10))
+					]	)
 				});
 				_this.data.cardInfoData.cardData = arr
 				_this.setData({

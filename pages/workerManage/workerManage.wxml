@@ -1,7 +1,7 @@
 <!--pages/workerManage/workerManage.wxml-->
 <view class="container">
-  <view wx:if="{{isLeader}}" class="bg vw100 vh100">
-    <list-card  bind:clickLine="getName" cardInfoData="{{cardInfoData}}"></list-card>
+  <view wx:if="{{isLeader}}" class="bg vw100 vh100 overfsy">
+    <list-card classStyle="overfsy vh70" bind:clickLine="getName" cardInfoData="{{cardInfoData}}"></list-card>
     <view class="mt30 color91 tc fz30">
       新员工需扫作坊主二维码才能添加到组织
     </view>
