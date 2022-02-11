@@ -434,6 +434,9 @@ page{
 .vh80{
   height: 80vh;
 }
+.vh85{
+  height: 85vh;
+}
 .vh90{
   height: 90vh;
 }

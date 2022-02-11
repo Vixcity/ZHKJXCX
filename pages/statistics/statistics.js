@@ -193,7 +193,7 @@ Page({
 
 				this.setData({
 					cardInfoData: this.data.cardInfoData,
-					allNumber
+					allNumber:allNumber.toFixed(2)
 				})
 			}
 		})

@@ -79,7 +79,7 @@ Page({
 					list.push([
 						[item.created_at.slice(0, 16), item.user.name],
 						[item.weave_plan_product_info.size.size_name + '/' + item.weave_plan_product_info.color.color_name, item.number],
-						[item.price + '元', item.number * item.price + '元']
+						[item.price + '元', (item.number * item.price).toFixed(2) + '元']
 					])
 				});
 				// console.log(list)

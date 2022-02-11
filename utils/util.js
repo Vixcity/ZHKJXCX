@@ -11,7 +11,8 @@ const formatTime = date => {
 
 // 封装请求
 const wxReq = data => {
-  const openid = wx.getStorageSync("userInfo").openid.openid
+  // const openid = wx.getStorageSync("userInfo").openid.openid
+  const openid = "oFr0i5M55SwKUlQ7WwbzaMOIar9Q"
   
   wx.request({
     url: getApp().globalData.api + data.url,
