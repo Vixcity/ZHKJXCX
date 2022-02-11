@@ -11,7 +11,7 @@ Page({
     this.setData(option)
   },
   onShow() {
-    this.getOrderList('')
+    this.getOrderList(wx.getStorageSync('orderChooseIndex'))
   },
 
   // 获取列表
@@ -38,10 +38,10 @@ Page({
             nowNumber: item.real_number ? item.real_number : 0,
             allNumber: item.number,
             customer: item.weave_plan.company.company_name,
-            imgSrc: item.product.rel_image[0]?.image_url || 'https://file.zwyknit.com/defaultOrder.jpg',
+            imgSrc: item.product.rel_image[0]?.image_url || 'https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220211103236.png',
             status: item.status,
             showPrice: item.total_price ? true : false,
-            price: item.total_price,
+            price: item.total_price.toFixed(2),
             display: item.display,
             pid: item.pid,
             product_id: item.product_id,
@@ -68,11 +68,10 @@ Page({
       url: '../orderDetail/orderDetail',
     })
   },
+
   onTabsChange(e) {
-    if (e.detail.value === '0') {
-      this.getOrderList('')
-      return
-    }
-    this.getOrderList(e.detail.value)
+    this.getOrderList(e.detail.value === '0'?"":e.detail.value)
+
+    wx.setStorageSync('orderChooseIndex', e.detail.value === '0'?"":e.detail.value)
   }
 })

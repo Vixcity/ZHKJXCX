@@ -21,7 +21,7 @@
 						<view class="w50">
 							<input type="number" bindinput="getInputNumber" data-index="{{index}}" value="{{item.value}}" placeholder="差额 {{item.number - item.real_number}}" />
 						</view>
-						<view wx:if="{{!notProcess}}" class="w20">{{sizeColorPrice || process_price}}元</view>
+						<view class="w20">{{item.sizeColorPrice || process_price}}元</view>
 					</view>
 				</view>
 			</t-tab-panel>
@@ -36,7 +36,7 @@
 						<view class="w50">
 							<input type="number" bindinput="getEnteryAllNumber" data-index="{{index}}" value="{{enteryAllNumber}}" placeholder="差额 {{allNumber - allRealNumber}}" />
 						</view>
-						<view wx:if="{{!notProcess}}" class="w20">{{process_price_all}}元</view>
+						<view class="w20">{{process_price_all}}元</view>
 					</view>
 				</view>
 			</t-tab-panel>

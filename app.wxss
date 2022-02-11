@@ -704,6 +704,22 @@ t-image {
 
 
 
+/* t-tabs */
+.t-tabs__scroll .t-is-active{
+  color:#008df9!important;
+}
+.t-tabs__track{
+  background-color:#008df9!important;
+}
+
+
+
+
+
+
+
+
+
 /* shadow */
 .shadow{
   box-shadow:0px 5px 20px #00000014;

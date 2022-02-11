@@ -82,12 +82,14 @@ Page({
 						[item.price + '元', item.number * item.price + '元']
 					])
 				});
-				console.log(list)
+				// console.log(list)
 				productionSchedule.cardData = list
 
 				this.setData({
 					cardInfoData,
-					productionSchedule
+					productionSchedule,
+					onePrice:res.data.data.process_prices[0].price,
+					allPrice:res.data.data.process_prices[0].total_price
 				})
 			}
 		})

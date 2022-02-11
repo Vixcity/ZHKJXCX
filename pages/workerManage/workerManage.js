@@ -32,16 +32,13 @@ Page({
 			cardData: [],
 			cardTitle: [{
 				title: '姓名',
-				width: 19
-			}, {
-				title: '角色',
-				width: 15
+				width: 30
 			}, {
 				title: '在岗状态',
 				width: 20
 			}, {
 				title: '在岗时间',
-				width: 46
+				width: 50
 			}]
 		},
 		isOpenAddWorkerWin: false
@@ -88,36 +85,10 @@ Page({
 				let arr = []
 				res.data.data.forEach(item => {
 					arr.push([
-						item.user.name,
-						'员工',
+						item.user.name+(item.user.user_name?('（'+item.user.user_name.slice(8,11)+'）'):''),
 						item.status === 1 ? '在职' : '离职',
 						item.created_at.slice(0, 10) + '~' + (item.quit_at === "0000-00-00 00:00:00" ? "至今" : item.quit_at.slice(0, 10))
-					],[
-						item.user.name,
-						'员工',
-						item.status === 1 ? '在职' : '离职',
-						item.created_at.slice(0, 10) + '~' + (item.quit_at === "0000-00-00 00:00:00" ? "至今" : item.quit_at.slice(0, 10))
-					],[
-						item.user.name,
-						'员工',
-						item.status === 1 ? '在职' : '离职',
-						item.created_at.slice(0, 10) + '~' + (item.quit_at === "0000-00-00 00:00:00" ? "至今" : item.quit_at.slice(0, 10))
-					],[
-						item.user.name,
-						'员工',
-						item.status === 1 ? '在职' : '离职',
-						item.created_at.slice(0, 10) + '~' + (item.quit_at === "0000-00-00 00:00:00" ? "至今" : item.quit_at.slice(0, 10))
-					],[
-						item.user.name,
-						'员工',
-						item.status === 1 ? '在职' : '离职',
-						item.created_at.slice(0, 10) + '~' + (item.quit_at === "0000-00-00 00:00:00" ? "至今" : item.quit_at.slice(0, 10))
-					],[
-						item.user.name,
-						'员工',
-						item.status === 1 ? '在职' : '离职',
-						item.created_at.slice(0, 10) + '~' + (item.quit_at === "0000-00-00 00:00:00" ? "至今" : item.quit_at.slice(0, 10))
-					]	)
+					])
 				});
 				_this.data.cardInfoData.cardData = arr
 				_this.setData({
@@ -201,7 +172,7 @@ Page({
 	},
 
 	getName(e) {
-		if(e.detail.item[2]==='离职') return
+		if(e.detail.item[1]==='离职') return
 		this.setData({
 			show: true,
 			useSlot: false,
@@ -235,6 +206,13 @@ Page({
 						content: '添加成功',
 					});
 					_this.getWokerList()
+					return
+				} else if(res.data.message === '姓名已存在,请更换'){
+					Message.error({
+						offset: [20, 32],
+						duration: 2000,
+						content: '姓名已存在,请更换',
+					});
 					return
 				}
 			}

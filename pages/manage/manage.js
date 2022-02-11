@@ -36,6 +36,9 @@ Component({
     show: function () {
       let _this = this
 
+      // 订单管理初始化
+      wx.setStorageSync('orderChooseIndex', "")
+
       if (typeof this.getTabBar === 'function' &&
         this.getTabBar()) {
         this.getTabBar().setData({
@@ -162,7 +165,7 @@ Component({
     // 获取pageList
     getPageList(type) {
 
-      if (type !== 2) {
+      if (type === 2) {
         return {
           pageList: [{
             title: '数据统计',
@@ -196,7 +199,7 @@ Component({
           index: 3
         }, {
           title: '员工管理',
-          path: '../workerManage/workerManage?isLeader=' + (type === 2),
+          path: '../workerManage/workerManage?isLeader=' + (type === 3),
           icon: 'https://file.zwyknit.com/%E5%91%98%E5%B7%A5%E7%AE%A1%E7%90%86-01.png',
           index: 4
         }]

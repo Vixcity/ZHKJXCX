@@ -8,7 +8,7 @@
         </view>
       </block>
       <block wx:else>
-        <view class="pb20">
+        <view class="pb20 vh85 overfsy">
           <order-card wx:for="{{detailInfoList}}" wx:for-item="item" wx:key="item" detailInfo="{{item}}" data-index="{{index}}" bindtap="toOrderDetail" showPrice="{{item.showPrice}}"></order-card>
           <view class="vw100"></view>
         </view>
@@ -21,7 +21,7 @@
         </view>
       </block>
       <block wx:else>
-        <view class="pb20">
+        <view class="pb20 vh85 overfsy">
           <order-card wx:for="{{detailInfoList}}" wx:for-item="item" wx:key="item" detailInfo="{{item}}" data-index="{{index}}" bindtap="toOrderDetail" showPrice="{{item.showPrice}}"></order-card>
           <view class="vw100"></view>
         </view>
@@ -34,7 +34,7 @@
         </view>
       </block>
       <block wx:else>
-        <view class="pb20">
+        <view class="pb20 vh85 overfsy">
           <order-card wx:for="{{detailInfoList}}" wx:for-item="item" wx:key="item" detailInfo="{{item}}" data-index="{{index}}" bindtap="toOrderDetail" showPrice="{{item.showPrice}}"></order-card>
           <view class="vw100"></view>
         </view>
@@ -47,7 +47,7 @@
         </view>
       </block>
       <block wx:else>
-        <view class="pb20">
+        <view class="pb20 vh85 overfsy">
           <order-card wx:for="{{detailInfoList}}" wx:for-item="item" wx:key="item" detailInfo="{{item}}" data-index="{{index}}" bindtap="toOrderDetail" showPrice="{{item.showPrice}}"></order-card>
           <view class="vw100"></view>
         </view>

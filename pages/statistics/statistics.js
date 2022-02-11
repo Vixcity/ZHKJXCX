@@ -68,31 +68,27 @@ Page({
 		if (wx.getStorageSync('userInfo').userinfo.role === 2) {
 			this.reqData(date.getFullYear(), date.getMonth() + 1, wx.getStorageSync('userInfo').userinfo.uuid)
 		} else {
-			this.reqData(date.getFullYear(), date.getMonth() + 1)
-			this.getPeople()
+			this.reqData(date.getFullYear(), date.getMonth() + 1,"",true)
 		}
 	},
 
-	getPeople() {
+	getPeople(list) {
 		let _this = this
-		wxReq({
-			url: '/user/staff/record/list',
-			method: 'GET',
-			success: (res) => {
-				let arr = [{
-					label: '所有人',
-					value: ''
-				}]
-				res.data.data.forEach(item => {
-					arr.push({
-						label: item.user.name,
-						value: item.uuid
-					})
-				});
-				_this.setData({
-					people: arr
-				})
-			}
+
+		let arr = [{
+			label: '所有人',
+			value: ''
+		}]
+
+		list.forEach(item => {
+			arr.push({
+				label: item.user.name,
+				value: item.uuid
+			})
+		});
+
+		_this.setData({
+			people: arr
 		})
 	},
 
@@ -124,9 +120,9 @@ Page({
 
 		// 选中时获取数据
 		if (this.data.topTabData[1].valueChoose === "") {
-			this.reqData(pickedData.slice(0, 4), pickedData.slice(5, 6))
+			this.reqData(pickedData.slice(0, 4), pickedData.slice(5, 6), "", true)
 		} else {
-			this.reqData(pickedData.slice(0, 4), pickedData.slice(5, 6), this.data.topTabData[1].valueChoose)
+			this.reqData(pickedData.slice(0, 4), pickedData.slice(5, 6), this.data.topTabData[1].valueChoose, true)
 		}
 	},
 	pickDataCancel() {
@@ -165,7 +161,7 @@ Page({
 	},
 
 	// 获取数据
-	reqData(year, month, uuid) {
+	reqData(year, month, uuid, isChangeMouth) {
 		let data = {
 			year,
 			month
@@ -182,14 +178,19 @@ Page({
 				let allNumber = 0
 				res.data.data.list.forEach(item => {
 					arr.push([
-						[item.created_at.slice(5, 16), item.user.name],
+						[item.created_at.slice(5, 16), item.user?.name || ""],
 						[item.weave_plan_product_info.weave_plan.company.company_name, item.weave_plan_product_info.product.name],
 						[item.weave_plan_product_info.size.size_name + '/' + item.weave_plan_product_info.color.color_name, item.number],
-						[item.price + '元', item.number * item.price + '元']
+						[item.price + '元', (item.number * item.price).toFixed(2) + '元']
 					])
 					allNumber += item.number * item.price
 				});
 				this.data.cardInfoData.cardData = arr
+
+				if(isChangeMouth){
+					this.getPeople(res.data.data.staff)
+				}
+
 				this.setData({
 					cardInfoData: this.data.cardInfoData,
 					allNumber

@@ -65,14 +65,12 @@ Page({
 				let discrepancy = allNumber - allRealNumber
 				let cardOrder = this.data.cardOrder
 				cardOrder.nowNumber = cardOrder.allNumber - discrepancy
-				console.log(cardOrder, this.data.allNumber)
 
 				this.setData({
 					cardOrder,
 					allNumber,
 					entryArr: [],
 					allRealNumber,
-					sizeColorPrice: 0,
 					enteryAllNumber: '',
 					product_info: res.data.data.product_info,
 					process_price: res.data.data.process_prices[0]?.price || '0.00',
@@ -100,8 +98,11 @@ Page({
 						value: item.uuid
 					})
 				});
+
 				_this.setData({
-					people: arr
+					people: arr,
+					selectedPeopleLabel:arr[0].label,
+					selectedPeopleValue:arr[0].value,
 				})
 			}
 		})
@@ -140,11 +141,12 @@ Page({
 	getInputNumber(e) {
 		let data = this.data.product_info[e.currentTarget.dataset.index]
 		let value = +e.detail.value > (data.number - data.real_number) ? (data.number - data.real_number) : +e.detail.value
-
+		
+		data.sizeColorPrice = ((value || 1) * this.data.process_price).toFixed(2)
 		data.value = value === 0 ? undefined : value
+
 		this.setData({
-			product_info: this.data.product_info,
-			sizeColorPrice: (value * this.data.process_price).toFixed(2)
+			product_info: this.data.product_info
 		})
 	},
 
@@ -185,7 +187,7 @@ Page({
 
 	// 提交按钮
 	commitEntry() {
-		let uuid = wx.getStorageSync('userInfo').userinfo.uuid
+		let uuid = this.data.selectedPeopleValue
 
 		// 判断是尺码颜色还是自由录入
 		if (this.data.tabValue !== 1) {
@@ -223,14 +225,14 @@ Page({
 						}
 					}
 				})
+			} else {
+				Message.error({
+					offset: [20, 32],
+					duration: 2000,
+					content: '请至少填写一个尺码颜色对应产量',
+				});
+				return
 			}
-
-			Message.error({
-				offset: [20, 32],
-				duration: 2000,
-				content: '请至少填写一个尺码颜色对应产量',
-			});
-			return
 		}
 
 		if (this.data.enteryAllNumber === "") {
@@ -315,7 +317,7 @@ Page({
 				number: minDiff,
 				price: _this.data.process_price,
 				product_info_id: min.id,
-				process_price_id: _this.data.detailOrder.process[0].id
+				process_price_id: (_this.data.detailOrder.process[0]!==undefined)?_this.data.detailOrder.process[0].id:0
 			})
 			_this.data.enteryAllNumber = _this.data.enteryAllNumber - minDiff
 			_this.getPostData()
@@ -325,7 +327,7 @@ Page({
 				number: enteryAllNumber,
 				price: _this.data.process_price,
 				product_info_id: min.id,
-				process_price_id: _this.data.detailOrder.process[0].id
+				process_price_id: (_this.data.detailOrder.process[0]!==undefined)?_this.data.detailOrder.process[0].id:0
 			})
 
 			return _this.data.entryArr
