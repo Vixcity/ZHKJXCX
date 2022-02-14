@@ -45,7 +45,7 @@ Page({
 				title: '尺码颜色/数量',
 				width: 26
 			}, {
-				title: '工序单价/总价',
+				title: '单价/总价',
 				width: 25
 			}],
 			hasBr: true,

@@ -8,15 +8,16 @@
           <image class="t-image" src="https://file.zwyknit.com/%E5%AE%9A%E4%BD%8D-01.png"/>
           <text class="ml10">{{address}}</text>
         </view>
-        <view wx:if="{{bindStatus === 0}}" class="poa bgColorB9 fz35 colorWhite flex aic jcc bindStatus">未绑定</view>
-        <view wx:if="{{bindStatus === 1}}" class="poa bgColorFDA9 fz35 colorWhite flex aic jcc bindStatus">审核中</view>
-        <view wx:if="{{bindStatus === 2}}" class="poa bgColor00D9 fz35 colorWhite flex aic jcc bindStatus">已绑定</view>
+        <view wx:if="{{(bindStatus === 0 || bindStatus === 3)}}" class="poa bgColorB9 fz35 colorWhite flex aic jcc bindStatus">未绑定</view>
+        <view wx:if="{{bindStatus === 1}}" class="poa bgColorFDA9 fz35 colorWhite flex aic jcc bindStatus">绑定中</view>
+        <view wx:if="{{bindStatus === 2}}" class="poa bgColor00D9 fz35 colorWhite flex aic jcc bindStatus">合作中</view>
+        <view wx:if="{{bindStatus === 4}}" class="poa bgColor00D9 fz35 colorWhite flex aic jcc bindStatus">已绑定</view>
       </view>
       <view wx:if="{{!isLogin}}" class="vw100 tc mt40">您还未登录，点击返回首页进行登录</view>
       <view wx:if="{{!isLeader}}" class="vw100 tc mt40">您为员工，无权限进行绑定操作</view>
       <view wx:if="{{companyName}}">
         <view class="flex fdc aic">
-          <view wx:if="{{bindStatus === 0}}" class="tc mt30 fz35 blod">
+          <view wx:if="{{(bindStatus === 0 || bindStatus === 3 || bindStatus === 2)}}" class="tc mt30 fz35 blod">
             <view>您尚未与该工厂绑定合作关系</view>
             <view>可点击下方按钮申请绑定</view>
           </view>
@@ -24,15 +25,15 @@
             <view>您已申请绑定与该工厂的合作</view>
             <view>正在审核中…</view>
           </view>
-          <view wx:if="{{bindStatus === 2}}" class="tc mt30 fz35 blod">
+          <view wx:if="{{bindStatus === 4}}" class="tc mt30 fz35 blod">
             <view>您已成功绑定与该工厂的合作</view>
             <view>无需重复扫码操作</view>
           </view>
           <view class="submit mt40">
-            <view wx:if="{{bindStatus === 0}}" class="fz28 vw80 mb20 flex {{iRead?'color8D9F':'color91'}}">
+            <view wx:if="{{(bindStatus === 0 || bindStatus === 3 || bindStatus === 2)}}" class="fz28 vw80 mb20 flex {{iRead?'color8D9F':'color91'}}">
               <t-icon name="check-circle-filled" size="xl" bind:click="changeRead"> </t-icon><view class="ml10">我已阅读并同意《纺织工厂绑定合作协议》</view>
             </view>
-            <t-button theme="primary" size="large" variant="plain" bindtap="bindOrToManege">{{bindStatus === 0?'申请绑定':'返回首页'}}</t-button>
+            <t-button theme="primary" size="large" variant="plain" bindtap="bindOrToManege">{{(bindStatus === 0 || bindStatus === 3 || bindStatus === 2)?'申请绑定':'返回首页'}}</t-button>
           </view>
         </view>
       </view>

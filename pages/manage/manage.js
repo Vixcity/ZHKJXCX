@@ -164,8 +164,9 @@ Component({
     },
     // 获取pageList
     getPageList(type) {
+      const isLeader = (type === 3)
 
-      if (type === 2) {
+      if (!isLeader) {
         return {
           pageList: [{
             title: '数据统计',
@@ -184,22 +185,22 @@ Component({
       return {
         pageList: [{
           title: '订单管理',
-          path: '../orderControl/orderControl?isLeader=' + (type === 3),
+          path: '../orderControl/orderControl?isLeader=' + isLeader,
           icon: 'https://file.zwyknit.com/%E8%AE%A2%E5%8D%95%E7%AE%A1%E7%90%86-01.png',
           index: 1
         }, {
           title: '数据统计',
-          path: '../statistics/statistics?isLeader=' + (type === 3),
+          path: '../statistics/statistics?isLeader=' + isLeader,
           icon: 'https://file.zwyknit.com/%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1-01.png',
           index: 2
         }, {
           title: '客户管理',
-          path: '../userManagement/userManagement?isLeader=' + (type === 3),
+          path: '../userManagement/userManagement?isLeader=' + isLeader,
           icon: 'https://file.zwyknit.com/%E5%AE%A2%E6%88%B7%E7%AE%A1%E7%90%86-01.png',
           index: 3
         }, {
           title: '员工管理',
-          path: '../workerManage/workerManage?isLeader=' + (type === 3),
+          path: '../workerManage/workerManage?isLeader=' + isLeader,
           icon: 'https://file.zwyknit.com/%E5%91%98%E5%B7%A5%E7%AE%A1%E7%90%86-01.png',
           index: 4
         }]

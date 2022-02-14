@@ -16,8 +16,8 @@
           "name": "扫码",
           "pathName": "pages/addWorkShop/addWorkShop",
           "query": "uuid=71673e807cf311eca0a711844a06be76&time=1643077534002",
-          "scene": 1047,
-          "launchMode": "default"
+          "launchMode": "default",
+          "scene": 1047
         },
         {
           "name": "绑定工厂",
@@ -25,6 +25,13 @@
           "query": "",
           "launchMode": "default",
           "scene": 1011
+        },
+        {
+          "name": "绑定订单",
+          "pathName": "pages/bindOrder/bindOrder",
+          "query": "",
+          "scene": null,
+          "launchMode": "default"
         }
       ]
     }

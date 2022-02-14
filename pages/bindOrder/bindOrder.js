@@ -23,9 +23,10 @@ Page({
       params.index=1
       this.init(params)      
     }
+
     // let params = {
     //   company_id: 'xx1',
-    //   hash: 10086,
+    //   hash: 7777,
     //   index:1
     // }
     
@@ -98,20 +99,22 @@ Page({
     let day = date.getDate()
     let nowDate = year + '-' + (month < 10 ? "0" + month : month) + '-' + (day < 10 ? '0' + day : day)
     data.forEach(item => {
-      arr.push({
-        title: item.product.name,
-        time: item.weave_plan.end_time,
-        nowNumber: item.real_number,
-        allNumber: item.number,
-        imgSrc: item.product.rel_image[0].image_url,
-        customer: item.weave_plan.company.company_name,
-        isBind: false,
-        display: item.display,
-        dataDiff: dateDiff(nowDate,item.weave_plan.end_time),
-        code: item.product.product_code,
-        pid: item.pid,
-        product_id: item.product_id
-      })
+      if(item.real_number < item.number){
+        arr.push({
+          title: item.product.name,
+          time: item.weave_plan.end_time,
+          nowNumber: item.real_number,
+          allNumber: item.number,
+          imgSrc: item.product.rel_image[0]?.image_url || 'https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220211103236.png',
+          customer: item.weave_plan.company?.company_name,
+          isBind: false,
+          display: item.display,
+          dataDiff: dateDiff(nowDate,item.weave_plan.end_time),
+          code: item.product.product_code,
+          pid: item.pid,
+          product_id: item.product_id
+        })
+      }
     });
 
     return arr

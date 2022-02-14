@@ -53,14 +53,15 @@ Page({
 				res.data.data.forEach(item => {
 					let status
 					if (item.status === 1) {
-						status = '绑定中'
+						status = '待绑定'
 					} else if (item.status === 2) {
 						status = '合作中'
 					} else if (item.status === 3) {
 						status = '已终止'
 					}
+					
 					arr.push([
-						item.company.company_name,
+						item.company?.company_name,
 						status,
 						item.created_at.slice(0, 10) + '~' + (item.quit_at === '0000-00-00 00:00:00' ? '至今' : item.quit_at.slice(0, 10))
 					])

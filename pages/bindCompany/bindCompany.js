@@ -43,9 +43,10 @@ Page({
 
       this.init(params)      
     }
-    // console.log(1)
+    
     // let params = {
-    //   company_id:'xx1'
+    //   // company_id:'xx1'
+    //   company_id:'0db46f8e744211eca9a54d3cafd8c04d'
     // }
     // this.init(params)
   },
@@ -83,7 +84,7 @@ Page({
   },
     
   bindOrToManege(){
-    if(this.data.bindStatus === 0 && this.data.companyName !== undefined){
+    if((this.data.bindStatus === 0 || this.data.bindStatus === 3 || this.data.bindStatus === 2) && this.data.companyName !== undefined){
       if(!this.data.iRead){
         Message.error({
           offset: [20, 32],
