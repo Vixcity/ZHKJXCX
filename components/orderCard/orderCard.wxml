@@ -1,9 +1,10 @@
 <!--components/orderCard.wxml-->
-<view class="ml20 mr20 mt20 bgColorWhite vw90 jcsb flexWarp borderRadius16 shadow borderBox pl10 pr10 pt10 pb10 colorBlack por overfh">
+<!-- wx:if="{{detailInfo.bigThan30}}" -->
+<view bindtap="changeCheck" class="ml20 mr20 mt20 bgColorWhite vw90 jcsb flexWarp borderRadius16 shadow borderBox pl10 pr10 pt10 pb10 colorBlack por overfh">
 	<view class="flex jcsb aic">
-		<view class="fz40 flex blod aic" bind:click="someFunction" catchtap="changeShow">
-			<text wx:if="{{detailInfo.display === 0}}">{{detailInfo.title}}</text>
-			<text wx:if="{{detailInfo.display === 1}}">{{detailInfo.code}}</text>
+		<view class="fz35 flex blod aic" bind:click="someFunction" catchtap="changeShow">
+			<view class="overfh vw53" style="text-overflow:ellipsis;white-space: nowrap;" wx:if="{{detailInfo.display === 0}}">{{detailInfo.title || "没有名称"}}</view>
+			<view class="overfh vw53" style="text-overflow:ellipsis;white-space: nowrap;" wx:if="{{detailInfo.display === 1}}">{{detailInfo.code || "没有编号"}}</view>
 			<t-icon wx:if="{{showChangeIcon}}" class="ml10 color8D9F" name=swap" size="xl"> </t-icon>
 		</view>
 		<view class="flex h90">
@@ -23,13 +24,13 @@
 		<view class="por ml10 fz30 flex jcsa fdc w100" style="height: 144rpx;">
 			<view class="flex w100">
 				<view class="w70">生产进度：{{detailInfo.nowNumber}} / {{detailInfo.allNumber}}</view>
-				<view class="w30 tc" wx:if="{{showEnterPrice && isLeader && (enterPricce !== '0.00')}}">已定价</view>
+				<view class="w30 tc" wx:if="{{showEnterPrice && isLeader && (enterPricce !== '0.00')}}">{{enterPricce}} 元</view>
 				<view class="w30 tc colorRed" wx:if="{{showEnterPrice && isLeader && (enterPricce === '0.00')}}" bindtap="toOrderDetail">点击定价</view>
 			</view>
 			<view>交付时间：{{detailInfo.time}}</view>
 			<view wx:if="{{showPrice}}" class="poa fz30 color27A2" style="right:0;bottom:24%">￥{{detailInfo.price}}</view>
 		</view>
-		<t-icon name="check-circle-filled" size="xl" bind:click="changeCheck" class="{{detailInfo.isBind?'check':'color9E'}} poa" style="right: 20rpx;bottom: 20rpx;" wx:if="{{showIcon}}"></t-icon>
+		<t-icon name="check-circle-filled" size="xl" class="{{detailInfo.isBind?'check':'color9E'}} poa" style="right: 20rpx;bottom: 20rpx;" wx:if="{{showIcon}}"></t-icon>
 		<view wx:if="{{detailInfo.status === 1}}" class="poa bgColor8D9F colorWhite borderRadius16 pl10 pb8 pr15 pt5 cornerStyle">待定价</view>
 		<view wx:if="{{detailInfo.status === 2}}" class="poa bgColor8D9F colorWhite borderRadius16 pl10 pb8 pr15 pt5 cornerStyle">生产中</view>
 		<view wx:if="{{detailInfo.status === 3}}" class="poa bgColor8D9F colorWhite borderRadius16 pl10 pb8 pr15 pt5 cornerStyle">已完成</view>

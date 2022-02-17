@@ -39,11 +39,7 @@ Page({
 
 	getDetailInfo() {
 		let _this = this
-		if (_this.data.detailOrder.process[0] === undefined) {
-			this.setData({
-				notProcess: true
-			})
-		}
+		
 		wxReq({
 			url: '/workshop/weave/product/detail',
 			data: {
@@ -64,6 +60,12 @@ Page({
 				// 更新卡片的数据
 				let discrepancy = allNumber - allRealNumber
 				let cardOrder = this.data.cardOrder
+				if(cardOrder === undefined){
+					wx.reLaunch({
+						url: '../manage/manage',
+					})
+				} 
+
 				cardOrder.nowNumber = cardOrder.allNumber - discrepancy
 
 				this.setData({
@@ -140,10 +142,13 @@ Page({
 	// 拿到输入的数字
 	getInputNumber(e) {
 		let data = this.data.product_info[e.currentTarget.dataset.index]
-		let value = +e.detail.value > (data.number - data.real_number) ? (data.number - data.real_number) : +e.detail.value
-		
-		data.sizeColorPrice = ((value || 1) * this.data.process_price).toFixed(2)
-		data.value = value === 0 ? undefined : value
+		if(e.detail.value === '-'){
+			e.detail.value = 0
+		}
+
+		// 超额10%
+		let value = +e.detail.value >= (data.number*1.1 - data.real_number) ? (data.number*1.1 - data.real_number) : +e.detail.value
+		data.value = value === 0 ? undefined : value.toFixed(0)
 
 		this.setData({
 			product_info: this.data.product_info
@@ -152,15 +157,14 @@ Page({
 
 	// 拿到总的差额数
 	getEnteryAllNumber(e) {
-		let value = +e.detail.value > (this.data.allNumber - this.data.allRealNumber) ? (this.data.allNumber - this.data.allRealNumber) : +e.detail.value
+		let value = +e.detail.value > (this.data.allNumber*1.1 - this.data.allRealNumber) ? (this.data.allNumber*1.1 - this.data.allRealNumber) : +e.detail.value
 
-		if (value === 0) {
-			value = ""
+		if (value === '-') {
+			value = 0
 		}
 
 		this.setData({
-			process_price_all: ((value || 1) * this.data.process_price).toFixed(2),
-			enteryAllNumber: value
+			enteryAllNumber: value.toFixed(0)
 		})
 	},
 
@@ -285,27 +289,35 @@ Page({
 	// 得到最小的差值
 	getMinDiff() {
 		let min
-
-		this.data.product_info.forEach(item => {
-			let difference = item.number - item.real_number
-
+		
+		this.data.product_info.forEach((item,index) => {
+			let difference = item.number*1.1 - item.real_number
+			
 			if (item.isMin) return
 
-			if (!min) {
+			if (index === 0) {
 				min = item
-				return
 			}
 
 			if (difference !== 0) {
-				min.number - min.real_number > difference ? min = item : min = min
+				min.number*1.1 - min.real_number > difference ? min = item : min = min
 			}
 		});
-		min.isMin = true
+
+		if(min){
+			min.isMin = true
+		}
+
+		console.log(min)
 		return min
 	},
 
 	getPostData(getUuid) {
 		let min = this.getMinDiff()
+		if(!min){
+			// min = this.data.product_info[this.data.product_info.length-1]
+			return
+		}
 		let minDiff = min.number - min.real_number
 		let enteryAllNumber = this.data.enteryAllNumber
 		let uuid = getUuid ? getUuid : wx.getStorageSync('userInfo').userinfo.uuid

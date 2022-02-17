@@ -1,7 +1,7 @@
 <!--pages/statistics/statistics.wxml-->
 <view class="container">
   <view wx:if="{{isLeader}}" class="pof flex vw100 top0 bgColorWhite">
-    <view wx:for="{{topTabData}}" wx:for-item="item" wx:key="item" data-whichType="{{item.whichType}}" bindtap="chooseWhichOne" class="flex jcc item aic">
+    <view wx:for="{{topTabData}}" wx:for-item="item" wx:key="item" data-whichType="{{item.whichType}}" bindtap="chooseWhichOne" class="flex item jcc aic">
       <view>{{item.value}}</view>
       <t-icon name="caret-down-small" size="xl"></t-icon>
     </view>

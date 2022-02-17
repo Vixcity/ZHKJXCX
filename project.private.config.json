@@ -30,6 +30,13 @@
           "name": "绑定订单",
           "pathName": "pages/bindOrder/bindOrder",
           "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "注册页面",
+          "pathName": "pages/signUp/signUp",
+          "query": "",
           "scene": null,
           "launchMode": "default"
         }

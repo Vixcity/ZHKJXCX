@@ -1,6 +1,8 @@
 const {
   wxReq,
-  dateDiff
+  dateDiff,
+  getTimeDiff,
+  getTimestamp
 } = require("../../utils/util")
 
 // index.js
@@ -30,7 +32,11 @@ Page({
         let year = date.getFullYear()
         let month = date.getMonth() + 1
         let day = date.getDate()
+        let hour = date.getHours()
+        let minute = date.getMinutes()
+        let second = date.getSeconds()
         let nowDate = year + '-' + (month < 10 ? "0" + month : month) + '-' + (day < 10 ? '0' + day : day)
+        let nowTime = nowDate + ' ' + hour + ":" + minute + ":" + second
         data.forEach(item => {
           datas.push({
             title: item.product.name,
@@ -45,9 +51,10 @@ Page({
             display: item.display,
             pid: item.pid,
             product_id: item.product_id,
-            code: item.product.product_code,
+            code: item.product.product_code || item.product.code_fix,
             dateDiff: dateDiff(nowDate, item.weave_plan.end_time),
-            processName: item.weave_plan.process_name
+            processName: item.weave_plan.process_name,
+            bigThan30:getTimeDiff(getTimestamp(nowTime), getTimestamp(item.weave_plan.created_at),'minutes')>=30,
           })
         });
         this.setData({

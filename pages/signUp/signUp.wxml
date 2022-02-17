@@ -15,7 +15,7 @@
 			</view>
 			<view class="flex jcsb aic mt10 por">
 				<text>手机号：</text>
-				<input placeholder="点击获取手机号" value="{{userInfo.wechat_data.phoneNumber}}"  maxlength="11" />
+				<input placeholder="点击获取手机号" value="{{userInfo.wechat_data.phoneNumber}}"  maxlength="11" disabled/>
 				<button class="getPhoneNumber poa" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">点击获取</button>
 			</view>
 			<view class="flex jcsb aic mt10">

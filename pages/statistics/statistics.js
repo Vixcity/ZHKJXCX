@@ -68,7 +68,7 @@ Page({
 		if (wx.getStorageSync('userInfo').userinfo.role === 2) {
 			this.reqData(date.getFullYear(), date.getMonth() + 1, wx.getStorageSync('userInfo').userinfo.uuid)
 		} else {
-			this.reqData(date.getFullYear(), date.getMonth() + 1,"",true)
+			this.reqData(date.getFullYear(), date.getMonth() + 1, "", true)
 		}
 	},
 
@@ -179,21 +179,21 @@ Page({
 				res.data.data.list.forEach(item => {
 					arr.push([
 						[item.created_at.slice(5, 16), item.user?.name || ""],
-						[item.weave_plan_product_info.weave_plan.company.company_name, item.weave_plan_product_info.product.name],
-						[item.weave_plan_product_info.size.size_name + '/' + item.weave_plan_product_info.color.color_name, item.number],
+						[(item.weave_plan_product_info?.weave_plan.company.company_name || "无数据"), (item.weave_plan_product_info?.product.name || "无数据")],
+						[(item.weave_plan_product_info?.size.size_name || "无数据") + '/' + (item.weave_plan_product_info?.color.color_name || "无数据"), item.number],
 						[item.price + '元', (item.number * item.price).toFixed(2) + '元']
 					])
 					allNumber += item.number * item.price
 				});
 				this.data.cardInfoData.cardData = arr
 
-				if(isChangeMouth){
+				if (isChangeMouth) {
 					this.getPeople(res.data.data.staff)
 				}
 
 				this.setData({
 					cardInfoData: this.data.cardInfoData,
-					allNumber:allNumber.toFixed(2)
+					allNumber: allNumber.toFixed(2)
 				})
 			}
 		})

@@ -88,8 +88,8 @@ Page({
 				this.setData({
 					cardInfoData,
 					productionSchedule,
-					onePrice:res.data.data.process_prices[0].price,
-					allPrice:res.data.data.process_prices[0].total_price
+					onePrice:res.data.data.process_prices[0]?.price,
+					allPrice:res.data.data.process_prices[0]?.total_price
 				})
 			}
 		})

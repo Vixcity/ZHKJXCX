@@ -127,6 +127,7 @@ Component({
         data: {
           user_name:userInfo.phoneNumber,
           name:userInfo.realName,
+          unionid:userInfo.openid.unionid,
           process:userInfo.process,
           wechat_data:userInfo.wechat_data,
           openid:userInfo.openid.openid

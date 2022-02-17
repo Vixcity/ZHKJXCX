@@ -39,9 +39,9 @@ Component({
 	data: {
 		isShow: 'title',
 		// 作坊主
-		// isLeader: wx.getStorageSync('userInfo').userinfo.role === 3
+		isLeader: wx.getStorageSync('userInfo').userinfo?.role === 3
 		// 员工账号测试
-		isLeader: wx.getStorageSync('userInfo').userinfo?.role === 2
+		// isLeader: wx.getStorageSync('userInfo').userinfo?.role === 2
 	},
 
 	/**
@@ -50,8 +50,9 @@ Component({
 	methods: {
 		// 点击勾号
 		changeCheck(event) {
-			// console.log(event)
-			this.triggerEvent("changeCheck", event.currentTarget.dataset)
+			if(this.data.showIcon){	
+				this.triggerEvent("changeCheck", {})
+			}
 			// this.setData({
 			// 	isCheck: !this.data.isCheck
 			// })

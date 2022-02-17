@@ -50,25 +50,28 @@ Page({
 			},
 			success: (res) => {
 				let arr = []
-				res.data.data.forEach(item => {
-					let status
-					if (item.status === 1) {
+				switch (status) {
+					case 1:
 						status = '待绑定'
-					} else if (item.status === 2) {
+						break;
+					case 2:
 						status = '合作中'
-					} else if (item.status === 3) {
+						break;
+					case 3:
 						status = '已终止'
-					}
-					
+						break;
+				}
+
+				res.data.data.forEach(item => {
 					arr.push([
 						item.company?.company_name,
 						status,
-						item.created_at.slice(0, 10) + '~' + (item.quit_at === '0000-00-00 00:00:00' ? '至今' : item.quit_at.slice(0, 10))
+						item.create_at.slice(0, 10) + '~' + (status !== '已终止' ? '至今' : item.updated_at.slice(0, 10))
 					])
 				});
 				_this.data.cardInfoData.cardData = arr
 				_this.setData({
-					cardInfoData:_this.data.cardInfoData
+					cardInfoData: _this.data.cardInfoData
 				})
 			}
 		})

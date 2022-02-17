@@ -19,9 +19,9 @@
 					<view class="flex fz30">
 						<view class="w30">产量</view>
 						<view class="w50">
-							<input type="number" bindinput="getInputNumber" data-index="{{index}}" value="{{item.value}}" placeholder="差额 {{item.number - item.real_number}}" />
+							<input wx:if="{{(item.number - item.real_number)<=0}}" type="number" bindinput="getInputNumber" data-index="{{index}}" value="{{item.value}}" placeholder="超额 {{-(item.number - item.real_number)}}"/>
+							<input wx:if="{{(item.number - item.real_number) > 0}}" type="number" bindinput="getInputNumber" data-index="{{index}}" value="{{item.value}}" placeholder="差额 {{(item.number - item.real_number)<0?0:(item.number - item.real_number)}}" />
 						</view>
-						<view class="w20">{{item.sizeColorPrice || process_price}}元</view>
 					</view>
 				</view>
 			</t-tab-panel>
@@ -34,9 +34,9 @@
 					<view class="flex fz30">
 						<view class="w30">产量</view>
 						<view class="w50">
-							<input type="number" bindinput="getEnteryAllNumber" data-index="{{index}}" value="{{enteryAllNumber}}" placeholder="差额 {{allNumber - allRealNumber}}" />
+							<input wx:if="{{(allNumber - allRealNumber)<= 0}}" type="number" bindinput="getEnteryAllNumber" data-index="{{index}}" value="{{enteryAllNumber}}" placeholder="超额 {{-(allNumber - allRealNumber)}}"/>
+							<input wx:if="{{(allNumber - allRealNumber) > 0}}" type="number" bindinput="getEnteryAllNumber" data-index="{{index}}" value="{{enteryAllNumber}}" placeholder="差额 {{allNumber - allRealNumber}}" />
 						</view>
-						<view class="w20">{{process_price_all}}元</view>
 					</view>
 				</view>
 			</t-tab-panel>

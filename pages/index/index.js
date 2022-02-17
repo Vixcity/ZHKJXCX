@@ -1,6 +1,8 @@
 import {
+  wxReq,
   dateDiff,
-  wxReq
+  getTimeDiff,
+  getTimestamp
 } from '../../utils/util';
 import Message from 'tdesign-miniprogram/message/index';
 // index.js
@@ -72,7 +74,7 @@ Page({
         page: page, // 默认从第二页加载
         limit: page_size, // 每页加载十条 上面设置
         type: 1, // 未完成列表
-        no_binding: 1 // 显示未绑定订单
+        // no_binding: 1 // 显示未绑定订单
       },
       success: function (res) {
         // console.log(res.data.data.data)
@@ -80,11 +82,19 @@ Page({
 
           //   var datas = res.data.result.comments; // 下面有得到的数据可以参考
           if (res.data.data.data.length === 0) { //如果res.data.data.data.length === 0 表示没有可加载的数据了
-            that.setData({
-              isShowLoadmore: false, //隐藏正在加载
-              isShowNoDatasTips: true, //显示暂无数据
-              endloading: true, //上拉不在加载
-            })
+            if (that.data.page === 1) {
+              that.setData({
+                isShowLoadmore: false, //隐藏正在加载
+                isShowNoDatasTips: false, //显示暂无数据
+                endloading: false, //上拉不在加载
+              })
+            } else {
+              that.setData({
+                isShowLoadmore: false, //隐藏正在加载
+                isShowNoDatasTips: true, //显示暂无数据
+                endloading: true, //上拉不在加载
+              })
+            }
           } else {
             let data = res.data.data.data
             let datas = []
@@ -92,7 +102,11 @@ Page({
             let year = date.getFullYear()
             let month = date.getMonth() + 1
             let day = date.getDate()
+            let hour = date.getHours()
+            let minute = date.getMinutes()
+            let second = date.getSeconds()
             let nowDate = year + '-' + (month < 10 ? "0" + month : month) + '-' + (day < 10 ? '0' + day : day)
+            let nowTime = nowDate + ' ' + hour + ":" + minute + ":" + second
             data.forEach(item => {
               datas.push({
                 title: item.product.name,
@@ -104,9 +118,10 @@ Page({
                 display: item.display,
                 pid: item.pid,
                 product_id: item.product_id,
-                code: item.product.product_code,
+                code: item.product.product_code || item.product.code_fix,
                 dateDiff: dateDiff(nowDate, item.weave_plan.end_time),
-                processName: item.weave_plan.process_name
+                processName: item.weave_plan.process_name,
+                bigThan30: getTimeDiff(getTimestamp(nowTime), getTimestamp(item.weave_plan.created_at), 'minutes') >= 30,
               })
             });
             that.setData({

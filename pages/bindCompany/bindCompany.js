@@ -29,6 +29,7 @@ Page({
 
       return
     }
+    
     // 扫描普通链接进入小程序，并获取参数
     // 链接为：https://knit-m-beta.zwyknit.com/miniprogram?company_id=xx1
     // 参数为：company_id
@@ -44,10 +45,13 @@ Page({
       this.init(params)      
     }
     
+    // let company_id = '0db46f8e744211eca9a54d3cafd8c04d'
     // let params = {
-    //   // company_id:'xx1'
-    //   company_id:'0db46f8e744211eca9a54d3cafd8c04d'
+    //   company_id
     // }
+    // this.setData({
+    //   company_id
+    // })
     // this.init(params)
   },
 

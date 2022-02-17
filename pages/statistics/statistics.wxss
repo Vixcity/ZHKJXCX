@@ -1,6 +1,5 @@
 /* pages/statistics/statistics.wxss */
 .item {
-	border: 1px solid #F3F3F3;
 	width: 50%;
 	padding: 2% 0;
 }

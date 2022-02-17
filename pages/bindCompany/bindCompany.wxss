@@ -9,6 +9,7 @@
   background-position: 55%;
   height: 20%;
 }
+
 .iconInDown .t-icon{
   width: auto;
 }

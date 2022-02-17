@@ -11,8 +11,8 @@ const formatTime = date => {
 
 // 封装请求
 const wxReq = data => {
-  const openid = wx.getStorageSync("userInfo").openid.openid
-  // const openid = "oFr0i5M55SwKUlQ7WwbzaMOIar9Q"
+  // const openid = wx.getStorageSync("userInfo").openid.openid
+  const openid = "oFr0i5M55SwKUlQ7WwbzaMOIar9Q"
   
   wx.request({
     url: getApp().globalData.api + data.url,
@@ -40,7 +40,18 @@ const formatNumber = n => {
   return n[1] ? n : `0${n}`
 }
 
-// 获取时间差
+const getTimestamp = n => {
+  // 时间格式 2015-03-05 17:59:00
+  var date = n;
+  date = date.substring(0,19);    
+  date = date.replace(/-/g,'/'); 
+  var timestamp = new Date(date).getTime();
+  // console.log(timestamp);
+  return timestamp
+}
+
+
+// 获取时间差，时间戳传入
 const getTimeDiff = (time1,time2,type='hours') => {
   let timeDiff = time1>time2?time1-time2:time2-time1
   let hours = Math.floor(timeDiff / (3600 * 1000));
@@ -122,6 +133,7 @@ module.exports = {
   verifyTel,
   getTimeDiff,
   createDateDate,
+  getTimestamp,
   dateDiff,
   urlParams
 }
