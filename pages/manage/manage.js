@@ -165,8 +165,9 @@ Component({
     // 获取pageList
     getPageList(type) {
       const isLeader = (type === 3)
+      const isNormal = (type === 1)
 
-      if (!isLeader) {
+      if (!isLeader && !isNormal) {
         return {
           pageList: [{
             title: '数据统计',

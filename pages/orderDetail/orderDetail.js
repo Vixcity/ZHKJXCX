@@ -71,14 +71,14 @@ Page({
 				let cardInfoData = this.data.cardInfoData
 				let productionSchedule = this.data.productionSchedule
 				product_info.forEach(item => {
-					arr.push([item.size.size_name + ' / ' + item.color.color_name, res.data.data.weave_plan.process_name, item.price + '元/件', item.number, item.real_number + ' / ' + (item.number - item.real_number)])
+					arr.push([(item.size.size_name || '无数据') + ' / ' + (item.color.color_name || '无数据'), res.data.data.weave_plan.process_name, item.price + '元/件', item.number, item.real_number + ' / ' + (item.number - item.real_number)])
 				});
 				cardInfoData.cardData = arr
 
 				user_workshop_yields.forEach(item => {
 					list.push([
 						[item.created_at.slice(0, 16), item.user.name],
-						[item.weave_plan_product_info.size.size_name + '/' + item.weave_plan_product_info.color.color_name, item.number],
+						[(item.weave_plan_product_info.size.size_name || '无数据') + '/' + (item.weave_plan_product_info.color.color_name || '无数据'), item.number],
 						[item.price + '元', (item.number * item.price).toFixed(2) + '元']
 					])
 				});
@@ -88,8 +88,8 @@ Page({
 				this.setData({
 					cardInfoData,
 					productionSchedule,
-					onePrice:res.data.data.process_prices[0]?.price,
-					allPrice:res.data.data.process_prices[0]?.total_price
+					onePrice: res.data.data.process_prices[0]?.price,
+					allPrice: res.data.data.process_prices[0]?.total_price
 				})
 			}
 		})

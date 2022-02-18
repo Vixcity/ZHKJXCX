@@ -16,6 +16,10 @@ Component({
 			type: Boolean,
 			value: false
 		},
+		smallThan24h: {
+			type: Boolean,
+			value: true
+		},
 		showPrice: {
 			type: Boolean,
 			value: false
@@ -63,36 +67,40 @@ Component({
 		changeShow(e) {
 			// 0 为title
 			// 1 为code
-			if (this.data.detailInfo.display === 0) {
-				this.data.detailInfo.display = 1
-			} else {
-				this.data.detailInfo.display = 0
-			}
 
-			this.setData({
-				detailInfo: this.data.detailInfo
-			})
-
-			let {
-				pid,
-				display,
-				product_id
-			} = this.data.detailInfo
-
-			wxReq({
-				url: '/workshop/order/display',
-				method: "POST",
-				data: {
+			// 仅作坊主可操作
+			if(this.data.showChangeIcon){
+				if (this.data.detailInfo.display === 0) {
+					this.data.detailInfo.display = 1
+				} else {
+					this.data.detailInfo.display = 0
+				}
+	
+				this.setData({
+					detailInfo: this.data.detailInfo
+				})
+	
+				let {
 					pid,
 					display,
 					product_id
-				},
-				success: (res) => {
-
-				}
-			})
-
-			this.triggerEvent("changeShow", display)
+				} = this.data.detailInfo
+	
+				wxReq({
+					url: '/workshop/order/display',
+					method: "POST",
+					data: {
+						pid,
+						display,
+						product_id
+					},
+					success: (res) => {
+	
+					}
+				})
+	
+				this.triggerEvent("changeShow", display)
+			}
 		},
 
 		// 产量录入 => 产品定价

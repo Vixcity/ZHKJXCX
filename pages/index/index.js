@@ -17,6 +17,7 @@ Page({
     page_size: 10,
     orderList: [],
     detailOrderList: [],
+    isLeader: false
   },
 
   onShow() {
@@ -27,6 +28,7 @@ Page({
       })
       return
     }
+
     if (typeof this.getTabBar === 'function' &&
       this.getTabBar()) {
       this.getTabBar().setData({
@@ -35,7 +37,8 @@ Page({
     }
     this.setData({
       page: 1,
-      orderList: []
+      orderList: [],
+      isLeader: wx.getStorageSync('userInfo')?.userinfo?.role === 3
     })
     this.reviewpage()
   },
@@ -73,29 +76,30 @@ Page({
       data: {
         page: page, // 默认从第二页加载
         limit: page_size, // 每页加载十条 上面设置
-        type: 1, // 未完成列表
+        // type: 1, // 未完成列表
         // no_binding: 1 // 显示未绑定订单
       },
       success: function (res) {
         // console.log(res.data.data.data)
-        if (res.data.code == 200) { //判断当code == 200 的时候得到数据
+        if (res.data.code == 200) { // 判断当code == 200 的时候得到数据
 
           //   var datas = res.data.result.comments; // 下面有得到的数据可以参考
-          if (res.data.data.data.length === 0) { //如果res.data.data.data.length === 0 表示没有可加载的数据了
+          if (res.data.data.data.length === 0) { // 如果res.data.data.data.length === 0 表示没有可加载的数据了
             if (that.data.page === 1) {
               that.setData({
-                isShowLoadmore: false, //隐藏正在加载
-                isShowNoDatasTips: false, //显示暂无数据
-                endloading: false, //上拉不在加载
+                isShowLoadmore: false, // 隐藏正在加载
+                isShowNoDatasTips: false, // 显示暂无数据
+                endloading: false, // 上拉不在加载
               })
             } else {
               that.setData({
-                isShowLoadmore: false, //隐藏正在加载
-                isShowNoDatasTips: true, //显示暂无数据
-                endloading: true, //上拉不在加载
+                isShowLoadmore: false, // 隐藏正在加载
+                isShowNoDatasTips: true, // 显示暂无数据
+                endloading: true, // 上拉不在加载
               })
             }
           } else {
+            let smallThan24h
             let data = res.data.data.data
             let datas = []
             let date = new Date()
@@ -107,7 +111,14 @@ Page({
             let second = date.getSeconds()
             let nowDate = year + '-' + (month < 10 ? "0" + month : month) + '-' + (day < 10 ? '0' + day : day)
             let nowTime = nowDate + ' ' + hour + ":" + minute + ":" + second
+
             data.forEach(item => {
+              if (item.workshop_yield_at === "0000-00-00 00:00:00" || item.workshop_yield_at === null) {
+                smallThan24h = true
+              } else {
+                smallThan24h = getTimeDiff(getTimestamp(nowTime), getTimestamp(item.workshop_yield_at), 'hours') <= 24
+              }
+
               datas.push({
                 title: item.product.name,
                 time: item.weave_plan.end_time,
@@ -122,22 +133,28 @@ Page({
                 dateDiff: dateDiff(nowDate, item.weave_plan.end_time),
                 processName: item.weave_plan.process_name,
                 bigThan30: getTimeDiff(getTimestamp(nowTime), getTimestamp(item.weave_plan.created_at), 'minutes') >= 30,
+                smallThan24h
               })
             });
+
             that.setData({
-              orderList: that.data.orderList.concat(datas), //将得到的订单添加到orderList中更新
-              detailOrderList: data
+              orderList: that.data.orderList.concat(datas), // 将得到的订单添加到orderList中更新
+              detailOrderList: that.data.detailOrderList.concat(data) // 将得到的订单添加到详情进行更新
             })
-            if (data.length < that.data.page_size) { //如果剩下评论数 小于10表示数据加载完了
+
+            // 判断是否满足条件
+
+
+            if (data.length < that.data.page_size) { // 如果剩下评论数 小于10表示数据加载完了
               // console.log('已经加载完了')
               that.setData({
-                isShowLoadmore: false, //隐藏正在加载
-                isShowNoDatasTips: false, //显示暂无数据
+                isShowLoadmore: false, // 隐藏正在加载
+                isShowNoDatasTips: false, // 显示暂无数据
               })
             }
           }
           that.setData({
-            page: page + 1 //更新page 请求下一页数据
+            page: page + 1 // 更新page 请求下一页数据
           })
         } else {
           Message.error({
@@ -158,6 +175,7 @@ Page({
     let i = e.currentTarget.dataset.index
     let detailOrder = this.data.detailOrderList[i]
     let cardOrder = this.data.orderList[i]
+
     wx.setStorageSync('outPutEntry', {
       detailOrder,
       cardOrder

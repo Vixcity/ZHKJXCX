@@ -34,12 +34,18 @@ Page({
 			})
 		}
 		this.getDetailInfo()
-		this.getPeopleName()
+		if (wx.getStorageSync('userInfo').userinfo.role === 3) {
+			this.getPeopleName()
+		} else {
+			this.setData({
+				selectedPeopleValue: wx.getStorageSync('userInfo').userinfo.uuid
+			})
+		}
 	},
 
 	getDetailInfo() {
 		let _this = this
-		
+
 		wxReq({
 			url: '/workshop/weave/product/detail',
 			data: {
@@ -60,13 +66,21 @@ Page({
 				// 更新卡片的数据
 				let discrepancy = allNumber - allRealNumber
 				let cardOrder = this.data.cardOrder
-				if(cardOrder === undefined){
-					wx.reLaunch({
-						url: '../manage/manage',
-					})
-				} 
+				if (cardOrder === undefined) {
+					Message.success({
+						offset: [20, 32],
+						duration: 2000,
+						content: '订单已完成,即将返回首页',
+					});
+					setTimeout(function () {
+						wx.reLaunch({
+							url: '../manage/manage',
+						})
+					}, 2000)
+					return
+				}
 
-				cardOrder.nowNumber = cardOrder.allNumber - discrepancy
+				cardOrder.nowNumber = cardOrder?.allNumber - discrepancy
 
 				this.setData({
 					cardOrder,
@@ -74,6 +88,7 @@ Page({
 					entryArr: [],
 					allRealNumber,
 					enteryAllNumber: '',
+					workshop_yield_at: res.data.workshop_yield_at,
 					product_info: res.data.data.product_info,
 					process_price: res.data.data.process_prices[0]?.price || '0.00',
 					process_price_all: res.data.data.process_prices[0]?.price || '0.00',
@@ -103,8 +118,8 @@ Page({
 
 				_this.setData({
 					people: arr,
-					selectedPeopleLabel:arr[0].label,
-					selectedPeopleValue:arr[0].value,
+					selectedPeopleLabel: arr[0].label,
+					selectedPeopleValue: arr[0].value,
 				})
 			}
 		})
@@ -141,14 +156,12 @@ Page({
 
 	// 拿到输入的数字
 	getInputNumber(e) {
-		let data = this.data.product_info[e.currentTarget.dataset.index]
-		if(e.detail.value === '-'){
+		if (e.detail.value === '-') {
 			e.detail.value = 0
 		}
 
-		// 超额10%
-		let value = +e.detail.value >= (data.number*1.1 - data.real_number) ? (data.number*1.1 - data.real_number) : +e.detail.value
-		data.value = value === 0 ? undefined : value.toFixed(0)
+		let data = this.data.product_info[e.currentTarget.dataset.index]
+		data.value = +e.detail.value === 0 ? undefined : (+e.detail.value).toFixed(0)
 
 		this.setData({
 			product_info: this.data.product_info
@@ -157,14 +170,12 @@ Page({
 
 	// 拿到总的差额数
 	getEnteryAllNumber(e) {
-		let value = +e.detail.value > (this.data.allNumber*1.1 - this.data.allRealNumber) ? (this.data.allNumber*1.1 - this.data.allRealNumber) : +e.detail.value
-
-		if (value === '-') {
-			value = 0
+		if (+e.detail.value === '-') {
+			e.detail.value = 0
 		}
 
 		this.setData({
-			enteryAllNumber: value.toFixed(0)
+			enteryAllNumber: (+e.detail.value).toFixed(0)
 		})
 	},
 
@@ -191,6 +202,17 @@ Page({
 
 	// 提交按钮
 	commitEntry() {
+		// 获取时间
+		let date = new Date()
+		let year = date.getFullYear()
+		let month = date.getMonth() + 1
+		let day = date.getDate()
+		let hour = date.getHours()
+		let minute = date.getMinutes()
+		let second = date.getSeconds()
+		let nowDate = year + '-' + (month < 10 ? "0" + month : month) + '-' + (day < 10 ? '0' + day : day)
+		let nowTime = nowDate + ' ' + hour + ":" + minute + ":" + second
+		// 获取选中的人的uuid
 		let uuid = this.data.selectedPeopleValue
 
 		// 判断是尺码颜色还是自由录入
@@ -198,9 +220,13 @@ Page({
 			// 判断是否留空
 			if ((this.data.product_info.find(item => item.value !== undefined)) !== undefined) {
 				let data = []
+				let sizeNumber = 0
+				let workshop_yield_at
 
 				this.data.product_info.forEach(item => {
+					// 判断是否有空数据，做异常处理
 					if (item.value) {
+						sizeNumber += item.value
 						data.push({
 							product_info_id: item.id,
 							number: item.value,
@@ -211,11 +237,23 @@ Page({
 					}
 				});
 
+				// 如果完成数 >= 预定数，代表已经有完成时间了，使用原来的完成时间
+				if (this.data.allRealNumber >= this.data.allNumber) {
+					workshop_yield_at = this.data.workshop_yield_at
+				} else if ((sizeNumber + this.data.allRealNumber) >= this.data.allNumber) {
+					// 到这里，代表本次录入完成，传现在的时间
+					workshop_yield_at = nowTime
+				} else {
+					// 到这里，代表未完成，给个null
+					workshop_yield_at = null
+				}
+
 				wxReq({
 					url: '/workshop/weave/product/save',
 					method: 'POST',
 					data: {
-						data
+						data,
+						workshop_yield_at
 					},
 					success: (res) => {
 						if (res.data.code === 200) {
@@ -262,12 +300,25 @@ Page({
 			this.getPostData()
 		}
 
+		let workshop_yield_at
+		// 如果完成数 >= 预定数，代表已经有完成时间了，使用原来的完成时间
+		if (this.data.allRealNumber >= this.data.allNumber) {
+			workshop_yield_at = this.data.workshop_yield_at
+		} else if ((this.data.enteryAllNumber + this.data.allRealNumber) >= this.data.allNumber) {
+			// 到这里，代表本次录入完成，传现在的时间
+			workshop_yield_at = nowTime
+		} else {
+			// 到这里，代表未完成，给个null
+			workshop_yield_at = null
+		}
+
 		// 保存产量
 		wxReq({
 			url: '/workshop/weave/product/save',
 			method: 'POST',
 			data: {
-				data: this.data.entryArr
+				data: this.data.entryArr,
+				workshop_yield_at
 			},
 			success: (res) => {
 				if (res.data.code === 200) {
@@ -289,36 +340,42 @@ Page({
 	// 得到最小的差值
 	getMinDiff() {
 		let min
-		
-		this.data.product_info.forEach((item,index) => {
-			let difference = item.number*1.1 - item.real_number
-			
+
+		this.data.product_info.forEach((item, index) => {
+			let difference = Math.abs(item.number - item.real_number).toFixed(0)
+
 			if (item.isMin) return
 
 			if (index === 0) {
 				min = item
 			}
 
+			if (!min) {
+				min = this.data.product_info[this.data.product_info.length - 1]
+			}
+
 			if (difference !== 0) {
-				min.number*1.1 - min.real_number > difference ? min = item : min = min
+				min.number - min.real_number > difference ? min = item : min = min
 			}
 		});
 
-		if(min){
+		if (min) {
 			min.isMin = true
 		}
 
-		console.log(min)
+		this.setData({
+			min
+		})
 		return min
 	},
 
 	getPostData(getUuid) {
 		let min = this.getMinDiff()
-		if(!min){
-			// min = this.data.product_info[this.data.product_info.length-1]
+		if (!min) {
+			min = this.data.product_info[this.data.product_info.length - 1]
 			return
 		}
-		let minDiff = min.number - min.real_number
+		let minDiff = Math.abs(min.number - min.real_number).toFixed(0)
 		let enteryAllNumber = this.data.enteryAllNumber
 		let uuid = getUuid ? getUuid : wx.getStorageSync('userInfo').userinfo.uuid
 		let _this = this
@@ -329,7 +386,7 @@ Page({
 				number: minDiff,
 				price: _this.data.process_price,
 				product_info_id: min.id,
-				process_price_id: (_this.data.detailOrder.process[0]!==undefined)?_this.data.detailOrder.process[0].id:0
+				process_price_id: (_this.data.detailOrder.process[0] !== undefined) ? _this.data.detailOrder.process[0].id : 0
 			})
 			_this.data.enteryAllNumber = _this.data.enteryAllNumber - minDiff
 			_this.getPostData()
@@ -339,7 +396,7 @@ Page({
 				number: enteryAllNumber,
 				price: _this.data.process_price,
 				product_info_id: min.id,
-				process_price_id: (_this.data.detailOrder.process[0]!==undefined)?_this.data.detailOrder.process[0].id:0
+				process_price_id: (_this.data.detailOrder.process[0] !== undefined) ? _this.data.detailOrder.process[0].id : 0
 			})
 
 			return _this.data.entryArr

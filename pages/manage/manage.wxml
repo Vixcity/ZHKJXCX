@@ -4,7 +4,7 @@
     <view class="pb50">
       <view class="flex pr20 pl20 jcsb aic borderBox colorWhite w100 manage-list">
         <view class="flex userInfo vw60" bindtap="bindViewTap">
-          <image class="image" src="{{userInfo.wechat_data.avatarUrl || userInfo.userinfo.wechat_data.avatarUrl}}" mode="aspectFill"/>
+          <image class="image" src="{{userInfo.wechat_data.avatarUrl || userInfo.userinfo.wechat_data.avatarUrl}}" mode="aspectFill" />
           <view class="fz40 ml20">
             <block wx:if="{{showNoLogin}}">
               <view bindtap="toLogin">暂未登录</view>
@@ -15,7 +15,7 @@
               <view bindtap="toSignUp" class="fz28 mt5">未完善资料，请立即填写</view>
             </block>
             <block wx:else>
-              <view>{{userInfo.userinfo.name[0]+'先生('+userInfo.userinfo.wechat_data.nickName+')'}}</view>
+              <view>{{userInfo.userinfo.name + '(' + userInfo.userinfo.wechat_data.nickName +')'}}</view>
               <view class="fz28 mt5">{{userInfo.userinfo.user_name}}</view>
             </block>
           </view>
@@ -35,18 +35,18 @@
         </view>
       </view>
     </view>
-    
+
     <!-- 菜单 -->
     <view class="ml20 mr20 mt40 bgColorWhite vw90 flex flexWarp borderBox pl20 pr20 pt20 pb20 color9E fz30 tc borderRadius16 shadow" style="transform: translateY(-60%);">
       <view class="{{item.index===1?'':'ml18'}}" wx:for="{{pageList}}" wx:for-item="item" wx:key="title" data-path="{{item.path}}" bindtap="toWitchPage">
-        <image class="sonContainer" src="{{item.icon}}" mode="aspectFill"/>
+        <image class="sonContainer" src="{{item.icon}}" mode="aspectFill" />
         <view class="mt5">{{item.title}}</view>
       </view>
     </view>
-    
+
     <!-- 消息组件 -->
     <t-message id="t-message" />
-    
+
     <!-- 弹出框 -->
     <t-popup visible="{{showPopup}}" placement="center">
       <view slot="content" class="bgColorWhite overfh vw80 por" style="transform: translateY(-5%);">

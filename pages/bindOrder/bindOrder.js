@@ -18,28 +18,28 @@ Page({
     // 扫描普通链接进入小程序，并获取参数
     // 链接为：https://knit-m-beta.zwyknit.com/miniprogram?company_id=xx1&hash=7777
     // 参数为：company_id,hash
-    // if (options.q) {
-    //   let scan_url = decodeURIComponent(options.q);
-    //   let params = urlParams(scan_url)
+    if (options.q) {
+      let scan_url = decodeURIComponent(options.q);
+      let params = urlParams(scan_url)
 
-    //   this.setData(params)
-    //   params.index=1
-    //   this.init(params)      
-    // }
+      this.setData(params)
+      params.index = 1
+      this.init(params)
+    }
 
     // let params = {
     //   company_id: '0db46f8e744211eca9a54d3cafd8c04d',
     //   hash: 777788,
     //   index: 1
     // }
-    let params = {
-      company_id: 'xx1',
-      hash: 7777,
-      index: 1
-    }
+    // let params = {
+    //   company_id: 'xx1',
+    //   hash: 7777,
+    //   index: 1
+    // }
 
-    this.setData(params)
-    this.init(params)
+    // this.setData(params)
+    // this.init(params)
   },
 
   init(params) {
