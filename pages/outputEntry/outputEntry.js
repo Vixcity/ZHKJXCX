@@ -15,7 +15,12 @@ Page({
 		selectedPeopleLabel: '',
 		enteryAllNumber: "",
 		showChoose: false,
-		entryArr: []
+		entryArr: [],
+		hash: ""
+	},
+
+	onLoad: function (option) {
+		this.setData(option)
 	},
 
 	/**
@@ -53,6 +58,17 @@ Page({
 			},
 			method: "GET",
 			success: (res) => {
+				if (res.data.code === 1005) {
+					Message.error({
+						offset: [20, 32],
+						duration: 3000,
+						content: res.data.message + '，请返回首页或者稍后重试',
+					});
+					_this.setData({
+						yichang: true
+					})
+				}
+
 				let allNumber = 0
 				let allRealNumber = 0
 				wx.setStorageSync('entry_product_info', res.data.data.product_info)
@@ -65,7 +81,7 @@ Page({
 
 				// 更新卡片的数据
 				let discrepancy = allNumber - allRealNumber
-				let cardOrder = this.data.cardOrder
+				let cardOrder = _this.data.cardOrder
 				if (cardOrder === undefined) {
 					Message.success({
 						offset: [20, 32],
@@ -181,6 +197,8 @@ Page({
 
 	// 切换选项卡
 	onTabsChange(e) {
+		if (this.data.yichang) return
+
 		if (e.detail.value == 0) {
 			this.setData({
 				enteryAllNumber: "",
@@ -231,8 +249,9 @@ Page({
 							product_info_id: item.id,
 							number: item.value,
 							uuid: uuid,
-							process_price_id: (this.data.detailOrder.process[0] !== undefined) ? this.data.detailOrder.process[0].id : 0,
-							price: this.data.process_price
+							process_price_id: (this.data.detailOrder.process && (this.data.detailOrder.process[0] !== undefined)) ? this.data.detailOrder.process[0].id : 0,
+							price: this.data.process_price,
+							hash: this.data.hash
 						})
 					}
 				});
@@ -386,7 +405,8 @@ Page({
 				number: minDiff,
 				price: _this.data.process_price,
 				product_info_id: min.id,
-				process_price_id: (_this.data.detailOrder.process[0] !== undefined) ? _this.data.detailOrder.process[0].id : 0
+				process_price_id: (_this.data.detailOrder.process && (_this.data.detailOrder.process[0] !== undefined)) ? _this.data.detailOrder.process[0].id : 0,
+				hash:_this.data.hash
 			})
 			_this.data.enteryAllNumber = _this.data.enteryAllNumber - minDiff
 			_this.getPostData()
@@ -396,7 +416,8 @@ Page({
 				number: enteryAllNumber,
 				price: _this.data.process_price,
 				product_info_id: min.id,
-				process_price_id: (_this.data.detailOrder.process[0] !== undefined) ? _this.data.detailOrder.process[0].id : 0
+				process_price_id: (_this.data.detailOrder.process && (_this.data.detailOrder.process[0] !== undefined)) ? _this.data.detailOrder.process[0].id : 0,
+				hash:_this.data.hash
 			})
 
 			return _this.data.entryArr

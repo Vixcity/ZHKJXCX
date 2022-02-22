@@ -3,10 +3,10 @@
   <view class="bg w100 {{orderList.length === 0?'vh85 overfh':'h100'}}">
     <!-- 卡片列表 -->
     <order-card bindtap="toOutPutEntry" bind:changeShow="changeShow" showChangeIcon="{{isLeader}}" smallThan24h="{{item.smallThan24h}}" wx:for="{{orderList}}" wx:for-item="item" wx:key="item" wx:for-index="index" data-index="{{index}}" detailInfo="{{item}}"></order-card>
-
+    
     <!-- 懒加载 -->
-    <view class="tc color91 mt20 mb20" hidden='{{!isShowLoadmore}}'>
-      <t-loading theme="spinner" size="40rpx" loading text="加载中..." hidden='{{!isShowLoadmore}}'></t-loading>
+    <view class="tc color91 mt20 mb20 {{orderList.length === 0?'flex vh100 jcc aic':''}}" hidden='{{!isShowLoadmore}}'>
+      <t-loading theme="dots" size="80rpx" loading="{{isShowLoadmore}}"></t-loading>
     </view>
 
     <!-- 查询无数据 -->
@@ -15,7 +15,7 @@
     </view>
 
     <!-- 第一次查询无数据 -->
-    <view class="flex fdc vh100 color91 w100 jcc aic" wx:if="{{orderList.length === 0 || notShow}}">
+    <view class="flex fdc vh100 color91 w100 jcc aic" wx:if="{{notShow && !isShowLoadmore}}">
       <view class="tc mt70">
         <image src="https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220216112643.png"></image>
         <view class="mt20">没有符合条件的数据</view>

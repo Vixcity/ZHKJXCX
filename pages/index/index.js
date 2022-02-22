@@ -70,6 +70,17 @@ Page({
     let that = this;
     let page = this.data.page;
     let page_size = this.data.page_size;
+
+    that.setData({
+      isShowLoadmore: true, // 隐藏正在加载
+    })
+
+    if (page === 1) {
+      this.setData({
+        notShow: false
+      })
+    }
+
     wxReq({
       url: '/workshop/weave/product/list',
       method: 'GET',
@@ -83,13 +94,14 @@ Page({
         // console.log(res.data.data.data)
         if (res.data.code == 200) { // 判断当code == 200 的时候得到数据
 
-          //   var datas = res.data.result.comments; // 下面有得到的数据可以参考
+          // var datas = res.data.result.comments; // 下面有得到的数据可以参考
           if (res.data.data.data.length === 0) { // 如果res.data.data.data.length === 0 表示没有可加载的数据了
             if (that.data.page === 1) {
               that.setData({
                 isShowLoadmore: false, // 隐藏正在加载
                 isShowNoDatasTips: false, // 显示暂无数据
                 endloading: false, // 上拉不在加载
+                notShow: true
               })
             } else {
               that.setData({

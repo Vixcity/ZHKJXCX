@@ -42,6 +42,7 @@ Component({
 	 */
 	data: {
 		isShow: 'title',
+		showPopup: false,
 		// 作坊主
 		isLeader: wx.getStorageSync('userInfo').userinfo?.role === 3
 		// 员工账号测试
@@ -54,12 +55,22 @@ Component({
 	methods: {
 		// 点击勾号
 		changeCheck(event) {
-			if(this.data.showIcon){	
+			if (this.data.showIcon) {
 				this.triggerEvent("changeCheck", {})
 			}
 			// this.setData({
 			// 	isCheck: !this.data.isCheck
 			// })
+		},
+		showImage(e) {
+			this.setData({
+				showPopup: !this.data.showPopup
+			})
+		},
+		closePopup() {
+			this.setData({
+				showPopup: false
+			})
 		},
 		clickEvent(event) {
 			this.triggerEvent("clickEvent", event.currentTarget.dataset)
@@ -69,23 +80,23 @@ Component({
 			// 1 为code
 
 			// 仅作坊主可操作
-			if(this.data.showChangeIcon){
+			if (this.data.showChangeIcon) {
 				if (this.data.detailInfo.display === 0) {
 					this.data.detailInfo.display = 1
 				} else {
 					this.data.detailInfo.display = 0
 				}
-	
+
 				this.setData({
 					detailInfo: this.data.detailInfo
 				})
-	
+
 				let {
 					pid,
 					display,
 					product_id
 				} = this.data.detailInfo
-	
+
 				wxReq({
 					url: '/workshop/order/display',
 					method: "POST",
@@ -95,10 +106,10 @@ Component({
 						product_id
 					},
 					success: (res) => {
-	
+
 					}
 				})
-	
+
 				this.triggerEvent("changeShow", display)
 			}
 		},

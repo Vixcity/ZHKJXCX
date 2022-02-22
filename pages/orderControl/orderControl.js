@@ -18,6 +18,9 @@ Page({
 
   // 获取列表
   getOrderList(status) {
+    this.setData({
+      isShowLoadmore: true
+    })
     wxReq({
       url: '/workshop/order/list',
       data: {
@@ -54,10 +57,11 @@ Page({
             code: item.product.product_code || item.product.code_fix,
             dateDiff: dateDiff(nowDate, item.weave_plan.end_time),
             processName: item.weave_plan.process_name,
-            bigThan30:getTimeDiff(getTimestamp(nowTime), getTimestamp(item.weave_plan.created_at),'minutes')>=30,
+            bigThan30: getTimeDiff(getTimestamp(nowTime), getTimestamp(item.weave_plan.created_at), 'minutes') >= 30,
           })
         });
         this.setData({
+          isShowLoadmore: false,
           detailInfoList: datas,
           allInfoList: data
         })
@@ -77,8 +81,8 @@ Page({
   },
 
   onTabsChange(e) {
-    this.getOrderList(e.detail.value === '0'?"":e.detail.value)
+    this.getOrderList(e.detail.value === '0' ? "" : e.detail.value)
 
-    wx.setStorageSync('orderChooseIndex', e.detail.value === '0'?"":e.detail.value)
+    wx.setStorageSync('orderChooseIndex', e.detail.value === '0' ? "" : e.detail.value)
   }
 })

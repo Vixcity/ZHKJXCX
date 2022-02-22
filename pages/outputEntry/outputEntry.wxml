@@ -4,10 +4,12 @@
 	<view class="ml20 mr20 mt20 bgColorWhite vw90 jcsb flexWarp borderRadius16 shadow borderBox pl10 pr10 pt10 pb10 colorBlack por overfh">
 		<t-tabs value="{{0}}" bind:change="onTabsChange">
 			<t-tab-panel label="按尺码颜色" value="0">
-				<view class="mt10">
-					生产人员：
-					<text wx:if="{{showChoose}}" class="ml20 {{selectedPeopleLabel===''?'color91':'colorBlack'}}" bindtap="openPick">{{selectedPeopleLabel===''?'选择员工':selectedPeopleLabel}}</text>
-					<text wx:else class="ml20">{{userName}}</text>
+				<view class="mt10 flex">
+					<view class="w30">生产人员：</view>
+					<view class="w70">
+						<view wx:if="{{showChoose}}" class="{{selectedPeopleLabel===''?'color91':'colorBlack'}}" bindtap="openPick">{{selectedPeopleLabel===''?'选择员工':selectedPeopleLabel}}</view>
+						<view wx:else>{{userName}}</view>
+					</view>
 				</view>
 				<view wx:for="{{product_info}}" wx:for-item="item" wx:for-index="index" wx:key="item">
 					<view class="bgColorF3 pt10 vw100 mt20 mb20"></view>
@@ -18,31 +20,37 @@
 					<view class="line"></view>
 					<view class="flex fz30">
 						<view class="w30">产量</view>
-						<view class="w50">
-							<input wx:if="{{(item.number - item.real_number)<=0}}" type="number" bindinput="getInputNumber" data-index="{{index}}" value="{{item.value}}" placeholder="超额 {{-(item.number - item.real_number)}}"/>
-							<input wx:if="{{(item.number - item.real_number) > 0}}" type="number" bindinput="getInputNumber" data-index="{{index}}" value="{{item.value}}" placeholder="差额 {{(item.number - item.real_number)<0?0:(item.number - item.real_number)}}" />
+						<view class="w70">
+							<input style="height: 5vh;" wx:if="{{(item.number - item.real_number)<=0}}" type="number" bindinput="getInputNumber" data-index="{{index}}" value="{{item.value}}" placeholder="超额 {{-(item.number - item.real_number)}}" />
+							<input style="height: 5vh;" wx:if="{{(item.number - item.real_number) > 0}}" type="number" bindinput="getInputNumber" data-index="{{index}}" value="{{item.value}}" placeholder="差额 {{(item.number - item.real_number)<0?0:(item.number - item.real_number)}}" />
 						</view>
 					</view>
 				</view>
 			</t-tab-panel>
 			<t-tab-panel label="自由录入" value="1">
 				<view class="mt10">
-					生产人员：
-					<text wx:if="{{showChoose}}" class="ml20 {{selectedPeopleLabel===''?'color91':'colorBlack'}}" bindtap="openPick">{{selectedPeopleLabel===''?'选择员工':selectedPeopleLabel}}</text>
-					<text wx:else class="ml20">{{userName}}</text>
-					<view class="bgColorF3 pt10 vw100 mt20 mb20"></view>
-					<view class="flex fz30">
+					<view class="flex">
+						<view class="w30">
+							生产人员：
+						</view>
+						<view class="w70">
+							<view wx:if="{{showChoose}}" class="{{selectedPeopleLabel===''?'color91':'colorBlack'}}" bindtap="openPick">{{selectedPeopleLabel===''?'选择员工':selectedPeopleLabel}}</view>
+							<view wx:else>{{userName}}</view>
+						</view>
+					</view>
+					<view wx:if="{{!yichang}}" class="bgColorF3 pt10 vw100 mt20 mb20"></view>
+					<view wx:if="{{!yichang}}" class="flex fz30">
 						<view class="w30">产量</view>
-						<view class="w50">
-							<input wx:if="{{(allNumber - allRealNumber)<= 0}}" type="number" bindinput="getEnteryAllNumber" data-index="{{index}}" value="{{enteryAllNumber}}" placeholder="超额 {{-(allNumber - allRealNumber)}}"/>
-							<input wx:if="{{(allNumber - allRealNumber) > 0}}" type="number" bindinput="getEnteryAllNumber" data-index="{{index}}" value="{{enteryAllNumber}}" placeholder="差额 {{allNumber - allRealNumber}}" />
+						<view class="w70">
+							<input style="height: 5vh;" wx:if="{{(allNumber - allRealNumber)<= 0}}" type="number" bindinput="getEnteryAllNumber" data-index="{{index}}" value="{{enteryAllNumber}}" placeholder="超额 {{-(allNumber - allRealNumber)}}" />
+							<input style="height: 5vh;" wx:if="{{(allNumber - allRealNumber) > 0}}" type="number" bindinput="getEnteryAllNumber" data-index="{{index}}" value="{{enteryAllNumber}}" placeholder="差额 {{allNumber - allRealNumber}}" />
 						</view>
 					</view>
 				</view>
 			</t-tab-panel>
 		</t-tabs>
 	</view>
-	<view class="vw100 mt20 mb20">
+	<view wx:if="{{!yichang}}" class="vw100 mt20 mb20">
 		<t-button theme="primary" size="large" variant="plain" bindtap="commitEntry">提交</t-button>
 	</view>
 	<t-picker visible="{{choosePeople}}" title="请选择员工" bindconfirm="confirmPick" bindcancel="closePick">
