@@ -231,6 +231,21 @@ page{
 .mb50{
   margin-bottom: 50px;
 }
+.mb60{
+  margin-bottom: 60px;
+}
+.mb70{
+  margin-bottom: 70px;
+}
+.mb80{
+  margin-bottom: 80px;
+}
+.mb90{
+  margin-bottom: 90px;
+}
+.mb100{
+  margin-bottom: 100px;
+}
 
 
 

@@ -15,6 +15,14 @@ Page({
   },
 
   onLoad: function (options) {
+    if (wx.getStorageSync('userInfo').userinfo.role !== 3) {
+      this.setData({
+        abnormal: true
+      })
+      return
+    }
+    
+    
     // 扫描普通链接进入小程序，并获取参数
     // 链接为：https://knit-m-beta.zwyknit.com/miniprogram?company_id=xx1&hash=7777
     // 参数为：company_id,hash
@@ -34,7 +42,7 @@ Page({
     // }
     let params = {
       company_id: 'xx1',
-      hash: 7777,
+      hash: 777777,
       index: 1
     }
 
@@ -75,10 +83,16 @@ Page({
       method: 'GET',
       data: params,
       success: (res) => {
+        if(res.data.data === '未注册，请注册'){
+          _this.setData({
+            abnormal:true
+          })
+          return
+        }
+
         if (index === 1) {
           // 选择情况
           let notChoose = (res.data.data.is_band === 0 && res.data.data.data.length === 1) || res.data.data.is_band === 1
-          console.log(res.data.data.data[0])
 
           // 先判断订单是否被绑定 is_band === 0 则代表未绑定
           if (res.data.data.is_band === 0 && res.data.data.data.length === 0) {
@@ -95,7 +109,7 @@ Page({
           _this.notDataGetData(res.data.data.data)
 
           // 直接跳转
-          if(notChoose){
+          if (notChoose) {
             // 改变数据格式进行跳转
             let arr = _this.dataChange(res.data.data.data)
             let detailOrder = res.data.data.data[0]
@@ -108,16 +122,16 @@ Page({
               detailInfoList
             })
 
-            
+
             // 转换数据，使得产量录入不会因为process是undefined而提交失败
             detailOrder.process = detailOrder.process || detailOrder.pidprocess
-            
+
             wx.setStorageSync('outPutEntry', {
               detailOrder,
               cardOrder
             })
-            
-            if(res.data.data.is_band !== 1) {
+
+            if (res.data.data.is_band !== 1) {
               _this.bindOrder()
               return
             }
@@ -175,6 +189,7 @@ Page({
         dataDiff: dateDiff(nowDate, item.weave_plan.end_time),
         code: item.product.product_code || item.product.code_fix,
         pid: item.pid,
+        id: item.id,
         product_id: item.product_id,
         bigThan30: getTimeDiff(getTimestamp(nowTime), getTimestamp(item.weave_plan.created_at), 'minutes') >= 30
       })
@@ -189,14 +204,14 @@ Page({
       if (index === e.target.dataset.index) {
         if (item.isBind === true) {
           item.isBind = false
-          _this.data.detailOrderList[index] = false
+          _this.data.detailOrderList[index].isBind = false
         } else {
           item.isBind = true
-          _this.data.detailOrderList[index] = true
+          _this.data.detailOrderList[index].isBind = true
         }
       } else {
         item.isBind = false
-        _this.data.detailOrderList[index] = false
+        _this.data.detailOrderList[index].isBind = false
       }
     });
     this.setData({
@@ -230,7 +245,24 @@ Page({
     }
 
     // 获取对应的绑定值
-    let cardOrder = this.data.detailInfoList.find(item => item.isBind === true)
+    let cardOrder
+    let index
+    for (let i = 0; i < this.data.detailInfoList.length; i++) {
+      if (this.data.detailInfoList[i].isBind === true) {
+        cardOrder = this.data.detailInfoList[i]
+        index = i
+        break
+      }
+    }
+    
+    let detailOrder = this.data.detailInfoList[index]
+
+    console.log(detailOrder)
+
+    wx.setStorageSync('outPutEntry', {
+      detailOrder,
+      cardOrder
+    })
 
     wxReq({
       url: '/weave/product/save',

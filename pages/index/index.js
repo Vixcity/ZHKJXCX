@@ -177,7 +177,7 @@ Page({
           that.setData({
             showDialog: true
           })
-          console.log(res)
+          console.log(res.data.data)
         }
       }
     })

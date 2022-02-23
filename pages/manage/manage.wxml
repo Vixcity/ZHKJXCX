@@ -12,7 +12,7 @@
             </block>
             <block wx:elif="{{userInfo === null || userInfo.userinfo === null}}">
               <view bindtap="toSignUp">{{userInfo.wechat_data.nickName}}</view>
-              <view bindtap="toSignUp" class="fz28 mt5">未完善资料，请立即填写</view>
+              <view bindtap="toSignUp" class="fz28 mt5">未完善资料，请填写</view>
             </block>
             <block wx:else>
               <view>{{userInfo.userinfo.name + '(' + userInfo.userinfo.wechat_data.nickName +')'}}</view>
@@ -23,14 +23,14 @@
         <view class="vw30">
           <view class="fr">
             <!-- 二维码 -->
-            <view wx:if="{{!showNoLogin && userInfo.userinfo.role !== 2}}" class="tr" bindtap="openPopup">
+            <view wx:if="{{!showNoLogin && userInfo.userinfo.role === 3}}" class="tr" bindtap="openPopup">
               <image src="https://file.zwyknit.com/erweima.png" style="width: 80rpx;height: 80rpx;"></image>
             </view>
             <block wx:if="{{ourUser !== null && userInfo.userinfo !== null}}">
               <view class="flex fz30 h40 colorBlack">
-                <view class="autoLogos pl5 pr5" style="background-color: white; color: #229CFB;">{{userInfo.userinfo.process}}</view>
+                <view class="autoLogos pl5 pr5" style="background-color: white; color: #229CFB;">{{ userInfo.userinfo.process }}</view>
               </view>
-            </block>
+            </block>  
           </view>
         </view>
       </view>

@@ -24,7 +24,14 @@
     </t-tabs>
   </view>
 
-  <view wx:if="{{!isLeader && !isStaff}}" class="mt40">暂无数据，请填写产量录入</view>
+  <view wx:if="{{!isLeader && !isStaff}}" class="mt40">
+    <view class="flex fdc vh90 color91 w100 jcc aic">
+      <view class="tc">
+        <image src="https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220216112643.png"></image>
+        <view class="mt20">没有符合条件的数据</view>
+      </view>
+    </view>
+  </view>
   
   <!-- 时间选择器 -->
   <t-picker visible="{{showDataPick}}" bindconfirm="pickDataConfirm" bindcancel="pickDataCancel">

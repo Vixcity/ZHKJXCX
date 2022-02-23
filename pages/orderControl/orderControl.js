@@ -19,7 +19,9 @@ Page({
   // 获取列表
   getOrderList(status) {
     this.setData({
-      isShowLoadmore: true
+      isShowLoadmore: true,
+      detailInfoList: [],
+      allInfoList: []
     })
     wxReq({
       url: '/workshop/order/list',

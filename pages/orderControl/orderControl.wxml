@@ -3,7 +3,7 @@
   <t-tabs value="{{0}}" bind:change="onTabsChange">
     <t-tab-panel label="全部" value="0">
       <block wx:if="{{!isLeader}}">
-        <view class="tc mt70 color91">
+        <view class="tc vh85 mt100 color91">
           <image src="https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220216112643.png"></image>
           <view class="mt20">没有符合条件的数据</view>
         </view>
@@ -11,14 +11,16 @@
       <block wx:else>
         <view class="pb20 vh85 overfsy">
           <order-card bindtap="toOrderDetail" wx:for="{{detailInfoList}}" wx:for-item="item" wx:key="item" detailInfo="{{item}}" data-index="{{index}}" showPrice="{{item.showPrice}}"></order-card>
-          <view wx:if="{{detailInfoList.length===0}}" class="tc mt70 color91">
+          <view wx:if="{{detailInfoList.length===0 && !isShowLoadmore}}" class="tc mt70 color91">
             <image src="https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220216112643.png"></image>
             <view class="mt20">没有符合条件的数据</view>
+          </view>
+          <view class="tc mt10" wx:if="{{isShowLoadmore}}">
+            <t-loading theme="dots" size="80rpx" loading="{{isShowLoadmore}}"></t-loading>
           </view>
           <view class="vw100"></view>
         </view>
       </block>
-      <t-loading theme="dots" size="80rpx" loading="{{isShowLoadmore}}"></t-loading>
     </t-tab-panel>
     <!-- <t-tab-panel label="待定价" value="1">
       <block wx:if="{{!isLeader}}">
@@ -40,7 +42,7 @@
     </t-tab-panel> -->
     <t-tab-panel label="生产中" value="2">
       <block wx:if="{{!isLeader}}">
-        <view class="tc mt70 color91">
+        <view class="tc vh85 mt100 color91">
           <image src="https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220216112643.png"></image>
           <view class="mt20">没有符合条件的数据</view>
         </view>
@@ -48,18 +50,20 @@
       <block wx:else>
         <view class="pb20 vh85 overfsy">
           <order-card bindtap="toOrderDetail" wx:for="{{detailInfoList}}" wx:for-item="item" wx:key="item" detailInfo="{{item}}" data-index="{{index}}" showPrice="{{item.showPrice}}"></order-card>
-          <view wx:if="{{detailInfoList.length===0}}" class="tc mt70 color91">
+          <view wx:if="{{detailInfoList.length===0 && !isShowLoadmore}}" class="tc mt70 color91">
             <image src="https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220216112643.png"></image>
             <view class="mt20">没有符合条件的数据</view>
+          </view>
+          <view class="tc mt10" wx:if="{{isShowLoadmore}}">
+            <t-loading theme="dots" size="80rpx" loading="{{isShowLoadmore}}"></t-loading>
           </view>
           <view class="vw100"></view>
         </view>
       </block>
-      <t-loading theme="dots" size="80rpx" loading="{{isShowLoadmore}}"></t-loading>
     </t-tab-panel>
     <t-tab-panel label="已完成" value="3">
       <block wx:if="{{!isLeader}}">
-        <view class="tc mt70 color91">
+        <view class="tc vh85 mt100 color91">
           <image src="https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220216112643.png"></image>
           <view class="mt20">没有符合条件的数据</view>
         </view>
@@ -67,14 +71,16 @@
       <block wx:else>
         <view class="pb20 vh85 overfsy">
           <order-card bindtap="toOrderDetail" wx:for="{{detailInfoList}}" wx:for-item="item" wx:key="item" detailInfo="{{item}}" data-index="{{index}}" showPrice="{{item.showPrice}}"></order-card>
-          <view wx:if="{{detailInfoList.length===0}}" class="tc mt70 color91">
+          <view wx:if="{{detailInfoList.length===0 && !isShowLoadmore}}" class="tc mt70 color91">
             <image src="https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220216112643.png"></image>
             <view class="mt20">没有符合条件的数据</view>
+          </view>
+          <view class="tc mt10" wx:if="{{isShowLoadmore}}">
+            <t-loading theme="dots" size="80rpx" loading="{{isShowLoadmore}}"></t-loading>
           </view>
           <view class="vw100"></view>
         </view>
       </block>
-      <t-loading theme="dots" size="80rpx" loading="{{isShowLoadmore}}"></t-loading>
     </t-tab-panel>
   </t-tabs>
 </view>

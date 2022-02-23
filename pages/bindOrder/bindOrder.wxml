@@ -11,15 +11,15 @@
         </view>
         <view class="poa bgColorB9 fz35 colorWhite flex aic jcc bindStatus">未绑定</view>
       </view>
-      <view class="flex fdc aic">
+      <view class="flex fdc aic mb80">
         <order-card wx:for="{{detailInfoList}}" wx:for-item="item" wx:key="item" wx:for-index="index" data-index="{{index}}" detailInfo="{{item}}" bind:changeCheck="changeCheck" showIcon="{{true}}"></order-card>
-        <view wx:if="{{!abnormal}}" class="submit mt40 mb20">
-          <t-button theme="primary" size="large" variant="plain" bindtap="bindOrder">绑定</t-button>
-        </view>
-        <view wx:else class="submit mt100 mb20">
-          <view class="pt100 mb30 tc">该产品订单不是你的客户</view>
-          <t-button theme="primary" size="large" variant="plain" bindtap="toManage">返回首页</t-button>
-        </view>
+      </view>
+      <view wx:if="{{!abnormal}}" class="submit mt40 mb20 pof" style="bottom: 0%;">
+        <t-button theme="primary" size="large" variant="plain" bindtap="bindOrder">绑定</t-button>
+      </view>
+      <view wx:else class="submit mt100 mb20">
+        <view class="pt100 mb30 tc">该产品订单不是你的客户</view>
+        <t-button theme="primary" size="large" variant="plain" bindtap="toManage">返回首页</t-button>
       </view>
     </view>
   </view>

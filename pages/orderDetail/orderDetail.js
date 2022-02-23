@@ -76,8 +76,9 @@ Page({
 				cardInfoData.cardData = arr
 
 				user_workshop_yields.forEach(item => {
+					console.log(item)
 					list.push([
-						[item.created_at.slice(0, 16), item.user.name],
+						[item.created_at.slice(0, 16), (item.user?.name || '无数据')],
 						[(item.weave_plan_product_info.size.size_name || '无数据') + '/' + (item.weave_plan_product_info.color.color_name || '无数据'), item.number],
 						[item.price + '元', (item.number * item.price).toFixed(2) + '元']
 					])

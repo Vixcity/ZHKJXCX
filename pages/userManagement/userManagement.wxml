@@ -2,8 +2,11 @@
 <t-tabs value="{{2}}" bind:change="onTabsChange">
   <t-tab-panel label="合作中" value="2">
     <block wx:if="{{!isLeader}}">
-      <view class="vh90 flex aic jcc">
-        暂无客户，请扫码绑定客户
+      <view class="flex fdc vh90 color91 w100 jcc aic">
+        <view class="tc">
+          <image src="https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220216112643.png"></image>
+          <view class="mt20">暂无客户，请扫码绑定客户</view>
+        </view>
       </view>
     </block>
     <block wx:else>
@@ -12,8 +15,11 @@
   </t-tab-panel>
   <t-tab-panel label="待绑定" value="1">
     <block wx:if="{{!isLeader}}">
-      <view class="vh90 flex aic jcc">
-        暂无客户，请扫码绑定客户
+      <view class="flex fdc vh90 color91 w100 jcc aic">
+        <view class="tc">
+          <image src="https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220216112643.png"></image>
+          <view class="mt20">暂无客户，请扫码绑定客户</view>
+        </view>
       </view>
     </block>
     <block wx:else>
@@ -22,8 +28,11 @@
   </t-tab-panel>
   <t-tab-panel label="已终止" value="3">
     <block wx:if="{{!isLeader}}">
-      <view class="vh90 flex aic jcc">
-        暂无客户，请扫码绑定客户
+      <view class="flex fdc vh90 color91 w100 jcc aic">
+        <view class="tc">
+          <image src="https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220216112643.png"></image>
+          <view class="mt20">暂无客户，请扫码绑定客户</view>
+        </view>
       </view>
     </block>
     <block wx:else>

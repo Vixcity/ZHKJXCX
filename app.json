@@ -13,7 +13,8 @@
 		"pages/orderDetail/orderDetail",
 		"pages/outputEntry/outputEntry",
 		"pages/bindCompany/bindCompany",
-		"pages/bindOrder/bindOrder"
+		"pages/bindOrder/bindOrder",
+		"pages/agreement/agreement"
 	],
 	"usingComponents": {
 		"t-button": "tdesign-miniprogram/button/button",

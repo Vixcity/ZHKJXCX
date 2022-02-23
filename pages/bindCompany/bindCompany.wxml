@@ -9,7 +9,7 @@
           <text class="ml10">{{address}}</text>
         </view>
         <view wx:if="{{(bindStatus === 0 || bindStatus === 3 || bindStatus === 2)}}" class="poa bgColorB9 fz35 colorWhite flex aic jcc bindStatus">未绑定</view>
-        <view wx:if="{{bindStatus === 1}}" class="poa bgColorFDA9 fz35 colorWhite flex aic jcc bindStatus">绑定中</view>
+        <view wx:if="{{bindStatus === 1}}" class="poa bgColorFDA9 fz35 colorWhite flex aic jcc bindStatus">审核中</view>
         <view wx:if="{{bindStatus === 4}}" class="poa bgColor00D9 fz35 colorWhite flex aic jcc bindStatus">已绑定</view>
       </view>
       <view wx:if="{{!isLogin}}" class="vw100 tc mt40">您还未登录，点击返回首页进行登录</view>

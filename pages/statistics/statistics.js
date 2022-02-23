@@ -82,7 +82,7 @@ Page({
 
 		list.forEach(item => {
 			arr.push({
-				label: item.user.name,
+				label: item.user?.name || '无数据',
 				value: item.uuid
 			})
 		});
