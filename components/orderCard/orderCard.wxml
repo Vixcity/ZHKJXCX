@@ -15,12 +15,12 @@
 		<text>客户：{{detailInfo.customer}}</text>
 		<view wx:if="{{detailInfo.status !== 3}}">
 			<text wx:if="{{detailInfo.dateDiff > 0}}" class="color8D9F">剩余{{detailInfo.dateDiff}}天</text>
-			<text wx:if="{{detailInfo.dateDiff === 0}}" class="colorFDA9">今天截止交付，请注意完成</text>
+			<text wx:if="{{detailInfo.dateDiff === 0}}" class="colorFDA9">今日截止交付</text>
 			<text wx:if="{{detailInfo.dateDiff < 0}}" class="colorE800">逾期{{0-detailInfo.dateDiff}}天</text>
 		</view>
 	</view>
 	<view class="flex aic">
-		<image class="size-l radius-m" catchtap="showImage" src="{{detailInfo.imgSrc}}" mode="aspectFill" />
+		<image class="size-l radius-m image" catchtap="showImage" src="{{detailInfo.imgSrc}}" mode="aspectFill" />
 		<view class="por ml10 fz30 flex jcsa fdc w100" style="height: 144rpx;">
 			<view class="flex w100">
 				<view class="{{(showEnterPrice && (enterPricce !== '0.00'))?'w70':'w100'}}">生产进度：{{detailInfo.allNumber}}({{detailInfo.nowNumber-detailInfo.allNumber<0?(detailInfo.nowNumber-detailInfo.allNumber):((detailInfo.nowNumber-detailInfo.allNumber)===0?0:'+'+(detailInfo.nowNumber-detailInfo.allNumber))}})</view>
@@ -36,13 +36,10 @@
 		<view wx:if="{{detailInfo.status === 3}}" class="poa bgColor8D9F colorWhite borderRadius16 pl10 pb8 pr15 pt5 cornerStyle">已完成</view>
 	</view>
 	<!-- 弹出框 -->
-	<t-popup catchtap visible="{{showPopup}}" placement="center">
-      <view slot="content" class="bgColorWhite overfh vw80 por" style="transform: translateY(-5%);">
-        <view class="poa blod" style="right: 20rpx;top:20rpx;">
-          <t-icon name="close" size="xl" catchtap="closePopup"></t-icon>
-        </view>
-        <view class="mt40 pb20 pl20 pr20 tc">
-          <image style="width: 500rpx;height: 500rpx;" src="{{detailInfo.imgSrc}}" show-menu-by-longpress="{{true}}"></image>
+	<t-popup catchtap visible="{{showPopup}}" placement="center" bindtap="closePopup">
+      <view slot="content" class="overfh por" catchtap>
+        <view class="tc vw100 h100">
+          <image style="width: 100%;" src="{{detailInfo.imgSrc}}"></image>
         </view>
       </view>
     </t-popup>

@@ -281,6 +281,9 @@ page{
 .pt40{
   padding-top: 40px;
 }
+.pt30{
+  padding-top: 30px;
+}
 .pt20{
   padding-top: 20px;
 }
@@ -821,6 +824,17 @@ t-image {
 }
 .overfsy{
   overflow-y: auto;
+}
+
+
+
+
+
+
+
+
+.dialogConfirm .t-dialog__footer .t-button{
+  color: #229cfb
 }
 
 

@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="container">
   <view class="bg flex fdc jcsa aic">
-    <view class="bg flex fdc jcsa aic por">
+    <view class="{{(companyName && !abnormal)? 'bg' : 'noData'}} {{!isLeader?'notLeader':''}} flex fdc jcsa aic por">
       <view wx:if="{{companyName}}" class="ml20 mr20 mt20 bgColorWhite vw90 jcsb flexWarp borderRadius16 shadow borderBox pl20 pr20 pt20 pb20 colorBlack por overfh borderBox flex fdc">
         <view class="fz40 blod">{{companyName}}（有限公司）</view>
         <view class="flex aic mt5 color91 fz28 size-xsss">
@@ -12,8 +12,6 @@
         <view wx:if="{{bindStatus === 1}}" class="poa bgColorFDA9 fz35 colorWhite flex aic jcc bindStatus">审核中</view>
         <view wx:if="{{bindStatus === 4}}" class="poa bgColor00D9 fz35 colorWhite flex aic jcc bindStatus">已绑定</view>
       </view>
-      <view wx:if="{{!isLogin}}" class="vw100 tc mt40">您还未登录，点击返回首页进行登录</view>
-      <view wx:if="{{!isLeader}}" class="vw100 tc mt40">您为员工，无权限进行绑定操作</view>
       <view wx:if="{{companyName}}">
         <view class="flex fdc aic">
           <view wx:if="{{(bindStatus === 0 || bindStatus === 3 || bindStatus === 2)}}" class="tc mt30 fz35 blod">
@@ -36,11 +34,12 @@
           </view>
         </view>
       </view>
-      <view wx:else class="vw100">
-        <view wx:if="{{isLogin && isLeader}}" class="tc mt30 fz35 blod">
-          <view>暂未查询到该工厂信息</view>
-        </view>
-        <view class="submit mt40">
+      <view wx:else class="vw100 mt100 fz35">
+        <view class="pt90"></view>
+        <view wx:if="{{isLogin && isLeader}}" class="tc vw100 fz35 blod">暂未查询到该工厂信息</view>
+        <view wx:if="{{!isLogin}}" class="vw100 tc mt100">您还未登录，点击返回首页进行登录</view>
+        <view wx:if="{{!isLeader}}" class="vw100 tc mt100">您为员工，无权限进行绑定操作</view>
+        <view class="submit mt30">
           <t-button theme="primary" size="large" variant="plain" bindtap="bindOrToManege">返回首页</t-button>
         </view>
       </view>

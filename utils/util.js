@@ -110,9 +110,9 @@ const dateDiff = function (nowTime, compairTime) {
   //nowTime和compairTime是yyyy-MM-dd格式
   let aDate, oDate1, oDate2, iDays;
   aDate = nowTime.split("-");
-  oDate1 = new Date(aDate[1] + '-' + aDate[2] + '-' + aDate[0]); //转换为yyyy-MM-dd格式
+  oDate1 = new Date(aDate[0] + '-' + aDate[1] + '-' + aDate[2]); //转换为yyyy-MM-dd格式
   aDate = compairTime.split("-");
-  oDate2 = new Date(aDate[1] + '-' + aDate[2] + '-' + aDate[0]);
+  oDate2 = new Date(aDate[0] + '-' + aDate[1] + '-' + aDate[2]);
   iDays = parseInt((oDate2 - oDate1) / 1000 / 60 / 60 / 24); //把相差的毫秒数转换为天数
   return iDays; //返回相差天数
 }

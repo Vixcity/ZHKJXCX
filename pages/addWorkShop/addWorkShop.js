@@ -31,7 +31,14 @@ Component({
 
       if (timeDiff > 48) {
         this.setData({
-          isBeOverdue: true
+          isBeOverdue: true,
+        })
+        return
+      }
+
+      if (wx.getStorageSync('userInfo').userinfo.role === 3) {
+        this.setData({
+          isZFZ:true
         })
         return
       }

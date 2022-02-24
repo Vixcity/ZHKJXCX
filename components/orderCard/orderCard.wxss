@@ -1,7 +1,7 @@
 /* components/orderCard.wxss */
 @import "../../app.wxss";
 
-image {
+.image {
 	border-radius: 0;
 	overflow: hidden;
 	width: 144rpx;
@@ -16,4 +16,11 @@ image {
 .cornerStyle{
 	right: -2%;
 	bottom: -2%;
+}
+
+.popup{
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.6);
 }

@@ -22,6 +22,7 @@ Page({
       
       return  
     }
+
     if(wx.getStorageSync('userInfo').userinfo.role===2) {
       this.setData({
         isLeader:false

@@ -62,6 +62,8 @@ Component({
 			// 	isCheck: !this.data.isCheck
 			// })
 		},
+
+		// 图片展示
 		showImage(e) {
 			this.setData({
 				showPopup: !this.data.showPopup
@@ -72,9 +74,13 @@ Component({
 				showPopup: false
 			})
 		},
+
+		// 传出点击事件
 		clickEvent(event) {
 			this.triggerEvent("clickEvent", event.currentTarget.dataset)
 		},
+		
+		// 切换标题和code
 		changeShow(e) {
 			// 0 为title
 			// 1 为code

@@ -234,7 +234,7 @@ Page({
 		let uuid = this.data.selectedPeopleValue
 
 		// 判断是尺码颜色还是自由录入
-		if (this.data.tabValue !== 1) {
+		if (this.data.tabValue === undefined || this.data.tabValue !== 1) {
 			// 判断是否留空
 			if ((this.data.product_info.find(item => item.value !== undefined)) !== undefined) {
 				let data = []
@@ -245,13 +245,15 @@ Page({
 					// 判断是否有空数据，做异常处理
 					if (item.value) {
 						sizeNumber += item.value
+						console.log(item)
 						data.push({
 							product_info_id: item.id,
 							number: item.value,
 							uuid: uuid,
 							process_price_id: (this.data.detailOrder.process && (this.data.detailOrder.process[0] !== undefined)) ? this.data.detailOrder.process[0].id : 0,
 							price: this.data.process_price,
-							hash: this.data.hash
+							hash: this.data.hash,
+							difference: (item.number - item.real_number - item.value)>0?(item.number - item.real_number - item.value):0
 						})
 					}
 				});
@@ -282,6 +284,14 @@ Page({
 								content: '提交成功',
 							});
 							this.getDetailInfo()
+							return
+						}
+						if (res.data.code === 1005) {
+							Message.error({
+								offset: [20, 32],
+								duration: 2000,
+								content: res.data.message,
+							});
 							return
 						}
 					}

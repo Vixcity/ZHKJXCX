@@ -15,7 +15,7 @@ Page({
   },
 
   onLoad: function (options) {
-    if (wx.getStorageSync('userInfo').userinfo.role !== 3) {
+    if (wx.getStorageSync('userInfo')==="" || wx.getStorageSync('userInfo').userinfo.role !== 3) {
       this.setData({
         abnormal: true
       })
