@@ -43,9 +43,22 @@ Page({
         company_id
       })
 
-      this.init(params)      
+      this.init(params)
+      return   
     }
     
+    if(options.company_id){
+      let company_id = options.company_id
+      let params = {
+        company_id
+      }
+      this.setData({
+        company_id
+      })
+      this.init(params)
+      return
+    }
+
     // let company_id = '0db46f8e744211eca9a54d3cafd8c04d'
     // let params = {
     //   company_id

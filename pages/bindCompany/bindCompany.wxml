@@ -27,9 +27,6 @@
             <view>无需重复扫码操作</view>
           </view>
           <view class="submit mt40">
-            <view wx:if="{{(bindStatus === 0 || bindStatus === 3 || bindStatus === 2)}}" class="fz28 vw80 mb20 flex {{iRead?'color8D9F':'color91'}}">
-              <t-icon name="check-circle-filled" size="xl" bind:click="changeRead"> </t-icon><view class="ml10">我已阅读并同意《纺织工厂绑定合作协议》</view>
-            </view>
             <t-button theme="primary" size="large" variant="plain" bindtap="bindOrToManege">{{(bindStatus === 0 || bindStatus === 3 || bindStatus === 2)?'申请绑定':'返回首页'}}</t-button>
           </view>
         </view>

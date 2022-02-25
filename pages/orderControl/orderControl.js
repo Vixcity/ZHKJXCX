@@ -18,7 +18,8 @@ Page({
 
   // 获取列表
   getOrderList(status) {
-    this.setData({
+    let _this = this
+    _this.setData({
       isShowLoadmore: true,
       detailInfoList: [],
       allInfoList: []
@@ -27,7 +28,8 @@ Page({
       url: '/workshop/order/list',
       data: {
         status,
-        limit: 1000000
+        limit: 1000000,
+        code:_this.data.code || ""
       },
       method: 'GET',
       success: (res) => {

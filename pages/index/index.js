@@ -2,7 +2,8 @@ import {
   wxReq,
   dateDiff,
   getTimeDiff,
-  getTimestamp
+  getTimestamp,
+  urlParams
 } from '../../utils/util';
 import Message from 'tdesign-miniprogram/message/index';
 // index.js
@@ -28,6 +29,10 @@ Page({
       })
       return
     }
+
+    this.setData({
+      userInfo: wx.getStorageSync('userInfo')
+    })
 
     if (typeof this.getTabBar === 'function' &&
       this.getTabBar()) {
@@ -155,8 +160,6 @@ Page({
             })
 
             // 判断是否满足条件
-
-
             if (data.length < that.data.page_size) { // 如果剩下评论数 小于10表示数据加载完了
               // console.log('已经加载完了')
               that.setData({
@@ -197,28 +200,34 @@ Page({
     })
   },
 
+  // 扫码功能
+  toPhoto() {
+    wx.scanCode({
+      scanType: "qrCode",
+      onlyFromCamera: true,
+      success: (res) => {
+        if (res.errMsg === "scanCode:ok"){
+          if(res.result.slice(0,43)==="https://knit-m-beta.zwyknit.com/miniprogram"){
+            let a = urlParams(res.result)
+            wx.navigateTo({
+              url: '/pages/bindCompany/bindCompany?company_id=' + a.company_id,
+            })
+          }
+          if(res.scanType === "WX_CODE" && res.path.slice(0,29) ==='pages/addWorkShop/addWorkShop'){
+            wx.navigateTo({
+              url: '/' + res.path,
+            })
+          }
+        }
+      }
+    })
+  },
+
   changeShow(e) {
     let detailOrder = this.data.detailOrderList[e.currentTarget.dataset.index]
     let cardOrder = this.data.orderList[e.currentTarget.dataset.index]
     detailOrder.display = e.detail
     cardOrder.display = e.detail
-  },
-
-  getUserProfile(e) {
-    // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
-    wx.getUserProfile({
-      desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-      success: (res) => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-        let userinfo = wx.getStorageSync('userInfo')
-        userinfo.wechat_data = res.userInfo
-        wx.setStorageSync('userInfo', userinfo)
-        this.toManage()
-      }
-    })
   },
 
   toManage() {

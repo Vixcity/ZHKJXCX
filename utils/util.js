@@ -11,11 +11,11 @@ const formatTime = date => {
 
 // 封装请求
 const wxReq = data => {
-  // const openid = wx.getStorageSync("userInfo").openid.openid
+  const openid = wx.getStorageSync("userInfo").openid.openid
   // 作坊主
   // const openid = "oFr0i5M55SwKUlQ7WwbzaMOIar9Q"
   // 员工
-  const openid = "oFr0i5FlAmENiYwaoEk75GcL8I5Y"
+  // const openid = "oFr0i5FlAmENiYwaoEk75GcL8I5Y"
 
   wx.request({
     url: getApp().globalData.api + data.url,
