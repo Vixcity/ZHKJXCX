@@ -678,6 +678,11 @@ t-image {
   overflow: hidden;
 }
 
+.image{
+  width: 200rpx;
+  height: 150rpx;
+}
+
 .t-image__mask {
   background-color: #f2f2f2;
 }

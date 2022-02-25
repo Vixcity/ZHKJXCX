@@ -15,14 +15,13 @@ Page({
   },
 
   onLoad: function (options) {
-    if (wx.getStorageSync('userInfo')==="" || wx.getStorageSync('userInfo').userinfo.role !== 3) {
+    if (wx.getStorageSync('userInfo') === "" || wx.getStorageSync('userInfo').userinfo.role === 1) {
       this.setData({
         abnormal: true
       })
       return
     }
-    
-    
+
     // 扫描普通链接进入小程序，并获取参数
     // 链接为：https://knit-m-beta.zwyknit.com/miniprogram?company_id=xx1&hash=7777
     // 参数为：company_id,hash
@@ -40,14 +39,15 @@ Page({
     //   hash: 99999,
     //   index: 1
     // }
-    let params = {
-      company_id: 'xx1',
-      hash: 777777,
-      index: 1
-    }
+    // let params = {
+    //   company_id: 'xx1',
+    //   hash: 777777,
+    //   id: 27,
+    //   index: 1
+    // }
 
-    this.setData(params)
-    this.init(params)
+    // this.setData(params)
+    // this.init(params)
   },
 
   init(params) {
@@ -83,9 +83,9 @@ Page({
       method: 'GET',
       data: params,
       success: (res) => {
-        if(res.data.data === '未注册，请注册'){
+        if (res.data.data === '未注册，请注册') {
           _this.setData({
-            abnormal:true
+            abnormal: true
           })
           return
         }
@@ -254,10 +254,10 @@ Page({
         break
       }
     }
-    
+
     let detailOrder = this.data.detailInfoList[index]
 
-    console.log(detailOrder)
+    // console.log(detailOrder)
 
     wx.setStorageSync('outPutEntry', {
       detailOrder,
@@ -270,7 +270,8 @@ Page({
       data: {
         product_id: cardOrder.product_id,
         pid: cardOrder.pid,
-        hash: this.data.hash
+        hash: this.data.hash,
+        production_code_id: this.data.id
       },
       success: (res) => {
         if (res.data.code === 200) {

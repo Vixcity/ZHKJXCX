@@ -4,7 +4,7 @@
     <block wx:if="{{!isLeader}}">
       <view class="flex fdc vh90 color91 w100 jcc aic">
         <view class="tc">
-          <image src="https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220216112643.png"></image>
+          <image class="image" src="https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220216112643.png"></image>
           <view class="mt20">暂无客户，请扫码绑定客户</view>
         </view>
       </view>
@@ -17,7 +17,7 @@
     <block wx:if="{{!isLeader}}">
       <view class="flex fdc vh90 color91 w100 jcc aic">
         <view class="tc">
-          <image src="https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220216112643.png"></image>
+          <image class="image" src="https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220216112643.png"></image>
           <view class="mt20">暂无客户，请扫码绑定客户</view>
         </view>
       </view>
@@ -30,7 +30,7 @@
     <block wx:if="{{!isLeader}}">
       <view class="flex fdc vh90 color91 w100 jcc aic">
         <view class="tc">
-          <image src="https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220216112643.png"></image>
+          <image class="image" src="https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220216112643.png"></image>
           <view class="mt20">暂无客户，请扫码绑定客户</view>
         </view>
       </view>
