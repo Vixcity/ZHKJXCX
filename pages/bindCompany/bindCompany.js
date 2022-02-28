@@ -132,13 +132,6 @@ Page({
         }
       }
     })
-    wxReq({
-      url:'/user/adopt/company',
-      method:'POST',
-      success: (res) => {
-        console.log(res)
-      }
-    })
   },
 
   toManege(){

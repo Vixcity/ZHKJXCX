@@ -16,8 +16,8 @@
           "name": "加入作坊",
           "pathName": "pages/addWorkShop/addWorkShop",
           "query": "uuid=f40832c87cf711ecba2ba18d238222ea&time=1646020781000",
-          "scene": 1047,
-          "launchMode": "default"
+          "launchMode": "default",
+          "scene": 1047
         },
         {
           "name": "绑定工厂",

@@ -29,7 +29,7 @@ Page({
       data: {
         status,
         limit: 1000000,
-        code:_this.data.code || ""
+        code:_this.data.order || ""
       },
       method: 'GET',
       success: (res) => {
