@@ -34,7 +34,7 @@ Page({
 				let arr = []
 				res.data.data.forEach(item => {
 					arr.push([
-						item.workshop.name,
+						item.workshop?.name || "无数据",
 						item.status===1?'在岗':'离职',
 						item.created_at.slice(0,10)+'~'+(item.quit_at!=="0000-00-00 00:00:00"?item.quit_at.slice(0,10):'至今')
 					])

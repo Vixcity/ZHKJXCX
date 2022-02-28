@@ -103,14 +103,6 @@ Page({
     
   bindOrToManege(){
     if((this.data.bindStatus === 0 || this.data.bindStatus === 3 || this.data.bindStatus === 2) && this.data.companyName !== undefined){
-      if(!this.data.iRead){
-        Message.error({
-          offset: [20, 32],
-          duration: 2000,
-          content: '同意并阅读绑定合作协议'
-        });
-        return
-      }
       this.bindCompany()
       return
     }

@@ -208,6 +208,33 @@ page{
 }
 
 /* margin-right */
+.mr100{
+  margin-right: 100px;
+}
+.mr90{
+  margin-right: 90px;
+}
+.mr80{
+  margin-right: 80px;
+}
+.mr70{
+  margin-right: 70px;
+}
+.mr60{
+  margin-right: 60px;
+}
+.mr50{
+  margin-right: 50px;
+}
+.mr45{
+  margin-right: 45px;
+}
+.mr40{
+  margin-right: 40px;
+}
+.mr30{
+  margin-right: 30px;
+}
 .mr20{
   margin-right: 20px;
 }
@@ -497,6 +524,12 @@ page{
 .vh100{
   height: 100vh;
 }
+.vh110{
+  height: 110vh;
+}
+.vh120{
+  height: 120vh;
+}
 
 
 
@@ -592,6 +625,9 @@ page{
   background: url(https://file.zwyknit.com/20220113152510.jpg);
   background-size: 100% auto;
   background-repeat: no-repeat;
+}
+.bgColorTransBlack{
+  background-color: rgba(0, 0, 0, 0.6);
 }
 .bgColorD8{
   background-color: #D8D8D8;

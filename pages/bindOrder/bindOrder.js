@@ -41,7 +41,7 @@ Page({
     // }
     // let params = {
     //   company_id: 'xx1',
-    //   hash: 777777,
+    //   hash: 9,
     //   id: 27,
     //   index: 1
     // }

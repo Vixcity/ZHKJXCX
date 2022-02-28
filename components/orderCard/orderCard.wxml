@@ -16,7 +16,7 @@
 		<view wx:if="{{detailInfo.status !== 3}}">
 			<text wx:if="{{detailInfo.dateDiff > 0}}" class="color8D9F">剩余{{detailInfo.dateDiff}}天</text>
 			<text wx:if="{{detailInfo.dateDiff === 0}}" class="colorFDA9">今日截止交付</text>
-			<text wx:if="{{detailInfo.dateDiff < 0}}" class="colorE800">逾期{{0-detailInfo.dateDiff}}天</text>
+			<text wx:if="{{detailInfo.dateDiff < 0 && (detailInfo.nowNumber-detailInfo.allNumber<0)}}" class="colorE800">逾期{{0-detailInfo.dateDiff}}天</text>
 		</view>
 	</view>
 	<view class="flex aic">

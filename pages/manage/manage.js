@@ -104,23 +104,8 @@ Component({
     },
     // 点击二维码拿到小程序码
     openPopup() {
-      if (wx.getStorageSync('wxacodeTime') === "") {
-        wx.setStorageSync('wxacodeTime', Date.now())
-        this.getWxACode()
-      } else {
-        let prevTime = wx.getStorageSync('wxacodeTime')
-        let timeDiff = getTimeDiff(Date.now(), prevTime, 'hours')
-        if (timeDiff < 48) {
-          this.setData({
-            showImage: wx.getStorageSync('作坊主小程序码'),
-            showPopup: true
-          })
-          return
-        }
-
-        wx.setStorageSync('wxacodeTime', Date.now())
-        this.getWxACode()
-      }
+      wx.setStorageSync('wxacodeTime', Date.now())
+      this.getWxACode()
     },
     getWxACode() {
       let _this = this

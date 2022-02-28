@@ -3,10 +3,10 @@
   <view class="h100 flex fdc jcsa aic">
     <view class="{{abnormal?'timeOutBg vw100':'bg'}} flex fdc jcsa aic por">
       <view wx:if="{{!abnormal}}" class="ml20 mr20 mt20 colorWhite cardBg vw90 jcsb flexWarp borderRadius16 shadow borderBox pl20 pr20 pt20 pb20 por overfh borderBox flex fdc">
-        <view class="fz35">
+        <!-- <view class="fz35">
         SCode：{{hash}}
-        </view>
-        <view class="fz35 mt20">
+        </view> -->
+        <view class="fz35 mt20 mb20">
           所属客户：{{companyName}}
         </view>
         <view class="poa bgColorB9 fz35 colorWhite flex aic jcc bindStatus">未绑定</view>

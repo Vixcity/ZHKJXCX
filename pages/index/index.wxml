@@ -2,7 +2,7 @@
 <view class="container">
   <view class="bg w100 {{orderList.length === 0?'vh85 overfh':'h100'}}" style="overflow-x: hidden;">
     <!-- 卡片列表 -->
-    <order-card bindtap="toOutPutEntry" bind:changeShow="changeShow" showChangeIcon="{{isLeader}}" smallThan24h="{{item.smallThan24h}}" wx:for="{{orderList}}" wx:for-item="item" wx:key="item" wx:for-index="index" data-index="{{index}}" detailInfo="{{item}}"></order-card>
+    <order-card bindtap="toOutPutEntry" bind:changeShow="changeShow" showChangeIcon="{{isLeader}}" smallThan24h="{{item.smallThan24h && (item.dateDiff>=-1) }}" wx:for="{{orderList}}" wx:for-item="item" wx:key="item" wx:for-index="index" data-index="{{index}}" detailInfo="{{item}}"></order-card>
 
     <!-- 懒加载 -->
     <view class="tc color91 mt20 mb20 {{orderList.length === 0?'flex vh100 jcc aic':''}}" hidden='{{!isShowLoadmore}}'>

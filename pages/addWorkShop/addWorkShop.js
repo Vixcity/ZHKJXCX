@@ -16,8 +16,6 @@ Page({
   },
   onLoad: function (option) {
     let _this = this
-    console.log(option)
-    let query_uuid = option.uuid
     let time = option.time
     let timeDiff = getTimeDiff(Date.now(), time, 'hours')
 
@@ -43,8 +41,9 @@ Page({
       return
     }
 
-    this.data.query_uuid = query_uuid
-    if (query_uuid === undefined) {
+    this.data.query_uuid = option.uuid
+    console.log(option.uuid)
+    if (option.uuid === undefined) {
       Message.error({
         offset: [20, 32],
         duration: 2000,
@@ -54,7 +53,7 @@ Page({
       wxReq({
         url: '/user/detali',
         data: {
-          uuid: query_uuid
+          uuid: option.uuid
         },
         method: "GET",
         success(res) {
@@ -67,7 +66,7 @@ Page({
           _this.setData({
             workShopInfo: res.data.data
           })
-          if (wx.getStorageSync('userInfo').userinfo.parent?.uuid === query_uuid) {
+          if (wx.getStorageSync('userInfo').userinfo.parent?.uuid === option.uuid) {
             _this.setData({
               showUsed: true
             })
@@ -78,6 +77,19 @@ Page({
         beloneInfo: wx.getStorageSync('userInfo').userinfo.parent
       })
     }
+  },
+
+  onHide(){
+    this.setData({
+      workShopInfo: {},
+      isAdded: wx.getStorageSync('userInfo').userinfo?.parent !== null || false,
+      query_uuid: '',
+      showDialog: false,
+      showUsed: false,
+      beloneInfo: {},
+      isBeOverdue: false,
+      notLeader: false
+    })
   },
 
   addWorkShop() {

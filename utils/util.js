@@ -13,7 +13,10 @@ const formatTime = date => {
 const wxReq = data => {
   const openid = wx.getStorageSync("userInfo").openid.openid
   // 作坊主
+  // 王
   // const openid = "oFr0i5M55SwKUlQ7WwbzaMOIar9Q"
+  // 周
+  // const openid = "oFr0i5Jhj6w5N5Oj_BEP6w-b1Lr4"
   // 员工
   // const openid = "oFr0i5FlAmENiYwaoEk75GcL8I5Y"
 
