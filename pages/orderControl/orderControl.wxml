@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-  <t-tabs value="{{0}}" bind:change="onTabsChange">
+  <t-tabs wx:if="{{!order}}" value="{{0}}" bind:change="onTabsChange">
     <t-tab-panel label="全部" value="0">
       <block wx:if="{{!isLeader}}">
         <view class="tc vh85 mt100 color91">
@@ -83,4 +83,12 @@
       </block>
     </t-tab-panel>
   </t-tabs>
+  <view wx:if="{{order}}" class="pb20 vh85 overfsy fz30">
+    <order-card bindtap="toOrderDetail" wx:for="{{detailInfoList}}" wx:for-item="item" wx:key="item" detailInfo="{{item}}" data-index="{{index}}" showPrice="{{item.showPrice}}"></order-card>
+    <view class="flex bgColorWhite vw100 tc aic jcsa mt20 pt20 pb20 colorWhite">
+      <view class="w40 boderSolid1 bgColor27A2 borderRadius10 pt10 pb10" bindtap="argeeOrder">接单</view>
+      <view class="w40 boderSolid1 borderRadius10 colorB9 pt10 pb10" bindtap="refuseOrder">我要拒单</view>
+    </view>
+    <t-dialog title="确认拒单？" content="请与工厂沟通后再拒单" confirm-btn="拒单" cancel-btn="接单" visible="{{isRefuseOrder}}" bind:confirm="isConfirmReuseOrder" bind:cancel="argeeOrder" />
+  </view>
 </view>

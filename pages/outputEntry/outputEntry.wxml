@@ -1,6 +1,10 @@
 <!--pages/outputEntry/outputEntry.wxml-->
 <view class="bg borderBox pt10 submit overfh">
 	<order-card detailInfo="{{cardOrder}}" enterPricce="{{process_price_all}}" showEnterPrice="{{true}}"></order-card>
+	<view wx:if="{{hash && prevProcess}}" class=" flex ml20 mr20 mt20 bgColorWhite vw90 fz30 flexWarp borderRadius16 shadow borderBox pl10 pr10 pt20 pb20 colorBlack por overfh">
+		<view class="w30">上道工序：</view>
+		<view class="w70">{{prevProcess.number}}件（{{prevProcess.weave_plan_product_info.weave_plan.process_name}}）</view>
+	</view>
 	<view class="ml20 mr20 mt20 bgColorWhite vw90 jcsb flexWarp borderRadius16 shadow borderBox pl10 pr10 pt10 pb10 colorBlack por overfh">
 		<t-tabs value="{{0}}" bind:change="onTabsChange">
 			<t-tab-panel label="按尺码颜色" value="0">

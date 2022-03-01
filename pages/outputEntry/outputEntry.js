@@ -82,6 +82,7 @@ Page({
 				// 更新卡片的数据
 				let discrepancy = allNumber - allRealNumber
 				let cardOrder = _this.data.cardOrder
+				let process_name = res.data.data.weave_plan.process_name
 				if (cardOrder === undefined) {
 					Message.success({
 						offset: [20, 32],
@@ -98,16 +99,28 @@ Page({
 
 				cardOrder.nowNumber = cardOrder?.allNumber - discrepancy
 
-				this.setData({
-					cardOrder,
-					allNumber,
-					entryArr: [],
-					allRealNumber,
-					enteryAllNumber: '',
-					workshop_yield_at: res.data.workshop_yield_at,
-					product_info: res.data.data.product_info,
-					process_price: res.data.data.process_prices[0]?.price || '0.00',
-					process_price_all: res.data.data.process_prices[0]?.price || '0.00',
+				// 获取上一道工序
+				wxReq({
+					url: '/user/workshop/yield/lastone',
+					data:{
+						process_name,
+						hash:_this.data.hash
+					},
+					method:"GET",
+					success:(ress) => {
+						this.setData({
+							cardOrder,
+							allNumber,
+							prevProcess:ress.data.data,
+							entryArr: [],
+							allRealNumber,
+							enteryAllNumber: '',
+							workshop_yield_at: res.data.workshop_yield_at,
+							product_info: res.data.data.product_info,
+							process_price: res.data.data.process_prices[0]?.price || '0.00',
+							process_price_all: res.data.data.process_prices[0]?.price || '0.00',
+						})
+					}
 				})
 			}
 		})

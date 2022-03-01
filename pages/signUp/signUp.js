@@ -52,10 +52,6 @@ Component({
       },
       {
         label: '水洗',
-        value: '10'
-      },
-      {
-        label: '水洗',
         value: '11'
       },
       {

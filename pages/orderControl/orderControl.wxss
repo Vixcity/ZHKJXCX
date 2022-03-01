@@ -2,3 +2,7 @@
 .container {
   overflow-x: hidden;
 }
+
+.container .t-dialog .t-dialog__footer .dialog--t-dialog__button-confirm{
+  color: #27A2FD;
+}

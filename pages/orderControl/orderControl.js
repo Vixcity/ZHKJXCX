@@ -9,6 +9,7 @@ const {
 Page({
   data: {},
   onLoad: function (option) {
+    // option.order = "FFSJH-2200017"
     option.isLeader = option.isLeader === "true" ? true : false
     this.setData(option)
   },
@@ -45,6 +46,9 @@ Page({
         let nowDate = year + '-' + (month < 10 ? "0" + month : month) + '-' + (day < 10 ? '0' + day : day)
         let nowTime = nowDate + ' ' + hour + ":" + minute + ":" + second
         data.forEach(item => {
+          if(!_this.data.order){
+            if(item.weave_plan.order_status !== 2) return;
+          }
           datas.push({
             title: item.product.name,
             time: item.weave_plan.end_time,
@@ -52,7 +56,7 @@ Page({
             allNumber: item.number,
             customer: item.weave_plan.company.company_name,
             imgSrc: item.product.rel_image[0]?.image_url || 'https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220211103236.png',
-            status: item.status,
+            status: _this.data.order?4:item.status,
             showPrice: item.total_price ? true : false,
             price: item.total_price.toFixed(2),
             display: item.display,
@@ -74,6 +78,10 @@ Page({
   },
 
   toOrderDetail(e) {
+    if(this.data.order){
+      return
+    }
+    
     wx.setStorageSync('orderDetail', {
       detailProduct: this.data.allInfoList[e.currentTarget.dataset.index],
       detailInfo: this.data.detailInfoList[e.currentTarget.dataset.index]
@@ -82,6 +90,23 @@ Page({
     wx.navigateTo({
       url: '../orderDetail/orderDetail',
     })
+  },
+
+  // 接单
+  argeeOrder(){
+    console.log(1)
+  },
+  
+  // 拒单按钮点击
+  refuseOrder(){
+    this.setData({
+      isRefuseOrder:true
+    })
+  },
+
+  // 拒单按钮再次点击
+  isConfirmReuseOrder(){
+    console.log(2)
   },
 
   onTabsChange(e) {

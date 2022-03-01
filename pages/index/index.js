@@ -94,6 +94,7 @@ Page({
         limit: page_size, // 每页加载十条 上面设置
         // type: 1, // 未完成列表
         // no_binding: 1 // 显示未绑定订单
+        order_status:2 // 显示已经接单的订单
       },
       success: function (res) {
         // console.log(res.data.data.data)

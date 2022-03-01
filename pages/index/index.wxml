@@ -15,7 +15,7 @@
     </view>
 
     <!-- 第一次查询无数据 -->
-    <view class="flex fdc vh100 color91 w100 jcc aic" wx:if="{{notShow && !isShowLoadmore}}">
+    <view class="flex fdc vh100 color91 w100 jcc aic" wx:if="{{(notShow && !isShowLoadmore) || noData}}">
       <view class="tc mt70 size-xl">
         <image class="image" src="https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220216112643.png"></image>
         <view class="mt20">没有符合条件的数据</view>
