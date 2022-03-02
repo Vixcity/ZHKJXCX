@@ -353,6 +353,21 @@ page{
 }
 
 /* padding-bottom */
+.pb100{
+  padding-bottom: 100px;
+}
+.pb90{
+  padding-bottom: 90px;
+}
+.pb80{
+  padding-bottom: 80px;
+}
+.pb70{
+  padding-bottom: 70px;
+}
+.pb60{
+  padding-bottom: 60px;
+}
 .pb50{
   padding-bottom: 50px;
 }
@@ -799,7 +814,22 @@ t-image {
   border-bottom-right-radius: 37rpx;
   margin: 0 auto;
 }
-
+.half .t-button {
+  color: #ffffff!important;
+  border: none;
+  width: 40%;
+  border-top-left-radius: 37rpx;
+  border-top-right-radius: 37rpx;
+  border-bottom-left-radius: 37rpx;
+  border-bottom-right-radius: 37rpx;
+  margin: 0 auto;
+}
+.half .t-button.submit {
+  background-image: linear-gradient( #52C0FF, #008AD8);
+}
+.half .t-button.refuse {
+  background-image: linear-gradient( #c7c7c7, #797979);
+}
 
 
 

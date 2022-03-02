@@ -27,7 +27,7 @@ Component({
 	 * 组件的初始数据
 	 */
 	data: {
-		isShort:false
+		isShort:true
 	},
 
 	/**
@@ -35,9 +35,9 @@ Component({
 	 */
 	pageLifetimes: {
 		show: function() {
-			if(this.data.showShort){
+			if(!this.data.showShort){
 				this.setData({
-					isShort:true
+					isShort:false
 				})
 			}
 		}

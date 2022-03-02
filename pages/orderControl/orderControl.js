@@ -4,12 +4,33 @@ const {
   getTimeDiff,
   getTimestamp
 } = require("../../utils/util")
+import Message from 'tdesign-miniprogram/message/index';
 
 // index.js
 Page({
-  data: {},
+  data: {
+    cardInfoData: {
+      cardData: [],
+      cardTitle: [{
+        title: '颜色尺码',
+        width: 20
+      }, {
+        title: '工序',
+        width: 20
+      }, {
+        title: '加工价',
+        width: 20
+      }, {
+        title: '数量',
+        width: 20
+      }, {
+        title: '已完成/差额',
+        width: 20
+      }]
+    },
+  },
   onLoad: function (option) {
-    // option.order = "FFSJH-2200017"
+    // option.order = "XXSJH-2200012"
     option.isLeader = option.isLeader === "true" ? true : false
     this.setData(option)
   },
@@ -30,11 +51,12 @@ Page({
       data: {
         status,
         limit: 1000000,
-        code:_this.data.order || ""
+        code: _this.data.order || ""
       },
       method: 'GET',
       success: (res) => {
         let data = res.data.data.data
+        let arr = []
         let datas = []
         let date = new Date()
         let year = date.getFullYear()
@@ -45,10 +67,15 @@ Page({
         let second = date.getSeconds()
         let nowDate = year + '-' + (month < 10 ? "0" + month : month) + '-' + (day < 10 ? '0' + day : day)
         let nowTime = nowDate + ' ' + hour + ":" + minute + ":" + second
+
         data.forEach(item => {
-          if(!_this.data.order){
-            if(item.weave_plan.order_status !== 2) return;
+          if (!_this.data.order) {
+            if (item.weave_plan.order_status !== 2) return;
           }
+          let product_info = item.product_info_data
+          product_info.forEach(el => {
+            arr.push([(el.size.size_name || '无数据') + ' / ' + (el.color.color_name || '无数据'), item.weave_plan.process_name, (item.process[0]?.price || 0) + '元/件', item.number, item.real_number + ' / ' + (item.number - item.real_number)])
+          })
           datas.push({
             title: item.product.name,
             time: item.weave_plan.end_time,
@@ -56,7 +83,7 @@ Page({
             allNumber: item.number,
             customer: item.weave_plan.company.company_name,
             imgSrc: item.product.rel_image[0]?.image_url || 'https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220211103236.png',
-            status: _this.data.order?4:item.status,
+            status: _this.data.order ? 4 : item.status,
             showPrice: item.total_price ? true : false,
             price: item.total_price.toFixed(2),
             display: item.display,
@@ -68,20 +95,22 @@ Page({
             bigThan30: getTimeDiff(getTimestamp(nowTime), getTimestamp(item.weave_plan.created_at), 'minutes') >= 30,
           })
         });
+        this.data.cardInfoData.cardData = arr
         this.setData({
           isShowLoadmore: false,
           detailInfoList: datas,
-          allInfoList: data
+          allInfoList: data,
+          cardInfoData: this.data.cardInfoData
         })
       }
     })
   },
 
   toOrderDetail(e) {
-    if(this.data.order){
+    if (this.data.order) {
       return
     }
-    
+
     wx.setStorageSync('orderDetail', {
       detailProduct: this.data.allInfoList[e.currentTarget.dataset.index],
       detailInfo: this.data.detailInfoList[e.currentTarget.dataset.index]
@@ -92,23 +121,65 @@ Page({
     })
   },
 
-  // 接单
-  argeeOrder(){
-    console.log(1)
+  postPlanStatus(status) {
+    let _this = this
+
+    wxReq({
+      url: '/weave/plan/status',
+      method: "POST",
+      data: {
+        code: _this.data.order || "",
+        order_status: status
+      },
+      success: (res => {
+        if (res.data.status) {
+          if (status === 2) {
+            Message.success({
+              offset: [20, 32],
+              duration: 3000,
+              content: '接单成功，3秒后返回首页',
+            });
+          }
+
+          if (status === 3){
+            Message.success({
+              offset: [20, 32],
+              duration: 3000,
+              content: '拒单成功，3秒后返回首页',
+            });
+          }
+
+          setTimeout(function(){_this.toManege()},3000)
+        }
+      })
+    })
   },
-  
+
+  // 接单
+  argeeOrder() {
+    this.postPlanStatus(2)
+  },
+
   // 拒单按钮点击
-  refuseOrder(){
+  refuseOrder() {
     this.setData({
-      isRefuseOrder:true
+      isRefuseOrder: true
     })
   },
 
   // 拒单按钮再次点击
-  isConfirmReuseOrder(){
-    console.log(2)
+  isConfirmReuseOrder() {
+    this.postPlanStatus(3)
   },
 
+  // 返回首页
+  toManege(){
+    wx.reLaunch({
+      url: '../manage/manage',
+    })
+  },
+
+  // 切换tab页
   onTabsChange(e) {
     this.getOrderList(e.detail.value === '0' ? "" : e.detail.value)
 
