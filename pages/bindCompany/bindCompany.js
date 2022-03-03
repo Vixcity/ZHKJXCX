@@ -59,14 +59,17 @@ Page({
       return
     }
 
+    // 测试工厂
     // let company_id = '0db46f8e744211eca9a54d3cafd8c04d'
-    // let params = {
-    //   company_id
-    // }
-    // this.setData({
-    //   company_id
-    // })
-    // this.init(params)
+    // 凯瑞工厂
+    let company_id = '70857b7288a011ecba5dd79c3ad4c961'
+    let params = {
+      company_id
+    }
+    this.setData({
+      company_id
+    })
+    this.init(params)
   },
 
   init(params){
@@ -78,6 +81,7 @@ Page({
       success: (res) => {
         _this.setData({
           companyName:res.data.data?.company_name,
+          alias:res.data.data?.alias,
           address:res.data.data?.address
         })
       }
@@ -102,7 +106,7 @@ Page({
   },
     
   bindOrToManege(){
-    if((this.data.bindStatus === 0 || this.data.bindStatus === 3 || this.data.bindStatus === 2) && this.data.companyName !== undefined){
+    if((this.data.bindStatus === 0 || this.data.bindStatus === 3 || this.data.bindStatus === 2) && (this.data.companyName !== undefined || this.data.alias !== undefined)){
       this.bindCompany()
       return
     }

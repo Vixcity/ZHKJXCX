@@ -4,7 +4,8 @@
 	<view class="flex jcsb aic">
 		<view class="fz35 flex blod aic" bind:click="someFunction" catchtap="changeShow">
 			<view class="overfh vw53" style="text-overflow:ellipsis;white-space: nowrap;" wx:if="{{detailInfo.display === 0}}">{{detailInfo.title || detailInfo.code}}</view>
-			<view class="overfh vw53" style="text-overflow:ellipsis;white-space: nowrap;" wx:if="{{detailInfo.display === 1}}">{{detailInfo.code || detailInfo.title}}</view>
+			<view class="overfh vw53" style="text-overflow:ellipsis;white-space: nowrap;" wx:elif="{{detailInfo.display === 1}}">{{detailInfo.code || detailInfo.title}}</view>
+			<view class="overfh vw53" style="text-overflow:ellipsis;white-space: nowrap;" wx:else>{{detailInfo.title || detailInfo.code}}</view>
 			<t-icon wx:if="{{showChangeIcon}}" class="ml10 color8D9F" name=swap" size="xl"> </t-icon>
 		</view>
 		<view class="flex h90">

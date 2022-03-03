@@ -2,11 +2,11 @@
 <view class="container">
   <view class="bg flex fdc jcsa aic">
     <view class="{{(companyName && !abnormal)? 'bg' : 'noData'}} {{!isLeader?'notLeader':''}} flex fdc jcsa aic por">
-      <view wx:if="{{companyName}}" class="ml20 mr20 mt20 bgColorWhite vw90 jcsb flexWarp borderRadius16 shadow borderBox pl20 pr20 pt20 pb20 colorBlack por overfh borderBox flex fdc">
-        <view class="fz40 blod">{{companyName}}（有限公司）</view>
+      <view wx:if="{{alias || companyName}}" class="ml20 mr20 mt20 bgColorWhite vw90 jcsb flexWarp borderRadius16 shadow borderBox pl20 pr20 pt20 pb20 colorBlack por overfh borderBox flex fdc">
+        <view class="fz40 blod">{{alias || companyName}}</view>
         <view class="flex aic mt5 color91 fz28 size-xsss">
           <image class="t-image" src="https://file.zwyknit.com/%E5%AE%9A%E4%BD%8D-01.png"/>
-          <text class="ml10">{{address}}</text>
+          <text class="ml10">{{address || "未填写地址"}}</text>
         </view>
         <view wx:if="{{(bindStatus === 0 || bindStatus === 3 || bindStatus === 2)}}" class="poa bgColorB9 fz35 colorWhite flex aic jcc bindStatus">未绑定</view>
         <view wx:if="{{bindStatus === 1}}" class="poa bgColorFDA9 fz35 colorWhite flex aic jcc bindStatus">审核中</view>
