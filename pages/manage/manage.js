@@ -53,6 +53,7 @@ Component({
           })
           return
         }
+
         this.setData({
           userInfo: userInfo
         })
@@ -80,6 +81,7 @@ Component({
           if (res.data.code === 200) {
             let allUserinfo = wx.getStorageSync('userInfo')
             allUserinfo.userinfo = res.data.data
+            allUserinfo.userinfo.process = allUserinfo.userinfo.process.split(",")
             wx.setStorageSync('userInfo', allUserinfo)
             // 作坊主 == 3
             // 员工 == 2

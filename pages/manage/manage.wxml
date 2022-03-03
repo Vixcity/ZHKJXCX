@@ -28,7 +28,7 @@
             </view>
             <block wx:if="{{ourUser !== null && userInfo.userinfo !== null}}">
               <view class="flex fz30 h40 colorBlack">
-                <view class="autoLogos pl5 pr5" style="background-color: white; color: #229CFB;">{{ userInfo.userinfo.process }}</view>
+                <view class="autoLogos pl5 pr5" style="background-color: white; color: #229CFB;">{{ userInfo.userinfo.process[0] }}</view>
               </view>
             </block>  
           </view>
