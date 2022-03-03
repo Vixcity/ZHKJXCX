@@ -74,7 +74,7 @@ Page({
           }
           let product_info = item.product_info_data
           product_info.forEach(el => {
-            arr.push([(el.size.size_name || '无数据') + ' / ' + (el.color.color_name || '无数据'), item.weave_plan.process_name, (item.process[0]?.price || 0) + '元/件', item.number, item.real_number + ' / ' + (item.number - item.real_number)])
+            arr.push([(el.size.size_name || '无数据') + '/' + (el.color.color_name || '无数据'), item.weave_plan.process_name, (item.process[0]?.price || 0) + '元/件', item.number, (item.real_number || 0) + ' / ' + (item.number - item.real_number)])
           })
           datas.push({
             title: item.product.name,

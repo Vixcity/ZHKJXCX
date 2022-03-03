@@ -71,7 +71,7 @@ Page({
 				let cardInfoData = this.data.cardInfoData
 				let productionSchedule = this.data.productionSchedule
 				product_info.forEach(item => {
-					arr.push([(item.size.size_name || '无数据') + ' / ' + (item.color.color_name || '无数据'), res.data.data.weave_plan.process_name, item.price + '元/件', item.number, item.real_number + ' / ' + (item.number - item.real_number)])
+					arr.push([(item.size.size_name || '无数据') + '/' + (item.color.color_name || '无数据'), res.data.data.weave_plan.process_name, item.price + '元/件', item.number, (item.real_number || 0) + ' / ' + (item.number - item.real_number)])
 				});
 				cardInfoData.cardData = arr
 
