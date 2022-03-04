@@ -9,6 +9,7 @@ import Message from 'tdesign-miniprogram/message/index';
 // index.js
 Page({
   data: {
+    isLogin: true,
     cardInfoData: {
       cardData: [],
       cardTitle: [{
@@ -30,12 +31,22 @@ Page({
     },
   },
   onLoad: function (option) {
+    // 测试用例
     // option.order = "XXSJH-2200012"
+    // 生产用例
+    // option.order = "CSXBSJH-2200021"
     option.isLeader = option.isLeader === "true" ? true : false
     this.setData(option)
-  },
-  onShow() {
-    this.getOrderList(wx.getStorageSync('orderChooseIndex'))
+
+    if (wx.getStorageSync('userInfo') === "") {
+      this.setData({
+        isLogin: false
+      })
+
+      return
+    } else {
+      this.getOrderList(wx.getStorageSync('orderChooseIndex'))
+    }
   },
 
   // 获取列表
@@ -55,9 +66,17 @@ Page({
       },
       method: 'GET',
       success: (res) => {
+        if (res.data.data.data.length === 0) {
+          _this.setData({
+            error: true
+          })
+          return
+        }
+
         let data = res.data.data.data
         let arr = []
         let datas = []
+        let indexArr = []
         let date = new Date()
         let year = date.getFullYear()
         let month = date.getMonth() + 1
@@ -68,13 +87,16 @@ Page({
         let nowDate = year + '-' + (month < 10 ? "0" + month : month) + '-' + (day < 10 ? '0' + day : day)
         let nowTime = nowDate + ' ' + hour + ":" + minute + ":" + second
 
-        data.forEach(item => {
+        data.forEach((item, index) => {
           if (!_this.data.order) {
-            if (item.weave_plan.order_status !== 2) return;
+            if (item.weave_plan.order_status !== 2) {
+              indexArr.push(index)
+              return;
+            }
           }
           let product_info = item.product_info_data
           product_info.forEach(el => {
-            arr.push([(el.size.size_name || '无数据') + '/' + (el.color.color_name || '无数据'), item.weave_plan.process_name, (item.process[0]?.price || 0) + '元/件', item.number, (item.real_number || 0) + ' / ' + (item.number - item.real_number)])
+            arr.push([(el.size.size_name || '无数据') + '/' + (el.color.color_name || '无数据'), item.weave_plan.process_name, (el.price || 0) + '元/件', el.number, (el.real_number || 0) + ' / ' + (el.number - el.real_number)])
           })
           datas.push({
             title: item.product.name,
@@ -95,6 +117,11 @@ Page({
             bigThan30: getTimeDiff(getTimestamp(nowTime), getTimestamp(item.weave_plan.created_at), 'minutes') >= 30,
           })
         });
+
+        indexArr.forEach(item => {
+          data.splice(item, 1);
+        })
+
         this.data.cardInfoData.cardData = arr
         this.setData({
           isShowLoadmore: false,
@@ -141,7 +168,7 @@ Page({
             });
           }
 
-          if (status === 3){
+          if (status === 3) {
             Message.success({
               offset: [20, 32],
               duration: 3000,
@@ -149,7 +176,9 @@ Page({
             });
           }
 
-          setTimeout(function(){_this.toManege()},3000)
+          setTimeout(function () {
+            _this.toManege()
+          }, 3000)
         }
       })
     })
@@ -173,9 +202,17 @@ Page({
   },
 
   // 返回首页
-  toManege(){
+  toManege() {
     wx.reLaunch({
       url: '../manage/manage',
+    })
+  },
+
+  // 注册页
+  toNoLogin() {
+    let _this = this
+    wx.reLaunch({
+      url: '../noLogin/noLogin?order=' + _this.data.order,
     })
   },
 

@@ -11,10 +11,10 @@ const formatTime = date => {
 
 // 封装请求
 const wxReq = data => {
-  // const openid = wx.getStorageSync("userInfo").openid.openid
+  const openid = wx.getStorageSync("userInfo").openid.openid
   // 作坊主
   // 王
-  const openid = "oFr0i5M55SwKUlQ7WwbzaMOIar9Q"
+  // const openid = "oFr0i5M55SwKUlQ7WwbzaMOIar9Q"
   // 周
   // const openid = "oFr0i5Jhj6w5N5Oj_BEP6w-b1Lr4"
   // 员工
@@ -29,6 +29,20 @@ const wxReq = data => {
       // Authorization:'Bearer ' + 6666
       Authorization: 'Bearer ' + openid // 员工ID
     }
+  })
+}
+
+// 刷新页面
+function reloadThisPage() {
+  let currentPages = getCurrentPages()
+  let lastRoute = currentPages[currentPages.length - 1].route
+  let options = currentPages[currentPages.length - 1].options
+  let optionsStr = ""
+  for (let key in options) {
+      optionsStr += '?' + key + '=' + options[key]
+  }
+  wx.redirectTo({
+      url: '/' + lastRoute + optionsStr,
   })
 }
 
@@ -140,5 +154,6 @@ module.exports = {
   createDateDate,
   getTimestamp,
   dateDiff,
-  urlParams
+  urlParams,
+  reloadThisPage
 }

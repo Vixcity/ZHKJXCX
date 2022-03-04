@@ -2,7 +2,7 @@ const {
 	wxReq
 } = require("../../utils/util")
 import Message from 'tdesign-miniprogram/message/index';
-// pages/outputEntry/outputEntry.js
+
 Page({
 
 	/**

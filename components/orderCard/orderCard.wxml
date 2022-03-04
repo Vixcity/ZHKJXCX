@@ -39,9 +39,9 @@
 	</view>
 	<!-- 弹出框 -->
 	<t-popup catchtap visible="{{showPopup}}" placement="center" bindtap="closePopup">
-      <view slot="content" class="overfh por" catchtap>
+      <view slot="content" class="overfh por">
         <view class="tc vw100 h100">
-          <image style="width: 100%;" src="{{detailInfo.imgSrc}}"></image>
+          <image mode="widthFix" show-menu-by-longpress="{{true}}" src="{{detailInfo.imgSrc}}"></image>
         </view>
       </view>
     </t-popup>

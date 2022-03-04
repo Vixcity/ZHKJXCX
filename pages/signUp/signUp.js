@@ -4,7 +4,7 @@ import {
   wxReq
 } from '../../utils/util';
 // index.js
-Component({
+Page({
   data: {
     userInfo: null,
     value: "",
@@ -193,204 +193,222 @@ Component({
     ],
     selectedWorkProcedureValue: ''
   },
-  pageLifetimes: {
-    show: function () {
-      wx.hideHomeButton()
-      if (this.data.userInfo === null) {
-        this.setData({
-          userInfo: wx.getStorageSync('userInfo')
-        })
-      }
+
+  onLoad: function (options) {
+    this.setData(options)
+
+    wx.hideHomeButton()
+    if (this.data.userInfo === null) {
+      this.setData({
+        userInfo: wx.getStorageSync('userInfo')
+      })
     }
   },
-  methods: {
-    // 下面三个方法为改变对应的值
-    changeName(e) {
-      this.changeSelectItem(e.detail.value, 'realName')
-    },
-    changeProcess(e) {
-      this.changeSelectItem(e.detail.value, 'process')
-    },
-    changePhone(e) {
-      this.changeSelectItem(e.detail.value, 'phoneNumber')
-    },
 
-    // 赋所需要的值
-    changeSelectItem(item, type) {
-      if (type === "phoneNumber") {
-        this.data.userInfo.wechat_data[type] = item
-        this.data.userInfo[type] = item
-      } else if (type === "process") {
-        this.data.userInfo[type] = item
-      } else if (type === 'realName'){
-        this.data.userInfo.realName = item
-        this.data.userInfo.wechat_data.realName = item
-      }
-        this.setData({
-          userInfo: this.data.userInfo
-        })
-    },
+  // 下面三个方法为改变对应的值
+  changeName(e) {
+    this.changeSelectItem(e.detail.value, 'realName')
+  },
+  changeProcess(e) {
+    this.changeSelectItem(e.detail.value, 'process')
+  },
+  changePhone(e) {
+    this.changeSelectItem(e.detail.value, 'phoneNumber')
+  },
 
-    // 获取手机号
-    getPhoneNumber(e) {
-      if (e.detail.errMsg === "getPhoneNumber:ok") {
-        wxReq({
-          url: '/wechat/phone',
-          data: {
-            code: e.detail.code,
-          },
-          method: "POST",
-          success: (res) => {
-            let phoneNumber = JSON.parse(res.data.data).phone_info.purePhoneNumber
-            this.changeSelectItem(phoneNumber, 'phoneNumber')
-          }
-        })
-      } else {
-        Message.error({
-          offset: [20, 32],
-          duration: 2000,
-          content: '获取手机号失败',
-        });
-      }
-      // this.data.userInfo.phoneNumber = e.detail.value
-    },
+  // 赋所需要的值
+  changeSelectItem(item, type) {
+    if (type === "phoneNumber") {
+      this.data.userInfo.wechat_data[type] = item
+      this.data.userInfo[type] = item
+    } else if (type === "process") {
+      this.data.userInfo[type] = item
+    } else if (type === 'realName') {
+      this.data.userInfo.realName = item
+      this.data.userInfo.wechat_data.realName = item
+    }
+    this.setData({
+      userInfo: this.data.userInfo
+    })
+  },
 
-    // 点击注册
-    postSignUp() {
-      if (!this.data.isRead) {
-        Message.error({
-          offset: [20, 32],
-          duration: 2000,
-          content: '请阅读并勾选协议',
-        });
-        return
-      }
-      if (this.data.selectedWorkProcedureValue === "") {
-        Message.error({
-          offset: [20, 32],
-          duration: 2000,
-          content: '请选择工序',
-        });
-        return
-      }
-      if (this.data.userInfo.realName === undefined) {
-        Message.error({
-          offset: [20, 32],
-          duration: 2000,
-          content: '请输入真实姓名',
-        });
-        return
-      }
-      if (this.data.userInfo.phoneNumber === undefined) {
-        Message.error({
-          offset: [20, 32],
-          duration: 2000,
-          content: '请填写手机号',
-        });
-        return
-      } else {
-        if (!verifyTel(this.data.userInfo.phoneNumber)) {
-          Message.error({
-            offset: [20, 32],
-            duration: 2000,
-            content: '手机号格式不正确，请重新填写或者获取',
-          });
-          this.changeSelectItem("", "phoneNumber")
-          return
-        }
-      }
-
-      let userInfo = this.data.userInfo
-      let selectedWorkProcedureValue = this.data.selectedWorkProcedureValue
+  // 获取手机号
+  getPhoneNumber(e) {
+    if (e.detail.errMsg === "getPhoneNumber:ok") {
       wxReq({
-        url: '/user/register',
+        url: '/wechat/phone',
         data: {
-          user_name: userInfo.phoneNumber,
-          name: userInfo.realName,
-          unionid: userInfo.openid.unionid,
-          process: selectedWorkProcedureValue,
-          wechat_data: userInfo.wechat_data,
-          openid: userInfo.openid.openid
+          code: e.detail.code,
         },
         method: "POST",
         success: (res) => {
-          if (res.data.data === true) {
+          let phoneNumber = JSON.parse(res.data.data).phone_info.purePhoneNumber
+          this.changeSelectItem(phoneNumber, 'phoneNumber')
+        }
+      })
+    } else {
+      Message.error({
+        offset: [20, 32],
+        duration: 2000,
+        content: '获取手机号失败',
+      });
+    }
+    // this.data.userInfo.phoneNumber = e.detail.value
+  },
+
+  // 点击注册
+  postSignUp() {
+    let _this = this
+
+    if (!this.data.isRead) {
+      Message.error({
+        offset: [20, 32],
+        duration: 2000,
+        content: '请阅读并勾选协议',
+      });
+      return
+    }
+    if (this.data.selectedWorkProcedureValue === "") {
+      Message.error({
+        offset: [20, 32],
+        duration: 2000,
+        content: '请选择工序',
+      });
+      return
+    }
+    if (this.data.userInfo.realName === undefined) {
+      Message.error({
+        offset: [20, 32],
+        duration: 2000,
+        content: '请输入真实姓名',
+      });
+      return
+    }
+    if (this.data.userInfo.phoneNumber === undefined) {
+      Message.error({
+        offset: [20, 32],
+        duration: 2000,
+        content: '请填写手机号',
+      });
+      return
+    } else {
+      if (!verifyTel(this.data.userInfo.phoneNumber)) {
+        Message.error({
+          offset: [20, 32],
+          duration: 2000,
+          content: '手机号格式不正确，请重新填写或者获取',
+        });
+        this.changeSelectItem("", "phoneNumber")
+        return
+      }
+    }
+
+    let userInfo = this.data.userInfo
+    let selectedWorkProcedureValue = this.data.selectedWorkProcedureValue
+    wxReq({
+      url: '/user/register',
+      data: {
+        user_name: userInfo.phoneNumber,
+        name: userInfo.realName,
+        unionid: userInfo.openid.unionid,
+        process: selectedWorkProcedureValue,
+        wechat_data: userInfo.wechat_data,
+        openid: userInfo.openid.openid
+      },
+      method: "POST",
+      success: (res) => {
+        if (res.data.data === true) {
+          if (_this.data.company_id) {
             Message.success({
               offset: [20, 32],
               duration: 2000,
-              content: '注册成功',
+              content: '注册成功,三秒后返回绑定工厂页面',
             });
-            this.toManage()
-          } else {
-            Message.error({
-              offset: [20, 32],
-              duration: 2000,
-              content: res.data.data,
-            });
+            setTimeout(() => {
+              wx.navigateTo({
+                url: '../bindCompany/bindCompany?company_id=' + _this.data.company_id,
+              })
+            },3000)
+            return
           }
-        }
-      })
-    },
 
-    // 去管理界面
-    toManage() {
-      wx.reLaunch({
-        url: '../manage/manage'
-      })
-    },
-
-    // 阅读同意
-    iRead() {
-      this.setData({
-        isRead: !this.data.isRead
-      })
-    },
-
-    // 去协议界面
-    toArgument() {
-      wx.navigateTo({
-        url: '../agreement/agreement',
-      })
-    },
-
-    // 打开弹窗
-    chooseProcedure(){
-      this.setData({
-        showPick:true
-      })
-    },
-
-    // 关闭弹窗
-    cancelChoose(e){
-      delete this.data.userInfo.process
-      this.setData({
-        showPick:false
-      })
-    },
-
-    // 点击确定
-    confirmChoose(){
-      let _this = this
-      let selectedWorkProcedureValue = ''
-      _this.data.workProcedure.forEach(process => {
-        delete process.checked
-      })
-
-      _this.data.userInfo.process.forEach((item,index) => {
-        if(index === 0){
-          selectedWorkProcedureValue += _this.data.workProcedure[item].label
+          Message.success({
+            offset: [20, 32],
+            duration: 2000,
+            content: '注册成功，三秒后返回首页',
+          });
+          setTimeout(() => {
+            _this.toManage()
+          },3000)
         } else {
-          selectedWorkProcedureValue += (',' + _this.data.workProcedure[item].label)
+          Message.error({
+            offset: [20, 32],
+            duration: 2000,
+            content: res.data.data,
+          });
         }
+      }
+    })
+  },
 
-        _this.data.workProcedure[item].checked = "true"
-      })
+  // 去管理界面
+  toManage() {
+    wx.reLaunch({
+      url: '../manage/manage'
+    })
+  },
 
-      this.setData({
-        showPick:false,
-        selectedWorkProcedureValue,
-        workProcedure:_this.data.workProcedure
-      })
-    }
+  // 阅读同意
+  iRead() {
+    this.setData({
+      isRead: !this.data.isRead
+    })
+  },
+
+  // 去协议界面
+  toArgument() {
+    wx.navigateTo({
+      url: '../agreement/agreement',
+    })
+  },
+
+  // 打开弹窗
+  chooseProcedure() {
+    this.setData({
+      showPick: true
+    })
+  },
+
+  // 关闭弹窗
+  cancelChoose(e) {
+    delete this.data.userInfo.process
+    this.setData({
+      showPick: false
+    })
+  },
+
+  // 点击确定
+  confirmChoose() {
+    let _this = this
+    let selectedWorkProcedureValue = ''
+    _this.data.workProcedure.forEach(process => {
+      delete process.checked
+    })
+
+    _this.data.userInfo.process.forEach((item, index) => {
+      if (index === 0) {
+        selectedWorkProcedureValue += _this.data.workProcedure[item].label
+      } else {
+        selectedWorkProcedureValue += (',' + _this.data.workProcedure[item].label)
+      }
+
+      _this.data.workProcedure[item].checked = "true"
+    })
+
+    this.setData({
+      showPick: false,
+      selectedWorkProcedureValue,
+      workProcedure: _this.data.workProcedure
+    })
   }
 })

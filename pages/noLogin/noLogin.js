@@ -8,19 +8,25 @@ Page({
     userInfo: {},
     hasUserInfo: false,
   },
+  
   toManage() {
     wx.reLaunch({
       url: '../manage/manage'
     })
-	},
+  },
+  
 	canToManage(){
 		if(wx.getStorageSync('userInfo') !== "" && wx.getStorageSync('userInfo').userinfo!==null){
 			this.toManage()
 		}
-	},
-  onLoad() {
+  },
+  
+  onLoad(options) {
+    this.setData(options)
+
 		this.canToManage()
   },
+
   getUserProfile(e) {
     let _this = this
     // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
@@ -47,6 +53,13 @@ Page({
                     let userinfo = resdata.data.data
                     userinfo.wechat_data = wxUserInfo
                     wx.setStorageSync('userInfo',userinfo)
+
+                    if(_this.data.order){
+                      wx.navigateTo({
+                        url: '../orderControl/orderControl?isLeader=true&order=' + _this.data.order,
+                      })
+                      return
+                    }
                     _this.toManage()
                 } else {
                   Message.error({

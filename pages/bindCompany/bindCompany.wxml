@@ -5,7 +5,7 @@
       <view wx:if="{{alias || companyName}}" class="ml20 mr20 mt20 bgColorWhite vw90 jcsb flexWarp borderRadius16 shadow borderBox pl20 pr20 pt20 pb20 colorBlack por overfh borderBox flex fdc">
         <view class="fz40 blod">{{alias || companyName}}</view>
         <view class="flex aic mt5 color91 fz28 size-xsss">
-          <image class="t-image" src="https://file.zwyknit.com/%E5%AE%9A%E4%BD%8D-01.png"/>
+          <image class="t-image" src="https://file.zwyknit.com/%E5%AE%9A%E4%BD%8D-01.png" />
           <text class="ml10">{{address || "未填写地址"}}</text>
         </view>
         <view wx:if="{{(bindStatus === 0 || bindStatus === 3 || bindStatus === 2)}}" class="poa bgColorB9 fz35 colorWhite flex aic jcc bindStatus">未绑定</view>
@@ -33,16 +33,23 @@
       </view>
       <view wx:else class="vw100 mt100 fz35">
         <view class="pt90"></view>
-        <view wx:if="{{isLogin && isLeader}}" class="tc vw100 fz35 blod">暂未查询到该工厂信息</view>
-        <view wx:if="{{!isLogin}}" class="vw100 tc mt100">您还未登录，点击返回首页进行登录</view>
+        <view wx:if="{{isLogin && isLeader && isNoData}}" class="tc vw100 fz35 blod">暂未查询到该工厂信息</view>
+        <view wx:if="{{!isLogin}}" class="vw100 tc mt100">你还没有登录，请点击登录</view>
+        <view wx:if="{{!isNoTrueLogin}}" class="vw100 tc mt100">您还未注册，点击进行注册</view>
         <view wx:if="{{!isLeader}}" class="vw100 tc mt100">您为员工，无权限进行绑定操作</view>
-        <view class="submit mt30">
+        <view wx:if="{{!isLogin}}" class="submit mt30">
+          <t-button theme="primary" size="large" bindtap="getUserProfile">登录</t-button>
+        </view>
+        <view wx:if="{{!isNoTrueLogin}}" class="submit mt30">
+          <t-button theme="primary" size="large" variant="plain" bindtap="toSignUp">点击注册</t-button>
+        </view>
+        <view wx:if="{{isLogin && isLeader && isNoData}}" class="submit mt30">
           <t-button theme="primary" size="large" variant="plain" bindtap="bindOrToManege">返回首页</t-button>
         </view>
       </view>
     </view>
   </view>
-  <t-dialog title="申请成功" content="您已加入作坊成功，请返回首页查看" confirm-btn="返回首页" visible="{{showDialog}}" bind:confirm="toManege"/>
-  <t-dialog title="重复申请" content="您已加入此作坊，请勿重复申请" confirm-btn="返回首页" visible="{{showUsed}}" bind:confirm="toManege"/>
+  <t-dialog title="申请成功" content="您已加入作坊成功，请返回首页查看" confirm-btn="返回首页" visible="{{showDialog}}" bind:confirm="toManege" />
+  <t-dialog title="重复申请" content="您已加入此作坊，请勿重复申请" confirm-btn="返回首页" visible="{{showUsed}}" bind:confirm="toManege" />
   <t-message id="t-message" />
 </view>
