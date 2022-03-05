@@ -66,7 +66,7 @@ Page({
       },
       method: 'GET',
       success: (res) => {
-        if (res.data.data.data.length === 0) {
+        if (res.data.data.data.length === 0 && _this.data.order) {
           _this.setData({
             error: true
           })
