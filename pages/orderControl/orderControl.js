@@ -109,6 +109,7 @@ Page({
             showPrice: item.total_price ? true : false,
             price: item.total_price.toFixed(2),
             display: item.display,
+            id: item.id,
             pid: item.pid,
             product_id: item.product_id,
             code: item.product.product_code || item.product.code_fix,
@@ -127,7 +128,8 @@ Page({
           isShowLoadmore: false,
           detailInfoList: datas,
           allInfoList: data,
-          cardInfoData: this.data.cardInfoData
+          cardInfoData: this.data.cardInfoData,
+          orderStatus:data[0].weave_plan.order_status
         })
       }
     })
