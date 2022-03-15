@@ -29,9 +29,9 @@
         {
           "name": "绑定订单",
           "pathName": "pages/bindOrder/bindOrder",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
+          "query": "company_id=da3fd4be69f011ecb621b1870022e9e4&hash=202236&id=53",
+          "scene": null,
+          "launchMode": "default"
         },
         {
           "name": "注册页面",
@@ -44,8 +44,8 @@
           "name": "派单点击",
           "pathName": "pages/orderControl/orderControl",
           "query": "order=CSXBSJH-2200045",
-          "scene": null,
-          "launchMode": "default"
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
