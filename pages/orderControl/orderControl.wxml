@@ -97,7 +97,7 @@
     </view>
     <view wx:if="{{isLogin && !error && orderStatus!==1}}" class="flex pof fz30 color9E vw100 tc aic jcsa half" style="bottom:5%">
       <view class="w40 borderRadius10 pt10 pb10" bindtap="argeeOrder">
-        {{orderStatus===2?'已接单':orderStatus===3?'已拒单':'状态有误'}}
+        {{orderStatus===2?'已接单':orderStatus===3?'已拒单':''}}
       </view>
     </view>
     <t-dialog title="确认拒单？" content="请与工厂沟通后再拒单" confirm-btn="拒单" cancel-btn="接单" visible="{{isRefuseOrder}}" bind:confirm="isConfirmReuseOrder" bind:cancel="argeeOrder" />

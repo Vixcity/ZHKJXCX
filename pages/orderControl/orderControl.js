@@ -66,9 +66,16 @@ Page({
       },
       method: 'GET',
       success: (res) => {
-        if (res.data.data.data.length === 0 && _this.data.order) {
+        if (res.data.data === "未注册，请注册") {
           _this.setData({
-            error: true
+            isLeader: false
+          })
+          return
+        }
+
+        if (res.data.data.data.length === 0) {
+          _this.setData({
+            isShowLoadmore: false
           })
           return
         }
@@ -96,7 +103,7 @@ Page({
           }
           let product_info = item.product_info_data
           product_info.forEach(el => {
-            arr.push([(el.size.size_name || '无数据') + '/' + (el.color.color_name || '无数据'), item.weave_plan.process_name, (el.price || 0) + '元/件', el.number, (el.real_number || 0) + ' / ' + (el.number - el.real_number)])
+            arr.push([(el.size.size_name || '无数据') + '/' + (el.color.color_name || '无数据'), item.weave_plan.process_name, (el.price.toFixed(2) || 0) + '元/件', el.number, (el.real_number || 0) + ' / ' + (el.number - el.real_number)])
           })
           datas.push({
             title: item.product.name,
@@ -124,12 +131,13 @@ Page({
         })
 
         this.data.cardInfoData.cardData = arr
+        
         this.setData({
           isShowLoadmore: false,
           detailInfoList: datas,
           allInfoList: data,
           cardInfoData: this.data.cardInfoData,
-          orderStatus:data[0].weave_plan.order_status
+          orderStatus: data.length===0?'':data[0].weave_plan.order_status
         })
       }
     })

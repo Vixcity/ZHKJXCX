@@ -15,6 +15,8 @@ const wxReq = data => {
   // 作坊主
   // 王
   // const openid = "oFr0i5M55SwKUlQ7WwbzaMOIar9Q"
+  // 王-小号
+  // const openid = "oFr0i5GHdONuAU0MI5cV1HJX1vs4"
   // 周
   // const openid = "oFr0i5Jhj6w5N5Oj_BEP6w-b1Lr4"
   // 员工
