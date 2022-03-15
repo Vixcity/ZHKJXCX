@@ -23,7 +23,7 @@ Page({
     // console.log(wx.getStorageSync('userInfo'))
     if (wx.getStorageSync('userInfo') === "" || wx.getStorageSync('userInfo').userinfo === null) {
       wx.reLaunch({
-        url: '../manage/manage',
+        url: '../noLogin/noLogin?time='+option.time+'&uuid='+option.uuid,
       })
     }
 

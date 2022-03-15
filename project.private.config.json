@@ -15,16 +15,16 @@
         {
           "name": "加入作坊",
           "pathName": "pages/addWorkShop/addWorkShop",
-          "query": "uuid=f40832c87cf711ecba2ba18d238222ea&time=1646458514000",
+          "query": "uuid=22363d7e7da811eca06bf5b86f255ace&time=1647306786000",
           "launchMode": "default",
           "scene": 1047
         },
         {
           "name": "绑定工厂",
           "pathName": "pages/bindCompany/bindCompany",
-          "query": "",
-          "launchMode": "default",
-          "scene": 1011
+          "query": "company_id=da3fd4be69f011ecb621b1870022e9e4",
+          "scene": 1011,
+          "launchMode": "default"
         },
         {
           "name": "绑定订单",
@@ -44,8 +44,8 @@
           "name": "派单点击",
           "pathName": "pages/orderControl/orderControl",
           "query": "order=CSXBSJH-2200021",
-          "scene": null,
-          "launchMode": "default"
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

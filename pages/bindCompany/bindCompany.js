@@ -171,7 +171,7 @@ Page({
   toSignUp() {
     let _this = this
     wx.navigateTo({
-      url:'../signUp/signUp?company_id=' + _this.data.company_id
+      url: '../signUp/signUp?company_id=' + _this.data.company_id
     })
   },
 
@@ -201,16 +201,25 @@ Page({
                   let userinfo = resdata.data.data
                   userinfo.wechat_data = wxUserInfo
                   wx.setStorageSync('userInfo', userinfo)
+                  wxReq({
+                    url: '/user/info',
+                    method: 'GET',
+                    success: function (res) {
+                      if (res.data.data === "未注册，请注册") {
+                        _this.toSignUp()
+                      } else {
+                        _this.setData({
+                          abnormal: false,
+                          isLogin: true
+                        })
 
-                  _this.setData({
-                    abnormal: false,
-                    isLogin: true
+                        let params = {
+                          company_id: _this.data.company_id
+                        }
+                        _this.init(params)
+                      }
+                    }
                   })
-
-                  let params = {
-                    company_id: _this.data.company_id
-                  }
-                  _this.init(params)
                 } else {
                   Message.error({
                     offset: [20, 32],

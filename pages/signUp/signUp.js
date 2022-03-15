@@ -331,6 +331,34 @@ Page({
             },3000)
             return
           }
+          
+          if (_this.data.time && _this.data.uuid) {
+            Message.success({
+              offset: [20, 32],
+              duration: 2000,
+              content: '注册成功,三秒后返回添加作坊页面',
+            });
+            setTimeout(() => {
+              wx.navigateTo({
+                url: '../addWorkShop/addWorkShop?time=' + _this.data.time + '&uuid=' + _this.data.uuid,
+              })
+            },3000)
+            return
+          }
+          
+          if (_this.data.order) {
+            Message.success({
+              offset: [20, 32],
+              duration: 2000,
+              content: '注册成功,三秒后返回订单管理页面',
+            });
+            setTimeout(() => {
+              wx.navigateTo({
+                url: '../orderControl/orderControl?isLeader=true&order=' + _this.data.order,
+              })
+            },3000)
+            return
+          }
 
           Message.success({
             offset: [20, 32],

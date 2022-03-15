@@ -1,3 +1,6 @@
+import {
+  wxReq
+} from '../../utils/util';
 // 获取应用实例
 const app = getApp()
 import Message from 'tdesign-miniprogram/message/index';
@@ -8,23 +11,23 @@ Page({
     userInfo: {},
     hasUserInfo: false,
   },
-  
+
   toManage() {
     wx.reLaunch({
       url: '../manage/manage'
     })
   },
-  
-	canToManage(){
-		if(wx.getStorageSync('userInfo') !== "" && wx.getStorageSync('userInfo').userinfo!==null){
-			this.toManage()
-		}
+
+  canToManage() {
+    if (wx.getStorageSync('userInfo') !== "" && wx.getStorageSync('userInfo').userinfo !== null) {
+      this.toManage()
+    }
   },
-  
+
   onLoad(options) {
     this.setData(options)
 
-		this.canToManage()
+    this.canToManage()
   },
 
   getUserProfile(e) {
@@ -50,17 +53,53 @@ Page({
               method: 'POST',
               success(resdata) {
                 if (resdata.data.code === 200) {
-                    let userinfo = resdata.data.data
-                    userinfo.wechat_data = wxUserInfo
-                    wx.setStorageSync('userInfo',userinfo)
+                  let userinfo = resdata.data.data
+                  userinfo.wechat_data = wxUserInfo
+                  wx.setStorageSync('userInfo', userinfo)
 
-                    if(_this.data.order){
-                      wx.navigateTo({
-                        url: '../orderControl/orderControl?isLeader=true&order=' + _this.data.order,
-                      })
-                      return
+                  wxReq({
+                    url: '/user/info',
+                    method: 'GET',
+                    success: function (res) {
+                      if (res.data.data === "未注册，请注册") {
+                        // 订单管理
+                        if (_this.data.order) {
+                          wx.navigateTo({
+                            url: '../signUp/signUp?isLeader=true&order=' + _this.data.order,
+                          })
+                          return
+                        }
+
+                        // 加入作坊
+                        if (_this.data.time && _this.data.uuid) {
+                          wx.navigateTo({
+                            url: '../signUp/signUp?time=' + _this.data.time + '&uuid=' + _this.data.uuid,
+                          })
+                          return
+                        }
+
+                        _this.toManage()
+                      } else {
+                        // 订单管理
+                        if (_this.data.order) {
+                          wx.navigateTo({
+                            url: '../orderControl/orderControl?isLeader=true&order=' + _this.data.order,
+                          })
+                          return
+                        }
+
+                        // 加入作坊
+                        if (_this.data.time && _this.data.uuid) {
+                          wx.navigateTo({
+                            url: '../addWorkShop/addWorkShop?time=' + _this.data.time + '&uuid=' + _this.data.uuid,
+                          })
+                          return
+                        }
+
+                        _this.toManage()
+                      }
                     }
-                    _this.toManage()
+                  })
                 } else {
                   Message.error({
                     offset: [20, 32],
