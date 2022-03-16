@@ -13,10 +13,9 @@
 			<view class="flex jcsb aic mt10">
 				<text>姓名：</text><input placeholder="输入真实姓名" value="{{userInfo.wechat_data.realName}}" bindinput="changeName" />
 			</view>
-			<view class="flex jcsb aic mt10 por">
+			<view class="flex jcsb aic mt10">
 				<text>手机号：</text>
-				<input placeholder="点击获取手机号" value="{{userInfo.wechat_data.phoneNumber}}" maxlength="11" disabled />
-				<button class="getPhoneNumber poa" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">点击获取</button>
+				<button class="{{userInfo.phoneNumber?'colorBlack getPhoneNumber':'getPhoneNumber color8D9F'}}" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">{{userInfo.phoneNumber?userInfo.phoneNumber:'点击获取手机号'}}</button>
 			</view>
 			<view class="flex jcsb aic mt10">
 				<text>工序：</text><input bindtap="chooseProcedure" placeholder="点击选择" value="{{selectedWorkProcedureValue}}" disabled />

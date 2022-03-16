@@ -15,14 +15,14 @@
         {
           "name": "加入作坊",
           "pathName": "pages/addWorkShop/addWorkShop",
-          "query": "uuid=22363d7e7da811eca06bf5b86f255ace&time=1647306786000",
-          "launchMode": "default",
-          "scene": 1047
+          "query": "uuid=22363d7e7da811eca06bf5b86f255ace&time=1647409355000",
+          "scene": 1047,
+          "launchMode": "default"
         },
         {
           "name": "绑定工厂",
           "pathName": "pages/bindCompany/bindCompany",
-          "query": "company_id=da3fd4be69f011ecb621b1870022e9e4",
+          "query": "company_id=xx1",
           "launchMode": "default",
           "scene": 1011
         },
@@ -30,8 +30,8 @@
           "name": "绑定订单",
           "pathName": "pages/bindOrder/bindOrder",
           "query": "company_id=da3fd4be69f011ecb621b1870022e9e4&hash=202236&id=53",
-          "scene": null,
-          "launchMode": "default"
+          "launchMode": "default",
+          "scene": null
         },
         {
           "name": "注册页面",

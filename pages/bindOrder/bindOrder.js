@@ -31,18 +31,22 @@ Page({
 
       this.setData(params)
       params.index = 1
+      params.order_status = 2
       this.init(params)
     }
 
     // let params = {
-    //   company_id: '0db46f8e744211eca9a54d3cafd8c04d',
-    //   hash: 99999,
+    //   company_id: 'da3fd4be69f011ecb621b1870022e9e4',
+    //   hash: 202236,
+    //   order_status: 2,
+    //   id: 53,
     //   index: 1
     // }
     // let params = {
     //   company_id: 'xx1',
-    //   hash: 9,
-    //   id: 27,
+    //   hash: 20223,
+    //   id: 55,
+    //   order_status: 2,
     //   index: 1
     // }
 

@@ -23,7 +23,6 @@ const wxReq = data => {
   // const openid = "oFr0i5FlAmENiYwaoEk75GcL8I5Y"
   // 注册用户未绑定作坊主↓
   // const openid = "yyy"
-  // const openid = "123"
 
   wx.request({
     url: getApp().globalData.api + data.url,

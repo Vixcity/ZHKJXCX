@@ -318,56 +318,68 @@ Page({
       method: "POST",
       success: (res) => {
         if (res.data.data === true) {
-          if (_this.data.company_id) {
-            Message.success({
-              offset: [20, 32],
-              duration: 2000,
-              content: '注册成功,三秒后返回绑定工厂页面',
-            });
-            setTimeout(() => {
-              wx.navigateTo({
-                url: '../bindCompany/bindCompany?company_id=' + _this.data.company_id,
-              })
-            },3000)
-            return
-          }
-          
-          if (_this.data.time && _this.data.uuid) {
-            Message.success({
-              offset: [20, 32],
-              duration: 2000,
-              content: '注册成功,三秒后返回添加作坊页面',
-            });
-            setTimeout(() => {
-              wx.navigateTo({
-                url: '../addWorkShop/addWorkShop?time=' + _this.data.time + '&uuid=' + _this.data.uuid,
-              })
-            },3000)
-            return
-          }
-          
-          if (_this.data.order) {
-            Message.success({
-              offset: [20, 32],
-              duration: 2000,
-              content: '注册成功,三秒后返回订单管理页面',
-            });
-            setTimeout(() => {
-              wx.navigateTo({
-                url: '../orderControl/orderControl?isLeader=true&order=' + _this.data.order,
-              })
-            },3000)
-            return
-          }
+          wxReq({
+            url: '/user/info',
+            method: 'GET',
+            success: function (res) {
+              let allUserinfo = wx.getStorageSync('userInfo')
+              allUserinfo.userinfo = res.data.data
+              allUserinfo.userinfo.process = allUserinfo.userinfo.process.split(",")
+              wx.setStorageSync('userInfo', allUserinfo)
+              
+              if (_this.data.company_id) {
+                Message.success({
+                  offset: [20, 32],
+                  duration: 2000,
+                  content: '注册成功,三秒后返回绑定工厂页面',
+                });
+                setTimeout(() => {
+                  wx.navigateTo({
+                    url: '../bindCompany/bindCompany?company_id=' + _this.data.company_id,
+                  })
+                }, 3000)
+                return
+              }
 
-          Message.success({
-            offset: [20, 32],
-            duration: 2000,
-            content: '注册成功，三秒后返回首页',
-          });
-          setTimeout(() => {
-            _this.toManage()
-          },3000)
+              if (_this.data.time && _this.data.uuid) {
+                Message.success({
+                  offset: [20, 32],
+                  duration: 2000,
+                  content: '注册成功,三秒后返回添加作坊页面',
+                });
+                setTimeout(() => {
+                  wx.navigateTo({
+                    url: '../addWorkShop/addWorkShop?time=' + _this.data.time + '&uuid=' + _this.data.uuid,
+                  })
+                }, 3000)
+                return
+              }
+
+              if (_this.data.order) {
+                Message.success({
+                  offset: [20, 32],
+                  duration: 2000,
+                  content: '注册成功,三秒后返回订单管理页面',
+                });
+                setTimeout(() => {
+                  wx.navigateTo({
+                    url: '../orderControl/orderControl?isLeader=true&order=' + _this.data.order,
+                  })
+                }, 3000)
+                return
+              }
+
+              Message.success({
+                offset: [20, 32],
+                duration: 2000,
+                content: '注册成功，三秒后返回首页',
+              });
+              setTimeout(() => {
+                _this.toManage()
+              }, 3000)
+              return
+            }
+          })
         } else {
           Message.error({
             offset: [20, 32],

@@ -24,33 +24,23 @@ input {
 }
 
 .getPhoneNumber {
-	border: unset;
-	box-shadow: unset;
+	border: 1px solid #E2E2E2;
 	background-color: white;
 	font-size: 30rpx;
-	right: 5%;
-	line-height: unset;
-	padding: 0;
-	text-align: center;
-	color: #24AEFC;
+	border-radius: 50px;
+	overflow: hidden;
+	width: 75%;
+	text-align: left;
+	margin-left: 30rpx;
+	padding-left: 30rpx;
+	position: relative;
+	line-height: 32px;
 	z-index: 999;
 }
 
 .getPhoneNumber::after {
-	border: unset;
+	border: none;
 }
-
-/* .getPhoneNumber{
-	border: 1px solid #E2E2E2;
-	background-color: white;
-	font-size: 30rpx;
-	border-radius: 500000px;
-	width: 72%;
-	margin-left: 29rpx;
-	text-align: left;
-	padding-left: 30rpx;
-	color: black;
-} */
 
 .size-l .t-image {
 	width: 188rpx;

@@ -2,7 +2,6 @@ import Message from 'tdesign-miniprogram/message/index';
 import {
   wxReq,
   urlParams,
-  reloadThisPage
 } from '../../utils/util';
 Page({
   data: {
@@ -74,7 +73,7 @@ Page({
     }
 
     // 测试工厂
-    // let company_id = '0db46f8e744211eca9a54d3cafd8c04d'
+    // let company_id = 'xx1'
     // 线上测试工厂
     // let company_id = 'da3fd4be69f011ecb621b1870022e9e4'
     // let params = {
