@@ -47,7 +47,7 @@ Page({
       Message.error({
         offset: [20, 32],
         duration: 2000,
-        content: '您扫描的作坊主码不正确'
+        content: '您扫描的员工邀请码不正确'
       });
     } else {
       wxReq({

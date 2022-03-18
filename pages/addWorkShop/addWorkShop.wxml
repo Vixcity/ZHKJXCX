@@ -9,7 +9,7 @@
         </view>
         <view wx:else>
           <view>您已经是作坊主</view>
-          <view class="mt10">不能扫描作坊主码</view>
+          <view class="mt10">不能扫描员工邀请码</view>
         </view>
         <view class="submit mt50">
           <t-button theme="primary" size="large" variant="plain" bindtap="toManege">返回首页</t-button>

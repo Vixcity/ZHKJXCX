@@ -3,13 +3,13 @@
   <view wx:if="{{isLeader}}" class="bg vw100 vh100 overfsy">
     <list-card classStyle="overfsy vh70" bind:clickLine="getName" cardInfoData="{{cardInfoData}}"></list-card>
     <view class="mt30 color91 tc fz30">
-      新员工需扫作坊主二维码才能添加到组织
+      新员工需扫员工邀请码才能添加到组织
     </view>
     <view class="vw90 mt20 submit ma por flex jcsb">
-      <image src="https://file.zwyknit.com/erweima.png" class="poa" style="width: 80rpx;height: 80rpx;z-index: 99;left: 1.5%;top: 5%;" bindtap="openPopup"></image>
-      <t-button theme="primary" style="width: 10vw;" size="large" variant="plain" bindtap="openPopup">
+      <t-button theme="primary" style="width: 40vw;" size="large" variant="plain" bindtap="openPopup">
+        员工邀请码
       </t-button>
-      <t-button theme="primary" style="width: 70vw;" size="large" variant="plain" bindtap="addWorkrManage">添加员工</t-button>
+      <t-button theme="primary" style="width: 40vw;" size="large" variant="plain" bindtap="addWorkrManage">添加员工</t-button>
     </view>
     <t-dialog visible="{{isOpenAddWorkerWin}}" t-class-confirm="{{dialogConfig.tConfirmBtn}}" title="{{dialogConfig.title}}" content="{{dialogConfig.content}}" confirm-btn="{{dialogConfig.confirmBtn}}" cancel-btn="{{dialogConfig.cancelBtn}}" button-layout="{{dialogConfig.buttonLayout}}" actions="{{dialogConfig.actions}}" bind:confirm="confirmHandle" bind:cancel="closeHandle">
       <scroll-view wx:if="{{currentKey === 'multiTextAndTitle'}}" slot="content" scroll-y class="long-content">

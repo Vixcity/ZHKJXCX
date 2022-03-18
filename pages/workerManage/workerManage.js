@@ -127,7 +127,7 @@ Page({
 					Message.error({
 						offset: [20, 32],
 						duration: 2000,
-						content: '获取作坊主码失败'
+						content: '获取员工邀请码失败'
 					});
 					return
 				}
