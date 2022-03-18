@@ -1,8 +1,7 @@
 // manages.js
 import Message from 'tdesign-miniprogram/message/index';
 import {
-  wxReq,
-  getTimeDiff
+  wxReq
 } from '../../utils/util';
 
 Component({
@@ -188,7 +187,7 @@ Component({
           index: 3
         }, {
           title: '员工管理',
-          path: '../workerManage/workerManage?isLeader=' + isLeader,
+          path: '../workerManage/workerManage',
           icon: 'https://file.zwyknit.com/%E5%91%98%E5%B7%A5%E7%AE%A1%E7%90%86-01.png',
           index: 4
         }]

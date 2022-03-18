@@ -44,22 +44,53 @@ Page({
 		isOpenAddWorkerWin: false
 	},
 
-	click(option) {
-		// console.log(option.detail)
-	},
-
 	// 获取参数，判断是否为作坊主
 	onLoad: function (option) {
+		if (wx.getStorageSync('userInfo') === "") {
+			this.toNoLogin(option)
+			return
+		}
+
+		if (wx.getStorageSync('userInfo').userinfo === null) {
+			this.toSignUp(option)
+			return
+		}
+
 		option.isLeader = option.isLeader === "true" ? true : false
+
+		if (wx.getStorageSync('userInfo').userinfo.role === 3) {
+			option.showPopup === "true" ? this.openPopup() : false
+			option.isLeader = true
+		} else {
+			option.showPopup = false
+			option.isLeader = false
+		}
+
 		this.setData(option)
 	},
 
-	/**
-	 * 生命周期函数--监听页面显示
-	 */
-	onShow: function (option) {
-		this.getWokerList()
+	// 登录页
+	toNoLogin(option) {
+		let _this = this
+		wx.reLaunch({
+			url: '../noLogin/noLogin?showPopup=' + (option.showPopup === "true"),
+		})
 	},
+
+	// 注册页
+	toSignUp(option) {
+		let _this = this
+		wx.reLaunch({
+			url: '../signUp/signUp?showPopup=' + (option.showPopup === "true"),
+		})
+	},
+
+	// 去管理界面
+  toManage() {
+    wx.reLaunch({
+      url: '../manage/manage'
+    })
+  },
 
 	addWorkrManage() {
 		this.setData({

@@ -77,6 +77,14 @@ Page({
                           })
                           return
                         }
+                        
+                        // 员工管理
+                        if (_this.data.showPopup) {
+                          wx.navigateTo({
+                            url: '../signUp/signUp?showPopup=' + _this.data.showPopup,
+                          })
+                          return
+                        }
 
                         _this.toManage()
                       } else {
@@ -92,6 +100,14 @@ Page({
                         if (_this.data.time && _this.data.uuid) {
                           wx.navigateTo({
                             url: '../addWorkShop/addWorkShop?time=' + _this.data.time + '&uuid=' + _this.data.uuid,
+                          })
+                          return
+                        }
+                        
+                        // 员工管理
+                        if (_this.data.showPopup) {
+                          wx.navigateTo({
+                            url: '../workerManage/workerManage?showPopup=' + _this.data.showPopup,
                           })
                           return
                         }

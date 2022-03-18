@@ -309,12 +309,14 @@ Page({
     wxReq({
       url: '/user/register',
       data: {
-        user_name: userInfo.phoneNumber,
+        user_name: "xxxxxxxxxx",
+        // user_name: userInfo.phoneNumber,
         name: userInfo.realName,
         unionid: userInfo.openid.unionid,
         process: selectedWorkProcedureValue,
         wechat_data: userInfo.wechat_data,
-        openid: userInfo.openid.openid
+        openid: "xxxxxxxxxx",
+        // openid: userInfo.openid.openid
       },
       method: "POST",
       success: (res) => {
@@ -351,6 +353,20 @@ Page({
                 setTimeout(() => {
                   wx.navigateTo({
                     url: '../addWorkShop/addWorkShop?time=' + _this.data.time + '&uuid=' + _this.data.uuid,
+                  })
+                }, 3000)
+                return
+              }
+              
+              if (_this.data.showPopup) {
+                Message.success({
+                  offset: [20, 32],
+                  duration: 2000,
+                  content: '注册成功,三秒后返回员工管理页面',
+                });
+                setTimeout(() => {
+                  wx.navigateTo({
+                    url: '../workerManage/workerManage?showPopup=' + _this.data.showPopup,
                   })
                 }, 3000)
                 return

@@ -21,9 +21,10 @@
     </t-dialog>
   </view>
   <view wx:else class="tc mt40">
-    <view class="tc vh85 mt100 color91">
+    <view class="tc vh85 mt100 color91 submit">
       <image class="image" src="https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220216112643.png"></image>
-      <view class="mt20">暂无员工，请成为作坊主添加员工</view>
+      <view class="mt20" style="margin-bottom: 80rpx;">暂无员工，请绑定工厂后添加员工</view>
+      <t-button theme="primary" size="large" variant="plain" bindtap="toManage">返回首页</t-button>
     </view>
   </view>
   <t-message id="t-message" />

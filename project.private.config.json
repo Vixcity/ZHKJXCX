@@ -16,8 +16,8 @@
           "name": "加入作坊",
           "pathName": "pages/addWorkShop/addWorkShop",
           "query": "uuid=22363d7e7da811eca06bf5b86f255ace&time=1647409355000",
-          "scene": 1047,
-          "launchMode": "default"
+          "launchMode": "default",
+          "scene": 1047
         },
         {
           "name": "绑定工厂",
@@ -46,6 +46,13 @@
           "query": "order=CSXBSJH-2200045",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "员工管理",
+          "pathName": "pages/workerManage/workerManage",
+          "query": "showPopup=true",
+          "scene": null,
+          "launchMode": "default"
         }
       ]
     }
