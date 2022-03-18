@@ -3,7 +3,7 @@
   <view wx:if="{{isLeader}}" class="bg vw100 vh100 overfsy">
     <list-card classStyle="overfsy vh70" bind:clickLine="getName" cardInfoData="{{cardInfoData}}"></list-card>
     <view class="mt30 color91 tc fz30">
-      新员工需扫员工邀请码才能添加到组织
+      扫员工邀请码加入，如无微信请点击添加员工
     </view>
     <view class="vw90 mt20 submit ma por flex jcsb">
       <t-button theme="primary" style="width: 40vw;" size="large" variant="plain" bindtap="openPopup">
