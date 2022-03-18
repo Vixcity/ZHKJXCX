@@ -2,3 +2,7 @@
 .bg {
 	background-position: 5%;
 }
+
+.submit .t-button {
+	width: unset;
+}

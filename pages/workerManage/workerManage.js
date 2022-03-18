@@ -49,7 +49,7 @@ Page({
 	},
 
 	// 获取参数，判断是否为作坊主
-	onLoad:function(option) {
+	onLoad: function (option) {
 		option.isLeader = option.isLeader === "true" ? true : false
 		this.setData(option)
 	},
@@ -85,17 +85,65 @@ Page({
 				let arr = []
 				res.data.data.forEach(item => {
 					arr.push([
-						item.user.name+(item.user.user_name?('（'+item.user.user_name.slice(8,11)+'）'):''),
+						item.user.name + (item.user.user_name ? ('（' + item.user.user_name.slice(8, 11) + '）') : ''),
 						item.status === 1 ? '在职' : '离职',
 						item.created_at.slice(0, 10) + '~' + (item.quit_at === "0000-00-00 00:00:00" ? "至今" : item.quit_at.slice(0, 10))
 					])
 				});
 				_this.data.cardInfoData.cardData = arr
 				_this.setData({
-					cardInfoData:_this.data.cardInfoData,
-					cardInfoDataDetail:res.data.data
+					cardInfoData: _this.data.cardInfoData,
+					cardInfoDataDetail: res.data.data
 				})
 			}
+		})
+	},
+
+	// 点击二维码拿到小程序码
+	openPopup() {
+		wx.setStorageSync('wxacodeTime', Date.now())
+		this.getWxACode()
+	},
+
+	getWxACode() {
+		let _this = this
+		let uuid = wx.getStorageSync('userInfo').userinfo.uuid
+		wxReq({
+			url: '/wechat/wxacode',
+			data: {
+				path: "pages/addWorkShop/addWorkShop?uuid=" + uuid + '&time=' + Date.now(),
+				width: 430,
+				auto_color: false,
+				line_color: {
+					"r": 0,
+					"g": 0,
+					"b": 0
+				},
+				is_hyaline: false
+			},
+			method: "POST",
+			success: function (res) {
+				if (res.data.code !== 200) {
+					Message.error({
+						offset: [20, 32],
+						duration: 2000,
+						content: '获取作坊主码失败'
+					});
+					return
+				}
+				_this.setData({
+					showPopup: true,
+					showImage: res.data.data
+				})
+				wx.setStorageSync('作坊主小程序码', res.data.data)
+				return
+			}
+		})
+	},
+
+	closePopup() {
+		this.setData({
+			showPopup: false
 		})
 	},
 
@@ -111,7 +159,7 @@ Page({
 				cancelBtn: '取消',
 			}),
 			isOpenAddWorkerWin: true,
-			isAddWoker:true
+			isAddWoker: true
 		})
 	},
 
@@ -126,20 +174,20 @@ Page({
 
 	/** 普通弹层关闭 */
 	confirmHandle(e) {
-		if(this.data.isAddWoker){
+		if (this.data.isAddWoker) {
 			this.addWorker()
 			return
 		}
 
 		let selectUserData = this.data.cardInfoDataDetail[this.data.workerListIndex]
 		wxReq({
-			url:'/user/staff/record/quitat',
-			data:{
-				id:selectUserData.id
+			url: '/user/staff/record/quitat',
+			data: {
+				id: selectUserData.id
 			},
-			method:"POST",
+			method: "POST",
 			success: (res) => {
-				if(res.data.code!==200){
+				if (res.data.code !== 200) {
 					Message.error({
 						offset: [20, 32],
 						duration: 2000,
@@ -147,7 +195,7 @@ Page({
 					});
 					return
 				}
-				if(res.data.data===true){
+				if (res.data.data === true) {
 					Message.success({
 						offset: [20, 32],
 						duration: 2000,
@@ -172,7 +220,7 @@ Page({
 	},
 
 	getName(e) {
-		if(e.detail.item[1]==='离职') return
+		if (e.detail.item[1] === '离职') return
 		this.setData({
 			show: true,
 			useSlot: false,
@@ -184,22 +232,22 @@ Page({
 				cancelBtn: '取消',
 			}),
 			isOpenAddWorkerWin: true,
-			workerListIndex:e.detail.index,
-			isAddWoker:false
+			workerListIndex: e.detail.index,
+			isAddWoker: false
 		})
 	},
 
 	// 添加员工
-	addWorker(){
+	addWorker() {
 		let _this = this
 		wxReq({
-			url:'/user/staff/add',
-			method:'POST',
-			data:{
-				name:this.data.workerName
+			url: '/user/staff/add',
+			method: 'POST',
+			data: {
+				name: this.data.workerName
 			},
 			success: (res) => {
-				if(res.data.code===200){
+				if (res.data.code === 200) {
 					Message.success({
 						offset: [20, 32],
 						duration: 2000,
@@ -207,7 +255,7 @@ Page({
 					});
 					_this.getWokerList()
 					return
-				} else if(res.data.message === '姓名已存在,请更换'){
+				} else if (res.data.message === '姓名已存在,请更换') {
 					Message.error({
 						offset: [20, 32],
 						duration: 2000,

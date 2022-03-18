@@ -5,40 +5,19 @@
     <view class="mt30 color91 tc fz30">
       新员工需扫作坊主二维码才能添加到组织
     </view>
-    <view class="vw90 mt20 submit ma">
-      <t-button theme="primary" size="large" variant="plain" bindtap="addWorkrManage">添加员工</t-button>
+    <view class="vw90 mt20 submit ma por flex jcsb">
+      <image src="https://file.zwyknit.com/erweima.png" class="poa" style="width: 80rpx;height: 80rpx;z-index: 99;left: 1.5%;top: 5%;" bindtap="openPopup"></image>
+      <t-button theme="primary" style="width: 10vw;" size="large" variant="plain" bindtap="openPopup">
+      </t-button>
+      <t-button theme="primary" style="width: 70vw;" size="large" variant="plain" bindtap="addWorkrManage">添加员工</t-button>
     </view>
-    <t-dialog
-      visible="{{isOpenAddWorkerWin}}"
-      t-class-confirm="{{dialogConfig.tConfirmBtn}}"
-      title="{{dialogConfig.title}}"
-      content="{{dialogConfig.content}}"
-      confirm-btn="{{dialogConfig.confirmBtn}}"
-      cancel-btn="{{dialogConfig.cancelBtn}}"
-      button-layout="{{dialogConfig.buttonLayout}}"
-      actions="{{dialogConfig.actions}}"
-      bind:confirm="confirmHandle"
-      bind:cancel="closeHandle"
-    >
-      <scroll-view
-        wx:if="{{currentKey === 'multiTextAndTitle'}}"
-        slot="content"
-        scroll-y
-        class="long-content"
-      >
+    <t-dialog visible="{{isOpenAddWorkerWin}}" t-class-confirm="{{dialogConfig.tConfirmBtn}}" title="{{dialogConfig.title}}" content="{{dialogConfig.content}}" confirm-btn="{{dialogConfig.confirmBtn}}" cancel-btn="{{dialogConfig.cancelBtn}}" button-layout="{{dialogConfig.buttonLayout}}" actions="{{dialogConfig.actions}}" bind:confirm="confirmHandle" bind:cancel="closeHandle">
+      <scroll-view wx:if="{{currentKey === 'multiTextAndTitle'}}" slot="content" scroll-y class="long-content">
         <view class="content-cintainer">
           告知当前状态、信息和解决方法，等内容。描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案很多描述文案
         </view>
       </scroll-view>
-      <input
-        wx:if="{{useSlot}}"
-        slot="content"
-        placeholder="员工姓名"
-        bindinput="workerName"
-        placeholder-class="placeholder"
-        style="border: 1px solid #919191;"
-        class="pl10 pt5 pb5 borderRadius16 mt10"
-      />
+      <input wx:if="{{useSlot}}" slot="content" placeholder="员工姓名" bindinput="workerName" placeholder-class="placeholder" style="border: 1px solid #919191;" class="pl10 pt5 pb5 borderRadius16 mt10" />
     </t-dialog>
   </view>
   <view wx:else class="tc mt40">
@@ -48,4 +27,21 @@
     </view>
   </view>
   <t-message id="t-message" />
+  <!-- 弹出框 -->
+  <t-popup visible="{{showPopup}}" placement="center">
+    <view slot="content" class="bgColorWhite overfh vw80 por" style="transform: translateY(-5%);">
+      <view class="poa" style="right: 20rpx;top:20rpx;">
+        <t-icon name="close" size="xl" bind:click="closePopup"></t-icon>
+      </view>
+      <view class="mt40 pb20 pl20 pr20 tc">
+        <image style="width: 500rpx;height: 500rpx;" src="{{showImage}}" show-menu-by-longpress="{{true}}"></image>
+        <view class="mt30">
+          长按保存至手机
+        </view>
+        <view>
+          或使用微信扫一扫
+        </view>
+      </view>
+    </view>
+  </t-popup>
 </view>
