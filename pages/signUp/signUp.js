@@ -309,14 +309,12 @@ Page({
     wxReq({
       url: '/user/register',
       data: {
-        user_name: "xxxxxxxxxx",
-        // user_name: userInfo.phoneNumber,
+        user_name: userInfo.phoneNumber,
         name: userInfo.realName,
         unionid: userInfo.openid.unionid,
         process: selectedWorkProcedureValue,
         wechat_data: userInfo.wechat_data,
-        openid: "xxxxxxxxxx",
-        // openid: userInfo.openid.openid
+        openid: userInfo.openid.openid
       },
       method: "POST",
       success: (res) => {

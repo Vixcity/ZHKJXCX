@@ -21,7 +21,7 @@
 				<text>工序：</text><input bindtap="chooseProcedure" placeholder="点击选择" value="{{selectedWorkProcedureValue}}" disabled />
 			</view>
 			<view wx:if="{{showPick}}" class="pof bgColorTransBlack" bindtap="cancelChoose" style="left: 0;top: 0;bottom:0;z-index: 999;">
-				<view catchtap class="por bgColorWhite colorBlack" style="top: 60%;">
+				<view catchtap class="por bgColorWhite colorBlack" style="top: 60%;padding-bottom: 30rpx;">
 					<view class="flex aic pt20 pb10 jcsa">
 						<view></view>
 						<view></view>
