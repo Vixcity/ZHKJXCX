@@ -102,16 +102,16 @@ Page({
 				// 获取上一道工序
 				wxReq({
 					url: '/user/workshop/yield/lastone',
-					data:{
+					data: {
 						process_name,
-						hash:_this.data.hash
+						hash: _this.data.hash
 					},
-					method:"GET",
-					success:(ress) => {
+					method: "GET",
+					success: (ress) => {
 						this.setData({
 							cardOrder,
 							allNumber,
-							prevProcess:ress.data.data,
+							prevProcess: ress.data.data,
 							entryArr: [],
 							allRealNumber,
 							enteryAllNumber: '',
@@ -266,7 +266,7 @@ Page({
 							process_price_id: (this.data.detailOrder.process && (this.data.detailOrder.process[0] !== undefined)) ? this.data.detailOrder.process[0].id : 0,
 							price: this.data.process_price,
 							hash: this.data.hash,
-							difference: (item.number - item.real_number - item.value)>0?(item.number - item.real_number - item.value):0
+							difference: (item.number - item.real_number - item.value) > 0 ? (item.number - item.real_number - item.value) : 0
 						})
 					}
 				});
@@ -338,8 +338,10 @@ Page({
 				return
 			}
 			this.getPostData(this.data.selectedPeopleValue)
+			return
 		} else {
 			this.getPostData()
+			return
 		}
 
 		let workshop_yield_at
@@ -383,66 +385,57 @@ Page({
 	getMinDiff() {
 		let min
 
-		this.data.product_info.forEach((item, index) => {
-			let difference = Math.abs(item.number - item.real_number).toFixed(0)
-
-			if (item.isMin) return
-
-			if (index === 0) {
-				min = item
+		min = Object.values(this.data.product_info).reduce((num1, num2) => {
+			if((num1.real_number - num1.number) < 0){
+				if((num2.real_number - num2.number) < 0){
+					if((num1.real_number - num1.number) >= (num2.real_number - num2.number)){
+						return num1
+					} else {
+						return num2
+					}
+				} else {
+					return unm1
+				}
+			} else if((num2.real_number - num2.number) < 0){
+				return num2
+			} else {
+				return num2
 			}
-
-			if (!min) {
-				min = this.data.product_info[this.data.product_info.length - 1]
-			}
-
-			if (difference !== 0) {
-				min.number - min.real_number > difference ? min = item : min = min
-			}
-		});
-
-		if (min) {
-			min.isMin = true
-		}
-
-		this.setData({
-			min
 		})
+
 		return min
 	},
 
 	getPostData(getUuid) {
 		let min = this.getMinDiff()
-		if (!min) {
-			min = this.data.product_info[this.data.product_info.length - 1]
-			return
-		}
-		let minDiff = Math.abs(min.number - min.real_number).toFixed(0)
+
+		let minDiff = +Math.abs(min.number - min.real_number).toFixed(0)
 		let enteryAllNumber = this.data.enteryAllNumber
 		let uuid = getUuid ? getUuid : wx.getStorageSync('userInfo').userinfo.uuid
 		let _this = this
 
-		if (enteryAllNumber > minDiff) {
+		if ((enteryAllNumber > minDiff) && (min.real_number < min.number)) {
 			_this.data.entryArr.push({
 				uuid: uuid,
 				number: minDiff,
 				price: _this.data.process_price,
 				product_info_id: min.id,
 				process_price_id: (_this.data.detailOrder.process && (_this.data.detailOrder.process[0] !== undefined)) ? _this.data.detailOrder.process[0].id : 0,
-				hash:_this.data.hash
+				hash: _this.data.hash
 			})
+
+			min.real_number += minDiff
 			_this.data.enteryAllNumber = _this.data.enteryAllNumber - minDiff
-			_this.getPostData()
+			_this.getPostData(getUuid)
 		} else {
 			_this.data.entryArr.push({
 				uuid: uuid,
-				number: enteryAllNumber,
+				number: +enteryAllNumber,
 				price: _this.data.process_price,
 				product_info_id: min.id,
 				process_price_id: (_this.data.detailOrder.process && (_this.data.detailOrder.process[0] !== undefined)) ? _this.data.detailOrder.process[0].id : 0,
-				hash:_this.data.hash
+				hash: _this.data.hash
 			})
-
 			return _this.data.entryArr
 		}
 	}
