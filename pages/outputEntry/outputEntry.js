@@ -338,10 +338,8 @@ Page({
 				return
 			}
 			this.getPostData(this.data.selectedPeopleValue)
-			return
 		} else {
 			this.getPostData()
-			return
 		}
 
 		let workshop_yield_at
