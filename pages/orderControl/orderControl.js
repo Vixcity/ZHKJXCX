@@ -103,7 +103,7 @@ Page({
           }
           let product_info = item.product_info_data
           product_info.forEach(el => {
-            arr.push([(el.size.size_name || '无数据') + '/' + (el.color.color_name || '无数据'), item.weave_plan.process_name, (el.price.toFixed(2) || 0) + '元/件', el.number, (el.real_number || 0) + ' / ' + (el.number - el.real_number)])
+            arr.push([(el.size.size_name || '无数据') + '/' + (el.color.color_name || '无数据'), item.weave_plan.process_name, ((+el.price).toFixed(2) || 0) + '元/件', el.number, (el.real_number || 0) + ' / ' + (el.number - el.real_number)])
           })
           datas.push({
             title: item.product.name,
@@ -114,7 +114,7 @@ Page({
             imgSrc: item.product.rel_image[0]?.image_url || 'https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220211103236.png',
             status: _this.data.order ? 4 : item.status,
             showPrice: item.total_price ? true : false,
-            price: item.total_price.toFixed(2),
+            price: (+item.total_price).toFixed(2),
             display: item.display,
             id: item.id,
             pid: item.pid,

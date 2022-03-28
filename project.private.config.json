@@ -43,16 +43,16 @@
         {
           "name": "派单点击",
           "pathName": "pages/orderControl/orderControl",
-          "query": "order=CSXBSJH-2200045",
-          "launchMode": "default",
-          "scene": null
+          "query": "order=CSXBSJH-2200035",
+          "scene": null,
+          "launchMode": "default"
         },
         {
           "name": "员工管理",
           "pathName": "pages/workerManage/workerManage",
           "query": "showPopup=true",
-          "scene": null,
-          "launchMode": "default"
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
