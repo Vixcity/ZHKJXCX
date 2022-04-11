@@ -120,6 +120,7 @@ Page({
           let smallThan24h
           let data = res.data.data
           let datas = []
+          let datas2 = []
           let date = new Date()
           let year = date.getFullYear()
           let month = date.getMonth() + 1
@@ -130,7 +131,7 @@ Page({
           let nowDate = year + '-' + (month < 10 ? "0" + month : month) + '-' + (day < 10 ? '0' + day : day)
           let nowTime = nowDate + ' ' + hour + ":" + minute + ":" + second
 
-          data.forEach(item => {
+          data.forEach((item, index) => {
             if (item.workshop_yield_at === "0000-00-00 00:00:00" || item.workshop_yield_at === null) {
               smallThan24h = true
             } else {
@@ -143,7 +144,6 @@ Page({
             if (!(dateDiff(nowDate, item.weave_plan.end_time) >= -1)) {
               return
             }
-
             datas.push({
               title: item.product.name,
               time: item.weave_plan.end_time,
@@ -160,11 +160,12 @@ Page({
               bigThan30: getTimeDiff(getTimestamp(nowTime), getTimestamp(item.weave_plan.created_at), 'minutes') >= 30,
               smallThan24h
             })
+            datas2.push(item)
           });
 
           that.setData({
             orderList: datas, // 将得到的订单添加到orderList中更新
-            detailOrderList: data, // 将得到的订单添加到详情进行更新
+            detailOrderList: datas2, // 将得到的订单添加到详情进行更新
             isShowLoadmore: false,
             noData: datas.length === 0
           })
