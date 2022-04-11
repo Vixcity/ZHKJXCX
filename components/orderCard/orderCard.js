@@ -43,10 +43,14 @@ Component({
 	data: {
 		isShow: 'title',
 		showPopup: false,
-		// 作坊主
-		isLeader: wx.getStorageSync('userInfo').userinfo?.role === 3
-		// 员工账号测试
-		// isLeader: wx.getStorageSync('userInfo').userinfo?.role === 2
+	},
+
+	lifetimes: {
+		ready: function () {
+			this.setData({
+				isLeader: wx.getStorageSync('userInfo').userinfo?.role === 3
+			})
+		},
 	},
 
 	/**
@@ -79,7 +83,7 @@ Component({
 		clickEvent(event) {
 			this.triggerEvent("clickEvent", event.currentTarget.dataset)
 		},
-		
+
 		// 切换标题和code
 		changeShow(e) {
 			// 0 为title
