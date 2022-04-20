@@ -181,7 +181,7 @@ Page({
 						[item.created_at.slice(5, 16), item.user?.name || ""],
 						[(item.weave_plan_product_info?.weave_plan.company.company_name || "无数据"), (item.weave_plan_product_info?.product.name || "无数据")],
 						[(item.weave_plan_product_info?.size.size_name || "无数据") + '/' + (item.weave_plan_product_info?.color.color_name || "无数据"), item.number],
-						[item.price + '元', (item.number * item.price).toFixed(2) + '元']
+						[(item.process_price?.price || 0) + '元', (item.number * (item.process_price?.price || 0)).toFixed(2) + '元']
 					])
 					allNumber += item.number * item.price
 				});

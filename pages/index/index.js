@@ -10,7 +10,7 @@ import Message from 'tdesign-miniprogram/message/index';
 Page({
   data: {
     userInfo: {},
-    value: 0,
+    tabValue: 0,
     isShowLoadmore: false,
     isShowNoDatasTips: false,
     endloading: false,
@@ -51,7 +51,7 @@ Page({
   onHide: function () {
     this.setData({
       userInfo: {},
-      value: 0,
+      tabValue: 0,
       isShowLoadmore: false,
       isShowNoDatasTips: false,
       endloading: false,
@@ -122,6 +122,7 @@ Page({
           let datas = []
           let datasOutTime = []
           let datas2 = []
+          let detailTimeOutOrderList = []
           let date = new Date()
           let year = date.getFullYear()
           let month = date.getMonth() + 1
@@ -161,6 +162,7 @@ Page({
                 bigThan30: getTimeDiff(getTimestamp(nowTime), getTimestamp(item.weave_plan.created_at), 'minutes') >= 30,
                 smallThan24h
               })
+              detailTimeOutOrderList.push(item)
               return
             }
 
@@ -190,6 +192,7 @@ Page({
             detailOrderList: datas2, // 将得到的订单添加到详情进行更新
             isShowLoadmore: false,
             datasOutTime,
+            detailTimeOutOrderList,
             noData: datas.length === 0
           })
 
@@ -220,10 +223,21 @@ Page({
     })
   },
 
+  onTabsChange(e) {
+    this.data.tabValue = e.detail.value
+  },
+
   toOutPutEntry(e) {
     let i = e.currentTarget.dataset.index
-    let detailOrder = this.data.detailOrderList[i]
-    let cardOrder = this.data.orderList[i]
+    let detailOrder
+    let cardOrder
+    if (this.data.tabValue === 0) {
+      detailOrder = this.data.detailOrderList[i]
+      cardOrder = this.data.orderList[i]
+    } else {
+      detailOrder = this.data.detailTimeOutOrderList[i]
+      cardOrder = this.data.datasOutTime[i]
+    }
 
     wx.setStorageSync('outPutEntry', {
       detailOrder,
@@ -232,6 +246,7 @@ Page({
     wx.navigateTo({
       url: '../outputEntry/outputEntry',
     })
+
   },
 
   // 扫码功能
