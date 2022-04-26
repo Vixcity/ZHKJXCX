@@ -9,7 +9,7 @@ Page({
 	 * 页面的初始数据
 	 */
 	data: {
-		showPopup:false,
+		showPopup: false,
 		// 展开信息
 		cardInfoData: {
 			cardData: [],
@@ -47,57 +47,37 @@ Page({
 		},
 		// 原料计划
 		rawMaterialPlanList: {
-			cardData: [
-				[
-					['均码/红色组'],
-					['36支晴纶', '黑色'],
-					['100kg'],
-					['300kg/200kg']
-				]
-			],
+			cardData: [],
 			cardTitle: [{
-				title: '尺码颜色',
+				title: '原料',
+				width: 25
 			}, {
-				title: '物料',
+				title: '计划数量',
+				width: 25
 			}, {
 				title: '需领数量',
+				width: 25
 			}, {
-				title: '可领/已领',
+				title: '数量差值',
+				width: 25
 			}],
 			hasBr: true,
 		},
 		// 扣款损耗
 		deductionLossList: {
-			cardData: [
-				['纱线质量问题', '25元', 'https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220211103236.png']
-			],
+			cardData: [],
 			cardTitle: [{
 				title: '扣款原因',
+				width: 33,
 			}, {
 				title: '扣款原因',
+				width: 33,
 			}, {
 				title: '相关图片',
-				isImg: true
+				width: 33,
+				isImg: true,
 			}],
 			// hasBr: true,
-		},
-		deductionLossList2: {
-			cardData: [
-				[
-					['纱线质量问题'],
-					['25元'],
-					['https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220211103236.png', 'https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220211103236.png']
-				]
-			],
-			cardTitle: [{
-				title: '扣款原因',
-			}, {
-				title: '扣款原因',
-			}, {
-				title: '相关图片',
-				isImg: true
-			}],
-			hasBr: true,
 		},
 		onePrice: '',
 		allPrice: '',
@@ -121,8 +101,12 @@ Page({
 			success: (res) => {
 				let arr = []
 				let list = []
+				let rawMaterialPlan = []
+				let deduct_info_list = []
 				let product_info = res.data.data.product_info
 				let user_workshop_yields = res.data.data.user_workshop_yields
+				let material_info = res.data.data.material_info
+				let deduct_info = res.data.data.deduct_info
 				let cardInfoData = this.data.cardInfoData
 				let productionSchedule = this.data.productionSchedule
 				product_info.forEach(item => {
@@ -137,14 +121,38 @@ Page({
 						[item.price + '元', (item.number * item.price).toFixed(2) + '元']
 					])
 				});
-				// console.log(list)
 				productionSchedule.cardData = list
+
+				// 原料计划
+				material_info.forEach(item => {
+					rawMaterialPlan.push([
+						[item.material_name, item.material_color],
+						[item.number + item.unit],
+						[item.number - item.real_push_number + item.unit],
+						[item.real_push_number + item.unit]
+					])
+				})
+
+				this.data.rawMaterialPlanList.cardData = rawMaterialPlan
+				let rawMaterialPlanList = this.data.rawMaterialPlanList
+
+				// 扣款损耗
+				deduct_info.forEach(item => {
+					deduct_info_list.push(
+						[item.reason || '无', ((item.price || 0) + '元'), (item.file_url || 'https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220211103236.png')]
+					)
+				})
+
+				this.data.deductionLossList.cardData = deduct_info_list
+				let deductionLossList = this.data.deductionLossList
 
 				this.setData({
 					cardInfoData,
 					productionSchedule,
 					onePrice: res.data.data.process_prices[0]?.price,
-					allPrice: res.data.data.process_prices[0]?.total_price
+					allPrice: res.data.data.process_prices[0]?.total_price,
+					rawMaterialPlanList,
+					deductionLossList
 				})
 			}
 		})
@@ -155,10 +163,10 @@ Page({
 			showPopup: false
 		})
 	},
-	showImage(e){
+	showImage(e) {
 		console.log()
 		this.setData({
-			popupSrc:e.detail.src,
+			popupSrc: e.detail.src,
 			showPopup: true
 		})
 	},
