@@ -9,6 +9,7 @@ Page({
 	 * 页面的初始数据
 	 */
 	data: {
+		showPopup:false,
 		// 展开信息
 		cardInfoData: {
 			cardData: [],
@@ -41,6 +42,60 @@ Page({
 			}, {
 				title: '单价/总价',
 				width: 30
+			}],
+			hasBr: true,
+		},
+		// 原料计划
+		rawMaterialPlanList: {
+			cardData: [
+				[
+					['均码/红色组'],
+					['36支晴纶', '黑色'],
+					['100kg'],
+					['300kg/200kg']
+				]
+			],
+			cardTitle: [{
+				title: '尺码颜色',
+			}, {
+				title: '物料',
+			}, {
+				title: '需领数量',
+			}, {
+				title: '可领/已领',
+			}],
+			hasBr: true,
+		},
+		// 扣款损耗
+		deductionLossList: {
+			cardData: [
+				['纱线质量问题', '25元', 'https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220211103236.png']
+			],
+			cardTitle: [{
+				title: '扣款原因',
+			}, {
+				title: '扣款原因',
+			}, {
+				title: '相关图片',
+				isImg: true
+			}],
+			// hasBr: true,
+		},
+		deductionLossList2: {
+			cardData: [
+				[
+					['纱线质量问题'],
+					['25元'],
+					['https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220211103236.png', 'https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220211103236.png']
+				]
+			],
+			cardTitle: [{
+				title: '扣款原因',
+			}, {
+				title: '扣款原因',
+			}, {
+				title: '相关图片',
+				isImg: true
 			}],
 			hasBr: true,
 		},
@@ -92,6 +147,19 @@ Page({
 					allPrice: res.data.data.process_prices[0]?.total_price
 				})
 			}
+		})
+	},
+
+	closePopup() {
+		this.setData({
+			showPopup: false
+		})
+	},
+	showImage(e){
+		console.log()
+		this.setData({
+			popupSrc:e.detail.src,
+			showPopup: true
 		})
 	},
 

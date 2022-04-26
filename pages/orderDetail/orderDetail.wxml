@@ -1,7 +1,7 @@
 <!--pages/orderDetail.wxml-->
 <view class="container">
-  <view class="bg vw100 vh100">
-    <order-card detailInfo="{{detailInfo}}" showPrice="{{true}}">
+	<view class="bg vw100 vh100">
+		<order-card detailInfo="{{detailInfo}}" showPrice="{{true}}">
 			<list-card slot="after" showShort="{{true}}" isSlot="{{true}}" cardInfoData="{{cardInfoData}}"></list-card>
 		</order-card>
 		<view class="bgColorWhite pl10 pr10 pt20 pb20 fz25 mt20 borderRadius16 shadow borderBox vw90 ma">
@@ -27,8 +27,21 @@
 				<t-tab-panel label="生产进度" value="1">
 					<list-card isSlot="{{true}}" cardInfoData="{{productionSchedule}}"></list-card>
 				</t-tab-panel>
+				<t-tab-panel label="原料与扣款" value="2">
+					<list-card isSlot="{{true}}" cardInfoData="{{rawMaterialPlanList}}" title="原料计划"></list-card>
+					<view class="line"></view>
+					<list-card isSlot="{{true}}" bind:clickImg="showImage" cardInfoData="{{deductionLossList}}" title="扣款损耗"></list-card>
+				</t-tab-panel>
 			</t-tabs>
 		</view>
-  </view>
+	</view>
 	<t-message id="t-message" />
+	<!-- 弹出框 -->
+	<t-popup catchtap visible="{{showPopup}}" placement="center" bindtap="closePopup">
+		<view slot="content" class="overfh por">
+			<view class="tc vw100 h100">
+				<image mode="widthFix" show-menu-by-longpress="{{true}}" src="{{popupSrc}}"></image>
+			</view>
+		</view>
+	</t-popup>
 </view>
