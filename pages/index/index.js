@@ -145,24 +145,26 @@ Page({
               }
 						}
 						
-						allDatas.push({
-							title: item.product.name,
-							time: item.weave_plan.end_time,
-							nowNumber: item.real_number ? item.real_number : 0,
-							allNumber: item.number,
-							customer: item.weave_plan.company.company_name,
-							imgSrc: item.product.rel_image[0]?.image_url || 'https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220211103236.png',
-							display: item.display,
-							pid: item.pid,
-							id: item.id,
-							product_id: item.product_id,
-							code: item.product.product_code || item.product.code_fix,
-							dateDiff: dateDiff(nowDate, item.weave_plan.end_time),
-							processName: item.weave_plan.process_name,
-							bigThan30: getTimeDiff(getTimestamp(nowTime), getTimestamp(item.weave_plan.created_at), 'minutes') >= 30,
-							smallThan24h
-						})
-						allDatasOrderList.push(item)
+						if (!(item.real_number > +item.number)){
+							allDatas.push({
+								title: item.product.name,
+								time: item.weave_plan.end_time,
+								nowNumber: item.real_number ? item.real_number : 0,
+								allNumber: item.number,
+								customer: item.weave_plan.company.company_name,
+								imgSrc: item.product.rel_image[0]?.image_url || 'https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220211103236.png',
+								display: item.display,
+								pid: item.pid,
+								id: item.id,
+								product_id: item.product_id,
+								code: item.product.product_code || item.product.code_fix,
+								dateDiff: dateDiff(nowDate, item.weave_plan.end_time),
+								processName: item.weave_plan.process_name,
+								bigThan30: getTimeDiff(getTimestamp(nowTime), getTimestamp(item.weave_plan.created_at), 'minutes') >= 30,
+								smallThan24h
+							})
+							allDatasOrderList.push(item)
+						}
 
             if (!(dateDiff(nowDate, item.weave_plan.end_time) >= -1)) {
               if (item.real_number > +item.number) return
