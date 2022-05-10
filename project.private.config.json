@@ -34,7 +34,7 @@
 				{
 					"name": "派单点击",
 					"pathName": "pages/orderControl/orderControl",
-					"query": "order=CSXBSJH-2200035",
+					"query": "order=CSXBSJH-2200049",
 					"launchMode": "default",
 					"scene": null
 				},

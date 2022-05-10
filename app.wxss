@@ -443,8 +443,14 @@ page{
 .vw70{
   width: 70vw;
 }
+.vw65{
+  width: 65vw;
+}
 .vw60{
   width: 60vw;
+}
+.vw55{
+  width: 55vw;
 }
 .vw54{
   width: 54vw;
@@ -454,6 +460,12 @@ page{
 }
 .vw50{
   width: 50vw;
+}
+.vw45{
+  width: 45vw;
+}
+.vw43{
+  width: 43vw;
 }
 .vw40{
   width: 40vw;

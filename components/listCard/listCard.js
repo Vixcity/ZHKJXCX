@@ -16,6 +16,10 @@ Component({
 			type: Boolean,
 			value: false
 		},
+		shortText:{
+			type:String,
+			value:'查看更多'
+		},
 		showShort: {
 			type: Boolean,
 			value: false
