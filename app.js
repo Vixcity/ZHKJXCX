@@ -13,8 +13,8 @@ App({
       // 正式版
       release: "https://knit-m-api.zwyknit.com/api"
     };
-    this.globalData.api = baseApi[env] || 'https://knit-m-beta.zwyknit.com/api'
-    // this.globalData.api = 'https://knit-m-api.zwyknit.com/api'
+    // this.globalData.api = baseApi[env] || 'https://knit-m-beta.zwyknit.com/api'
+    this.globalData.api = 'https://knit-m-api.zwyknit.com/api'
   },
   globalData: {}
 })
