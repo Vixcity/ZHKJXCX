@@ -1,34 +1,45 @@
 <!--index.wxml-->
 <view class="container">
-	<view class="bg w100 {{orderList.length === 0?'vh85 overfh':'h100'}}" style="overflow-x: hidden;">
+	<view class="bg w100 {{allDatas.length === 0?'vh85 overfh':'h100'}}" style="overflow-x: hidden;">
 		<!-- 卡片列表 -->
 		<t-tabs value="{{tabValue}}" bind:change="onTabsChange">
 			<t-tab-panel label="全部" value="{{0}}">
-				<order-card bindtap="toOutPutEntry" bind:changeShow="changeShow" showChangeIcon="{{isLeader}}" wx:for="{{allDatas}}" wx:for-item="item" wx:key="item" wx:for-index="index" data-index="{{index}}" detailInfo="{{item}}"></order-card>
+				<order-card bindtap="toOutPutEntry" bind:changeShow="changeShow" showChangeIcon="{{isLeader}}"
+					wx:for="{{allDatas}}" wx:for-item="item" wx:key="item" wx:for-index="index" data-index="{{index}}"
+					detailInfo="{{item}}"></order-card>
 				<!-- 第一次查询无数据 -->
-				<view class="flex fdc vh80 color91 w100 jcc aic" wx:if="{{(notShow && !isShowLoadmore) || noData}}">
+				<view class="flex fdc vh80 color91 w100 jcc aic" wx:if="{{(notShow && !isShowLoadmore) || allDatas.length==0}}">
 					<view class="tc size-xl">
-						<image class="image" src="https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220216112643.png"></image>
+						<image class="image" src="https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220216112643.png">
+						</image>
 						<view class="mt20">没有符合条件的数据</view>
 					</view>
 				</view>
 			</t-tab-panel>
 			<t-tab-panel label="进行中" value="{{1}}">
-				<order-card bindtap="toOutPutEntry" bind:changeShow="changeShow" showChangeIcon="{{isLeader}}" wx:for="{{orderList}}" wx:for-item="item" wx:key="item" wx:for-index="index" data-index="{{index}}" detailInfo="{{item}}"></order-card>
+				<order-card bindtap="toOutPutEntry" bind:changeShow="changeShow" showChangeIcon="{{isLeader}}"
+					wx:for="{{orderList}}" wx:for-item="item" wx:key="item" wx:for-index="index" data-index="{{index}}"
+					detailInfo="{{item}}"></order-card>
 				<!-- 第一次查询无数据 -->
-				<view class="flex fdc vh80 color91 w100 jcc aic" wx:if="{{(notShow && !isShowLoadmore) || noData}}">
+				<view class="flex fdc vh80 color91 w100 jcc aic"
+					wx:if="{{(notShow && !isShowLoadmore) || orderList.length==0}}">
 					<view class="tc size-xl">
-						<image class="image" src="https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220216112643.png"></image>
+						<image class="image" src="https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220216112643.png">
+						</image>
 						<view class="mt20">没有符合条件的数据</view>
 					</view>
 				</view>
 			</t-tab-panel>
 			<t-tab-panel label="已逾期" value="{{2}}">
-				<order-card bindtap="toOutPutEntry" bind:changeShow="changeShow" showChangeIcon="{{isLeader}}" wx:for="{{datasOutTime}}" wx:for-item="item" wx:key="item" wx:for-index="index" data-index="{{index}}" detailInfo="{{item}}"></order-card>
+				<order-card bindtap="toOutPutEntry" bind:changeShow="changeShow" showChangeIcon="{{isLeader}}"
+					wx:for="{{datasOutTime}}" wx:for-item="item" wx:key="item" wx:for-index="index" data-index="{{index}}"
+					detailInfo="{{item}}"></order-card>
 				<!-- 第一次查询无数据 -->
-				<view class="flex fdc vh80 color91 w100 jcc aic" wx:if="{{(notShow && !isShowLoadmore) || noData}}">
+				<view class="flex fdc vh80 color91 w100 jcc aic"
+					wx:if="{{(notShow && !isShowLoadmore) || datasOutTime.length==0}}">
 					<view class="tc size-xl">
-						<image class="image" src="https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220216112643.png"></image>
+						<image class="image" src="https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220216112643.png">
+						</image>
 						<view class="mt20">没有符合条件的数据</view>
 					</view>
 				</view>
@@ -45,8 +56,11 @@
 			<view>暂无更多数据</view>
 		</view>
 	</view>
-	<t-dialog title="注册账号" content="您还未注册账号，请点击前往注册" confirm-btn="点击注册" visible="{{showDialog}}" bind:confirm="toSingUp" />
+	<t-dialog title="注册账号" content="您还未注册账号，请点击前往注册" confirm-btn="点击注册" visible="{{showDialog}}"
+		bind:confirm="toSingUp" />
 	<t-dialog title="登录" content="您还未登录，点击前往登录" confirm-btn="点击登录" visible="{{showLogin}}" bind:confirm="toNoLogin" />
-	<t-dialog title="您还未绑定" content="请扫描员工邀请码或者工厂码进行绑定" confirm-btn="点击扫码" visible="{{userInfo.userinfo.user_apply_company===null&&userInfo.userinfo.user_apply_workshop===null}}" bind:confirm="toPhoto" />
+	<t-dialog title="您还未绑定" content="请扫描员工邀请码或者工厂码进行绑定" confirm-btn="点击扫码"
+		visible="{{userInfo.userinfo.user_apply_company===null&&userInfo.userinfo.user_apply_workshop===null}}"
+		bind:confirm="toPhoto" />
 	<t-message id="t-message" />
 </view>
