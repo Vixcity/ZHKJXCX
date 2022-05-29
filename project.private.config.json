@@ -20,7 +20,7 @@
 				{
 					"name": "绑定订单",
 					"pathName": "pages/bindOrder/bindOrder",
-					"query": "company_id=da3fd4be69f011ecb621b1870022e9e4&hash=202236&id=53",
+					"query": "company_id=da3fd4be69f011ecb621b1870022e9e4&hash=新版测试工厂2202266&id=82",
 					"launchMode": "default",
 					"scene": null
 				},
