@@ -84,7 +84,7 @@ Page({
           width: 33,
         },
         {
-          title: "扣款原因",
+          title: "扣款金额",
           width: 33,
         },
         {
@@ -153,7 +153,7 @@ Page({
         productionSchedule.cardData = list;
         productDetail.detailProduct = res.data.data;
         productDetail.detailInfo.nowNumber = res.data.data.real_number;
-        console.log(productDetail);
+        // console.log(productDetail);
 
         // 原料计划
         if (material_info) {
@@ -174,7 +174,7 @@ Page({
         if (deduct_info) {
           deduct_info.forEach((item) => {
             deduct_info_list.push([
-              item.reason || "无",
+              item.reason ? unescape(item.reason.replace(/\\u/g, "%u").replaceAll('"','')) : "无",
               (item.price || 0) + "元",
               item.file_url ||
                 "https://file.zwyknit.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220211103236.png",
