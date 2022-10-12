@@ -124,7 +124,7 @@ Component({
 			}
 		},
 
-		// 产量录入 => 产品定价
+		// 完成数量录入 => 产品定价
 		toOrderDetail(e) {
 			// 拿到 => 取值 => 赋值
 			let obj = wx.getStorageSync('outPutEntry')

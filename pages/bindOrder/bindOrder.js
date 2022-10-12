@@ -127,7 +127,7 @@ Page({
               detailInfoList,
             });
 
-            // 转换数据，使得产量录入不会因为process是undefined而提交失败
+            // 转换数据，使得完成数量录入不会因为process是undefined而提交失败
             detailOrder.process = detailOrder.process || detailOrder.pidprocess;
 
             wx.setStorageSync("outPutEntry", {

@@ -99,7 +99,7 @@ Page({
 			currentKey: 'withInput',
 			dialogConfig: modelConfigFactory({
 				title: '添加员工',
-				content: '添加后可以为该员工添加产量',
+				content: '添加后可以为该员工添加完成数量',
 				confirmBtn: '保存',
 				cancelBtn: '取消',
 			}),
@@ -185,7 +185,7 @@ Page({
 			currentKey: 'confirm',
 			dialogConfig: modelConfigFactory({
 				title: '添加员工',
-				content: '添加后可以为该员工添加产量',
+				content: '添加后可以为该员工添加完成数量',
 				confirmBtn: '保存',
 				cancelBtn: '取消',
 			}),

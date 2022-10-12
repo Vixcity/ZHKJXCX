@@ -23,7 +23,7 @@
 					</view>
 					<view class="line"></view>
 					<view class="flex fz30">
-						<view class="w30">产量</view>
+						<view class="w30">完成数量</view>
 						<view class="w70">
 							<input style="height: 5vh;" wx:if="{{(item.number - item.real_number) < 0}}" type="number" bindinput="getInputNumber" data-index="{{index}}" value="{{item.value}}" placeholder="超额 {{-(item.number - item.real_number)}}" />
 							<input style="height: 5vh;" wx:if="{{(item.number - item.real_number) === 0}}" type="number" bindinput="getInputNumber" data-index="{{index}}" value="{{item.value}}" placeholder="已完成" />
@@ -45,7 +45,7 @@
 					</view>
 					<view wx:if="{{!yichang}}" class="bgColorF3 pt10 vw100 mt20 mb20"></view>
 					<view wx:if="{{!yichang}}" class="flex fz30">
-						<view class="w30">产量</view>
+						<view class="w30">完成数量</view>
 						<view class="w70">
 							<input style="height: 5vh;" wx:if="{{(allNumber - allRealNumber) < 0}}" type="number" bindinput="getEnteryAllNumber" data-index="{{index}}" value="{{enteryAllNumber}}" placeholder="超额 {{-(allNumber - allRealNumber)}}" />
 							<input style="height: 5vh;" wx:if="{{(allNumber - allRealNumber) === 0}}" type="number" bindinput="getEnteryAllNumber" data-index="{{index}}" value="{{enteryAllNumber}}" placeholder="已完成" />

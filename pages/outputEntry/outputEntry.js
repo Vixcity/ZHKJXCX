@@ -313,7 +313,7 @@ Page({
 				Message.error({
 					offset: [20, 32],
 					duration: 2000,
-					content: '请至少填写一个尺码颜色对应产量',
+					content: '请至少填写一个尺码颜色对应完成数量',
 				});
 				return
 			}
@@ -323,7 +323,7 @@ Page({
 			Message.error({
 				offset: [20, 32],
 				duration: 2000,
-				content: '请填写自由录入产量',
+				content: '请填写自由录入完成数量',
 			});
 			return
 		}
@@ -354,7 +354,7 @@ Page({
 			workshop_yield_at = null
 		}
 
-		// 保存产量
+		// 保存完成数量
 		wxReq({
 			url: '/workshop/weave/product/save',
 			method: 'POST',

@@ -1,8 +1,13 @@
 <!--miniprogram/custom-tab-bar/index.wxml-->
-<cover-view class="tab-bar">
-  <cover-view class="tab-bar-border"></cover-view>
-  <cover-view wx:for="{{list}}" wx:key="index" class="tab-bar-item" data-path="{{item.pagePath}}" data-index="{{index}}" bindtap="switchTab">
-    <cover-image src="{{selected === index ? item.selectedIconPath : item.iconPath}}"></cover-image>
-    <cover-view style="color: {{selected === index ? selectedColor : color}}">{{item.text}}</cover-view>
-  </cover-view>
-</cover-view>
+<view>
+	<view style="position: absolute; top: 1px;">111</view>
+	<view class="tab-bar">
+		<view class="tab-bar-border"></view>
+		<view wx:for="{{list}}" wx:key="index" class="tab-bar-item" data-path="{{item.pagePath}}" data-index="{{index}}"
+			bindtap="switchTab">
+			<image style="background-color: white;width: 30px;height:30px;"
+				src="{{selected === index ? item.selectedIconPath : item.iconPath}}"></image>
+			<view class="fz28" style="color: {{selected === index ? selectedColor : color}}">{{item.text}}</view>
+		</view>
+	</view>
+</view>
