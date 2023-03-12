@@ -46,6 +46,27 @@
 					"query": "showPopup=true",
 					"launchMode": "default",
 					"scene": null
+				},
+				{
+					"name": "扫码收件",
+					"pathName": "pages/SM/SMSJ/SMSJ",
+					"query": "",
+					"launchMode": "default",
+					"scene": null
+				},
+				{
+					"name": "扫码发件",
+					"pathName": "pages/SM/SMFJ/SMFJ",
+					"query": "",
+					"launchMode": "default",
+					"scene": null
+				},
+				{
+					"name": "更新完成数量",
+					"pathName": "pages/SM/GXWCSL/GXWCSL",
+					"query": "",
+					"launchMode": "default",
+					"scene": null
 				}
 			]
 		}

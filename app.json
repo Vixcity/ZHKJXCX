@@ -14,7 +14,11 @@
 		"pages/outputEntry/outputEntry",
 		"pages/bindCompany/bindCompany",
 		"pages/bindOrder/bindOrder",
-		"pages/agreement/agreement"
+		"pages/agreement/agreement",
+		"pages/chooseSM/chooseSM",
+		"pages/SM/SMSJ/SMSJ",
+		"pages/SM/SMFJ/SMFJ",
+		"pages/SM/GXWCSL/GXWCSL"
 	],
 	"usingComponents": {
 		"t-button": "tdesign-miniprogram/button/button",
@@ -35,7 +39,8 @@
 		"t-tab-panel": "tdesign-miniprogram/tabs/tab-panel",
 		"order-card": "./components/orderCard/orderCard",
 		"list-card": "./components/listCard/listCard",
-		"t-loading": "tdesign-miniprogram/loading/loading"
+		"t-loading": "tdesign-miniprogram/loading/loading",
+		"van-field": "@vant/weapp/field/index"
 	},
 	"window": {
 		"backgroundTextStyle": "light",
@@ -54,6 +59,10 @@
 			{
 				"pagePath": "pages/index/index",
 				"text": "首页"
+			},
+			{
+				"pagePath": "pages/chooseSM/chooseSM",
+				"text": "扫一扫"
 			},
 			{
 				"pagePath": "pages/manage/manage",

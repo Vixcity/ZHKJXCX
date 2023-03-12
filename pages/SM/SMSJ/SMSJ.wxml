@@ -1,0 +1,69 @@
+<!--pages/SM/SMSJ/SMSJ.wxml-->
+<view style="padding-top: 40rpx;">
+	<van-field
+    value="{{ detailInfo.client_name }}"
+		label="下单客户"
+    placeholder="请输入下单客户"
+    border="{{ false }}"
+    bind:change="onChange"
+  />
+	<van-field
+    value="{{ detailInfo.code }}"
+		label="流转卡编号"
+    placeholder="请输入流转卡编号"
+    border="{{ false }}"
+    bind:change="onChange"
+  />
+	<van-field
+    value="{{ detailInfo.client_name }}"
+		label="产品编号"
+    placeholder="请输入产品编号"
+    border="{{ false }}"
+    bind:change="onChange"
+  />
+	<van-field
+    value="{{ detailInfo.client_name }}"
+		label="尺码颜色"
+    placeholder="请输入尺码颜色"
+    border="{{ false }}"
+    bind:change="onChange"
+  />
+	<van-field
+    value="{{ detailInfo.client_name }}"
+		label="关联生产单号"
+    placeholder="请输入关联生产单号"
+    border="{{ false }}"
+    bind:change="onChange"
+  />
+	<van-field
+    value="{{ detailInfo.client_name }}"
+		label="已收件袋数"
+    placeholder="请输入已收件袋数"
+    border="{{ false }}"
+    bind:change="onChange"
+  />
+	<van-field
+    value="{{ detailInfo.client_name }}"
+		label="已收件数量"
+    placeholder="请输入已收件数量"
+    border="{{ false }}"
+    bind:change="onChange"
+  />
+	<view style="height: 40rpx ;"></view>
+	<van-field
+    value="{{ detailInfo.client_name }}"
+		label="当前袋序号"
+    placeholder="请输入当前袋序号"
+    border="{{ false }}"
+    bind:change="onChange"
+  />
+	<van-field
+    value="{{ detailInfo.client_name }}"
+		label="当前收件数量"
+    placeholder="请输入当前收件数量"
+    border="{{ false }}"
+    bind:change="onChange"
+  />
+	<view class="saoma" style="background: #27A2FD;">扫描下一件</view>
+	<view class="tc" style="color: #35b188 ;margin-top: 20rpx;">完成扫描</view>
+</view>

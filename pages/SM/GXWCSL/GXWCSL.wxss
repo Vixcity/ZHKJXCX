@@ -1,0 +1,11 @@
+/* pages/SM/GXWCSL/GXWCSL.wxss */
+.saoma {
+	margin: 0 auto;
+	width: 50vw;
+	box-sizing: border-box;
+	border-radius: 16rpx;
+	text-align: center;
+	padding: 20rpx;
+	color: white;
+	margin-top: 5vh;
+}

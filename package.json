@@ -4,6 +4,7 @@
   "description": "",
   "main": ".eslintrc.js",
   "dependencies": {
+    "@vant/weapp": "^1.10.14",
     "miniprogram-sm-crypto": "^0.3.7",
     "tdesign-miniprogram": "^0.4.2"
   },

@@ -1,0 +1,6 @@
+<!--pages/chooseSM/chooseSM.wxml-->
+<view style="position: absolute;top: 45%;left: 50%;transform: translateY(-50%) translateX(-50%);">
+	<view class="saoma" style="background: #27a2fd;">扫码收件</view>
+	<view class="saoma" style="background: #00b58c;">完成更新数量</view>
+	<view class="saoma" style="background: #f99036;">扫码发件</view>
+</view>
